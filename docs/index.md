@@ -1,3 +1,2 @@
-# KrozFu Documentation
+# Welcome Blog KrozFu
 
-Trabajando en nuevos cambios.
