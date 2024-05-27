@@ -1,15 +1,16 @@
 site_name: KrozFu
 
 nav:
-  # - Home: index.md
+  - Home: index.md
   - Project:
     - Implementación WireGuard: articles/wireguard.md
   - Writeups:
-    - Maquina Linux: writeups/linux.md
+    - HackTheBox:
+      - Blue: writeups/hackthebox/blue.md
 
 theme:
   name: material
-  logo: img/kzf1.png
+  logo: img/kzf-notbk.png
   favicon: img/kzf-notbk.png
   features:
     - navigation.tabs
@@ -48,6 +49,8 @@ extra:
       link: https://twitter.com/krozfu
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/juan-carlos-charfuelan-caipe
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@krozfuhack
 
 markdown_extensions:
   - pymdownx.highlight:
