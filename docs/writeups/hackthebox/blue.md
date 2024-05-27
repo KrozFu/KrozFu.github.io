@@ -1,25 +1,26 @@
 
-# Información Box
+## Información Box
 
 | Parámetros | Características                                  |
 | ---------- | ------------------------------------------------ |
-| OS         | Linux                                            |
+| OS         | Windows                                          |
 | Dificultad | Easy                                             |
-| Creador    | ippsec                                           |
+| Creador    | ch4p                                             |
 | Link       | [Blue](https://www.hackthebox.com/machines/blue) |
 
-# Introducción
+## Introducción
 Blue es un CTF que podemos encontrar en diversas plataformas. La dificultad de esta máquina es fácil. Tendremos que explotar la vulnerabilidad MS17-010 para obtener una shell como System. Veremos cómo enumerar si la máquina es vulnerable a MS17-010 usando Nmap, y cómo explotarla tanto con Metasploit como usando scripts en Python.
 
-# Requisitos previos
+## Requisitos previos
 Creamos **directorios** para poder almacenar los diferentes archivos que se trabajan en la maquina.
 ```bash
 > mkdir nmap content script exploits
 > export blue="10.129.230.92"
 ```
 
-# Reconocimiento
+## Reconocimiento
 Para ver a que tipo de maquina estamos explorando, realizamos una traza ICMP hacia la maquina y como se puede observar el TTL es de 127, que esta en el rango de una maquina Windows.
+
 ![img](./img/blue/Pasted%20image%2020240526145148.png)
 
 Realizamos el respectivo reconocimiento con `nmap`.
@@ -83,7 +84,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Como se puede observar, el servicio `smb` está presente, lo cual es muy común en los servicios de Windows. Además, hay otros puertos abiertos típicos de un servidor de Windows. Hemos logrado obtener información sobre la versión del sistema operativo de la máquina, que es `Windows 7 Professional`.
 Se conoce que el protocolo `smb` utiliza el puerto `445`. En este laboratorio, nos enfocaremos en escalar privilegios mediante este protocolo.
 
-# Enumeración de SMB
+## Enumeración de SMB
 Realizamos un escaneo al protocolo SMB, que es comúnmente utilizado por los sistemas Windows para compartir archivos, impresoras y otros recursos en la red. Ejecutamos todos los scripts de `nmap` para `smb-vuln`, los cuales buscan vulnerabilidades conocidas en servicios SMB. También utilizamos el escaneo `-sT` para conexión TCP, un método más confiable en comparación con otros tipos de escaneo. Sin embargo, este método es más lento y puede ser detectado por sistemas de seguridad. En este caso, optamos por este tipo de escaneo para identificar las vulnerabilidades presentes.
 
 ```bash
@@ -122,7 +123,7 @@ Host script results:
 ```
 Se puede observar al finalizar el escaneo, que posee una vulnerabilidad con CVE de `CVE:CVE-2017-0143`.
 
-# Explotación
+## Explotación
 En este apartado vamos ayudarnos de la herramienta de `Metasploit`, para poder explotar esta maquina, realizamos la búsqueda de la vulnerabilidad en la base de datos de Metasploit.
 
 ![img](./img/blue/Pasted%20image%2020240526151354.png)
@@ -143,4 +144,4 @@ Navegamos  por los directorios del sistema, y logramos acceder como `Administrat
 
 ![img](./img/blue/Pasted%20image%2020240526161242.png)
 
-## !pwned 
+<h1>!pwned</h1>
