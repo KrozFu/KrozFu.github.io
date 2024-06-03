@@ -90,6 +90,7 @@ Genera una clave pública y privada para el cliente:
 wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
 ```
 ![img](./img/wireguard/img_6.png)
+
 Configuramos ahora la interfaz de red wg0
 ```bash
 [Interface]
