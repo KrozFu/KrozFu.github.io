@@ -6,7 +6,7 @@ En un servidor Ubuntu Server 22.04.4 LTS, se implementará una VPN utilizando Do
 Versión del servidor de Ubuntu Server.
 
 ## Requisitos previos
-1. ener Docker instalado en tu sistema, se puede guiar de los anexos, que son guías en formato digital para instalar Docker.
+1. Tener Docker instalado en tu sistema, se puede guiar de los anexos, que son guías en formato digital para instalar Docker.
 2. Acceso a internet para descargar las imágenes de Docker necesarias.
 3. Conocimientos básicos de Docker y redes.
 ---

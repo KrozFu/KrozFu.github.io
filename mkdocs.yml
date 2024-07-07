@@ -4,7 +4,7 @@ nav:
   - Home: index.md
   - Project:
     - Implementación WireGuard: articles/wireguard.md
-    - Servidores: articles/servidor-ubuntu.md
+    - Implementación Servidores: articles/servidor-ubuntu.md
   - Writeups:
     - HackTheBox:
       - Blue: writeups/hackthebox/blue.md
