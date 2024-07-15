@@ -1,13 +1,13 @@
-# Page con MkDocs
+# Page with MkDocs KrozFu
 
 Repository created to document Cybersecurity and tutoriales
 
-## Instalar requirements
+## Install requirements
 ```bash
 pip install -r requirements.txt
 ```
 
-## Para correr el servidor en desarrollo
+## Run a development server
 ```bash
-mkdocs serve --dev-addr $ip:8000
+mkdocs serve
 ```

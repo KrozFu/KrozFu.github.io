@@ -2,7 +2,7 @@ site_name: KrozFu
 
 nav:
   - Home: index.md
-  - Project:
+  - Articles:
     - Implementación WireGuard: articles/wireguard.md
     - Implementación Servidores: articles/servidor-ubuntu.md
   - Writeups:
@@ -44,14 +44,16 @@ plugins:
 
 extra:
   social:
-    - icon: fontawesome/brands/github-alt
-      link: https://github.com/krozfu
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/krozfu
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/juan-carlos-charfuelan-caipe
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/krozfu
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/@krozfuhack
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/krozfu
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/krozfu/
 
 markdown_extensions:
   - pymdownx.highlight:
