@@ -8,6 +8,7 @@ nav:
   - Writeups:
     - HackTheBox:
       - Blue: writeups/hackthebox/blue.md
+      - Lame: writeups/hackthebox/lame.md
 
 theme:
   name: material
