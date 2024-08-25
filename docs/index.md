@@ -1,3 +1,5 @@
+[![Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+)](https://www.linkedin.com/in/juan-carlos-charfuelan-caipe/)
 [![GitHub followers](https://img.shields.io/github/followers/krozfu?style=for-the-badge&logo=github)](https://github.com/KrozFu)
 [![Twitch Status](https://img.shields.io/twitch/status/krozfu?style=for-the-badge&logo=twitch&cacheSeconds=https%3A%2F%2Fwww.twitch.tv%2Fkrozfu)](https://www.twitch.tv/krozfu)
 [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/krozfu?style=for-the-badge&logo=x&cacheSeconds=https%3A%2F%2Ftwitter.com%2FKrozFu)](https://twitter.com/KrozFu)
