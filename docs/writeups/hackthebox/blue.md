@@ -1,4 +1,4 @@
-## Información Box
+## Información maquina
 
 | **Parámetros** | **Características**                              |
 | -------------- | ------------------------------------------------ |

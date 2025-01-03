@@ -1,4 +1,4 @@
-## Información Box
+## Información maquina
 
 ![img](./img/lame/Pasted%20image%2020240715155613.png)
 
