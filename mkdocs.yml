@@ -10,6 +10,7 @@ nav:
     - HackTheBox:
       - Blue: writeups/hackthebox/blue.md
       - Lame: writeups/hackthebox/lame.md
+      - Cicada: writeups/hackthebox/cicada.md
     - TryHackMe:
       - Pickle Rick: writeups/tryhackme/pickle-rick.md
 
@@ -34,7 +35,7 @@ theme:
         icon: material/toggle-switch-off-outline 
         name: Switch to dark mode
       primary: teal
-      accent: purple 
+      accent: purple
     - scheme: slate 
       toggle:
         icon: material/toggle-switch
