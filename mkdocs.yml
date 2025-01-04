@@ -3,6 +3,7 @@ site_name: KrozFu
 nav:
   - Whoami: index.md
   - Articles:
+    - Configuración NAT y ataque con hping MikroTik: articles/nat-attack-hping.md
     - Instalar Kali Linux VMware: articles/kali-linux.md
     - Implementación WireGuard: articles/wireguard.md
     - Implementación Servidores: articles/servidor-ubuntu.md
@@ -78,4 +79,4 @@ markdown_extensions:
         emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 copyright: |
-  &copy; 2024 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
+  &copy; 2025 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
