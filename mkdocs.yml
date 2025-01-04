@@ -4,9 +4,9 @@ nav:
   - Whoami: index.md
   - Articles:
     - Configuración NAT y ataque con hping MikroTik: articles/nat-attack-hping.md
-    - Instalar Kali Linux VMware: articles/kali-linux.md
     - Implementación WireGuard: articles/wireguard.md
     - Implementación Servidores: articles/servidor-ubuntu.md
+    - Instalar Kali Linux VMware: articles/kali-linux.md
   - Writeups:
     - HackTheBox:
       - Blue: writeups/hackthebox/blue.md

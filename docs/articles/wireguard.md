@@ -1,4 +1,4 @@
-# Implementación de WireGuard entre dos contenedores de Docker
+# **IMPLEMENTACIÓN DE WIREGUARD ENTRE DOS CONTENEDORES DE DOCKER**
 
 En un servidor Ubuntu Server 22.04.4 LTS, se implementará una VPN utilizando Docker para establecer una conexión segura entre dos contenedores. Esta conexión se realizará mediante la tunelización de los contenedores a través del protocolo VPN WireGuard.
 

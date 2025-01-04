@@ -1,4 +1,5 @@
-# Implementación y Configuración de Servicios SSH, DHCP, HTTP, DNS y FTP en un Servidor
+# **IMPLEMENTACIÓN Y CONFIGURACIÓN DE SERVICIOS SSH, DHCP, HTTP, DNS Y FTP EN UN SERVIDOR**
+
 En este laboratorio se implementara una red, donde esta conectado un computador con Windows 10 y un servidor Ubuntu server 22.04.4 LTS, y se implementara los servicios de SSH, DHCP, HTTP, DNS, FTP.
 
 ## Pasos previos
