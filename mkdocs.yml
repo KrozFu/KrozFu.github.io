@@ -9,16 +9,19 @@ nav:
     - Instalar Kali Linux VMware: articles/kali-linux.md
   - Writeups:
     - HackTheBox:
-      - Blue: writeups/hackthebox/blue.md
-      - Lame: writeups/hackthebox/lame.md
-      - Cicada: writeups/hackthebox/cicada.md
+      - Machines:
+        - Blue: writeups/hackthebox/machines/blue.md
+        - Lame: writeups/hackthebox/machines/lame.md
+        - Cicada: writeups/hackthebox/machines/cicada.md
+      - Challenges:
+        - R0bob1rd: writeups/hackthebox/challenges/R0bob1rd.md
     - TryHackMe:
       - Pickle Rick: writeups/tryhackme/pickle-rick.md
 
 theme:
   name: material
-  logo: img/kzf-notbk.png
-  favicon: img/kzf-notbk.png
+  logo: img/kzf-logo.png
+  favicon: img/kzf-logo.png
   features:
     - navigation.tabs
     - navigation.sections
