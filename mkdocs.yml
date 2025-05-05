@@ -15,6 +15,7 @@ nav:
         - Cicada: writeups/hackthebox/machines/cicada.md
       - Challenges:
         - R0bob1rd: writeups/hackthebox/challenges/R0bob1rd.md
+        - Primed-for-Action: writeups/hackthebox/challenges/primed-for-action.md
     - TryHackMe:
       - Pickle Rick: writeups/tryhackme/pickle-rick.md
 
