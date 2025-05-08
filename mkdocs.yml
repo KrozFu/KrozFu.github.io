@@ -2,7 +2,7 @@ site_name: KrozFu
 
 nav:
   - Whoami: index.md
-  - Articles:
+  - Projects:
     - Configuración NAT y ataque con hping MikroTik: articles/nat-attack-hping.md
     - Implementación WireGuard: articles/wireguard.md
     - Implementación Servidores: articles/servidor-ubuntu.md
@@ -14,8 +14,12 @@ nav:
         - Lame: writeups/hackthebox/machines/lame.md
         - Cicada: writeups/hackthebox/machines/cicada.md
       - Challenges:
-        - R0bob1rd: writeups/hackthebox/challenges/pwn/R0bob1rd.md
-        - Primed-for-Action: writeups/hackthebox/challenges/coding/primed-for-action.md
+        - Pwn:
+          - R0bob1rd: writeups/hackthebox/challenges/pwn/r0bob1rd.md
+        - Coding:
+          - Primed-for-Action: writeups/hackthebox/challenges/coding/primed-for-action.md
+        - Hardware:
+          - The-Needle: writeups/hackthebox/challenges/hardware/the-needle.md
     - TryHackMe:
       - Pickle Rick: writeups/tryhackme/pickle-rick.md
 
