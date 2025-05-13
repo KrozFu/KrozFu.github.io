@@ -108,7 +108,7 @@ La función de **hping3** viene preinstalada en las herramientas de Kali Linux, 
 Con el siguiente comando podemos ver nuestra conectividad y poder conocer las maquinas que estan conectadas en nuestra red
 
 ```bash
-$ sudo arp-scan -I eth0 --localnet
+sudo arp-scan -I eth0 --localnet
 ```
 
 Se puede observar con el escaneo las IP de los routers R1, R2, R3, ya tenemos las IPs y ahora procedemos a realizar algunas pruebas de conectividad.  
@@ -160,7 +160,7 @@ Vamos a realizar un ataque de inundación de peticiones hacia los routers para v
 
 #### Realizando ataque con hping3 al R2
 
-**IP Spoof**   
+**IP Spoof**
 Al lanzar el comando realizando un IP Spoof a la dirección de R2, con un trafico con DNS 1.1.1.1 enviando diferentes paquetes, y el trafico se ve reflejado en la interfaz de wireshark como el tráfico se envía con varios paquetes de ASK.
 
 ```bash
