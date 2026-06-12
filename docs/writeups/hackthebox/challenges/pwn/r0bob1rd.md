@@ -1,19 +1,33 @@
 # R0bob1rd Challenge
 
-### Context
+<div class="grid cards" markdown>
 
-This _pwn_ challenge presents a 64-bit ELF binary named `r0bob1rd`, which implements interactive functionality for selecting and describing a `r0bob1rd`. Despite its innocent appearance, the program exhibits several classic C vulnerabilities, such as the use of raw `printf(buffer)` and the lack of proper validation when reading memory and user input.
+-   :material-information-outline: &nbsp; **Challenge Info**
 
-The objective of the challenge is to exploit a _format string_ condition to dynamically overwrite the address of the _GOT entry_ of `__stack_chk_fail`, initially to redirect execution back to `main()` and subsequently to a _one_gadget_ in `libc` to obtain a shell. A custom version of `glibc` is used, which adds an extra layer of complexity to the environment.
+    ---
+
+    - 🏷️ **Category:** Pwn
+    - ⚡ **Difficulty:** 🔴 Medium
+    - 💻 **Platform:** HackTheBox
+
+-   :material-tools: &nbsp; **Tools Required**
+
+    ---
+
+    - `checksec` — Binary protections analysis
+    - `ghidra` — Reverse engineering & code analysis
+    - `gdb` — Dynamic analysis & debugging
+    - `one_gadget` — Find RCE gadgets in libc
+    - `pwntools` — Exploit scripting framework
+
+</div>
+
+!!! abstract "Challenge Description"
+    This _pwn_ challenge presents a 64-bit ELF binary named `r0bob1rd`, which implements interactive functionality for selecting and describing a `r0bob1rd`. Despite its innocent appearance, the program exhibits several classic C vulnerabilities, such as the use of raw `printf(buffer)` and the lack of proper validation when reading memory and user input.
+
+    The objective of the challenge is to exploit a _format string_ condition to dynamically overwrite the address of the _GOT entry_ of `__stack_chk_fail`, initially to redirect execution back to `main()` and subsequently to a _one_gadget_ in `libc` to obtain a shell. A custom version of `glibc` is used, which adds an extra layer of complexity to the environment.
 
 ### Solution
-
-#### Requirements
-
-- checksec
-- ghidra
-- gdb
-- one_gadget
 
 #### Step 1 - Check the binary prote
 
@@ -165,7 +179,5 @@ sh.interactive()
 
 #### Step 5 - Flag
 
-```bash
-$ cat flag.txt
-HTB{S0m3t1m3s_bl0w1ng_th3_pr0gr4m_1s_g00d}
-```
+!!! success "🚩 Flag"
+    `HTB{S0m3t1m3s_bl0w1ng_th3_pr0gr4m_1s_g00d}`

@@ -1,20 +1,33 @@
 # The Needle Challenge
 
-### Context
+<div class="grid cards" markdown>
 
-In this challenge, you must analyze a binary, which comes from a device, which is a firmware for security tests, so you must find the flag within this file.
+-   :material-information-outline: &nbsp; **Challenge Info**
 
-Challenge description:
-> As a part of our SDLC process, we've got our firmware ready for security testing. Can you help us by performing a security assessment?
+    ---
+
+    - 🏷️ **Category:** Hardware
+    - ⚡ **Difficulty:** 🟢 Easy
+    - 💻 **Platform:** HackTheBox
+
+-   :material-tools: &nbsp; **Tools Required**
+
+    ---
+
+    - `file` — File type identification
+    - `binwalk` — Firmware analysis & extraction
+    - `grep` — Pattern search in extracted files
+    - `find` — File system navigation
+    - `netcat` — Connect to challenge server
+
+</div>
+
+!!! abstract "Challenge Description"
+    In this challenge, you must analyze a binary firmware file for a device used in security testing. The goal is to find a hidden flag within the firmware.
+
+    > As a part of our SDLC process, we've got our firmware ready for security testing. Can you help us by performing a security assessment?
 
 ### Solution
-
-#### Requirements
-
-- file
-- binwalk
-- grep
-- find
 
 #### Step 1 - Security analysis
 
@@ -125,12 +138,8 @@ ng-1591596-hwtheneedle-djvrn-6cfb57b64d-gljtm:~$
 
 #### Step 6 - Flag
 
-```ruby
-ng-1591596-hwtheneedle-djvrn-6cfb57b64d-gljtm:~$ cat flag.txt
-cat flag.txt
-
-HTB{4_hug3_blund3r_d289a1_!!}
-```
+!!! success "🚩 Flag"
+    `HTB{4_hug3_blund3r_d289a1_!!}`
 
 #### Step 5 - Conclusion
 

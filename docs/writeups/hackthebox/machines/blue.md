@@ -1,15 +1,29 @@
-## Información maquina
+# 🖥️ Blue
 
-| **Parámetros** | **Características**                              |
-| -------------- | ------------------------------------------------ |
-| OS             | Windows                                          |
-| Dificultad     | Easy                                             |
-| Creador        | ch4p                                             |
-| Link           | [Blue](https://www.hackthebox.com/machines/blue) |
+<div class="grid cards" markdown>
 
-## Introducción
+-   :material-information-outline: &nbsp; **Machine Info**
 
-Blue es un CTF disponible en diversas plataformas, conocido por su dificultad fácil. En esta máquina, se requiere explotar la vulnerabilidad MS17-010 para obtener una shell con privilegios de System. A lo largo del proceso, aprenderemos a enumerar la vulnerabilidad MS17-010 en la máquina utilizando Nmap, en una primera instancia se utilizara  Metasploit, y también se realizara escalamiento de privilegios a nivel de administrador con un script en Python.
+    ---
+
+    - 💻 **OS:** Windows
+    - ⚡ **Difficulty:** 🟢 Easy
+    - 👤 **Creator:** ch4p
+    - 🔗 **Link:** [Blue](https://www.hackthebox.com/machines/blue)
+
+-   :material-tools: &nbsp; **Tools Used**
+
+    ---
+
+    - `nmap` — Reconnaissance & port scanning
+    - `metasploit` — MS17-010 exploitation
+    - `python2` + `impacket` — Manual EternalBlue exploit
+    - `netcat` + `rlwrap` — Reverse shell listener
+
+</div>
+
+!!! abstract "Introducción"
+    Blue es un CTF disponible en diversas plataformas, conocido por su dificultad fácil. En esta máquina, se requiere explotar la vulnerabilidad MS17-010 para obtener una shell con privilegios de System. A lo largo del proceso, aprenderemos a enumerar la vulnerabilidad MS17-010 en la máquina utilizando Nmap, utilizando Metasploit y también realizando escalamiento de privilegios a nivel de administrador con un script en Python.
 
 ## Requisitos previos
 
@@ -267,3 +281,9 @@ Finalmente se ha logrado obtener los privilegios de acceso dentro de la maquina 
 ![img](./img/blue/Pasted%20image%2020240626134517.png)
 
 Al finalizar este proceso, se puede observar que esta vulnerabilidad de **EternalBlue**, nos permite tener acceso como usuario administrador `nt authority\system`, con lo cual podemos proceder a tener una escalabilidad tanto horizontal dentro del sistema, proponiendo tener persistencia dentro de la maquina.
+
+---
+
+!!! success "🚩 Flag Captured"
+    Shell obtenida como `nt authority\system` mediante **EternalBlue (MS17-010)**.  
+    Acceso completo con privilegios de SYSTEM en Windows 7 Professional.

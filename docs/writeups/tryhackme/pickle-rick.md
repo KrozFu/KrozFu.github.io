@@ -1,11 +1,26 @@
-# Información Box
+# 🥒 Pickle Rick
 
-| Parámetros | Características                                        |
-| ---------- | ------------------------------------------------------ |
-| OS         | Linux                                                  |
-| Dificultad | Easy                                                   |
-| Creador    | ar33zy                                                 |
-| Link       | [Pickle Rick](https://tryhackme.com/r/room/picklerick) |
+<div class="grid cards" markdown>
+
+-   :material-information-outline: &nbsp; **Room Info**
+
+    ---
+
+    - 💻 **OS:** Linux
+    - ⚡ **Difficulty:** 🟢 Easy
+    - 👤 **Creator:** ar33zy
+    - 🔗 **Link:** [Pickle Rick](https://tryhackme.com/r/room/picklerick)
+
+-   :material-tools: &nbsp; **Tools Used**
+
+    ---
+
+    - `nmap` — Reconnaissance & port scanning
+    - `whatweb` — Web technology fingerprinting
+    - `netcat` — Reverse shell listener
+    - PHP reverse shell — Remote code execution
+
+</div>
 
 ## Introducción
 Esta es una maquina de la plataforma de [TryHackMe](https://tryhackme.com/) donde se puede realizar diferentes CTF para poder practicar y hacer análisis de Pentesting, esta maquina es de dificulta fácil, con lo cual vamos a explorar las diferentes fases de un análisis de Pentesting.
@@ -176,6 +191,11 @@ Al finalizar el proceso, dentro de la maquina procedemos a borrar el exploit cre
 ## Finalización del reto
 
 ![img](./img/pickle-rick/img17.png)
+
+!!! success "🚩 Ingredients Found"
+    - 🧪 **1st Ingredient:** `mr. meeseeks hair`
+    - 🧪 **2nd Ingredient:** `1 jerry tear`
+    - 🧪 **3rd Ingredient:** `fleeb juice`
 
 ## Reflexión
 1. Al finalizar este reto de CTF, aprendí a enumerar de manera mas eficientes los diferentes puertos utilizando la herramienta `nmap`, para poder comprobar los servicios que tenia abiertos esta maquina.

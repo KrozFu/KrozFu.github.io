@@ -1,19 +1,37 @@
-## Información maquina
+# 🖥️ Cicada
 
-![img](./img/cicada/cicada.png)
+<div class="grid cards" markdown>
 
-| **Parámetros** | **Características**                                  |
-| -------------- | ---------------------------------------------------- |
-| OS             | Windows                                              |
-| Dificultad     | Easy                                                 |
-| Creador        | theblxckcicada                                       |
-| Link           | [Cicada](https://www.hackthebox.com/machines/cicada) |
+-   :material-information-outline: &nbsp; **Machine Info**
 
-**Tema contemplados**
-> Enumeración y reconocimiento con `nmap`.  
-> Enumeración de entornos de directorio.  
-> Ingeniería inversa, criptografía.  
-> Reconocimiento de servicios de una maquina Windows.  
+    ---
+
+    ![Cicada](./img/cicada/cicada.png)
+
+    - 💻 **OS:** Windows (Active Directory)
+    - ⚡ **Difficulty:** 🟢 Easy
+    - 👤 **Creator:** theblxckcicada
+    - 🔗 **Link:** [Cicada](https://www.hackthebox.com/machines/cicada)
+
+-   :material-tools: &nbsp; **Tools Used**
+
+    ---
+
+    - `nmap` — Reconnaissance & port scanning
+    - `crackmapexec` / `nxc` — SMB enumeration & credential spraying
+    - `smbclient` — SMB resource access
+    - `enum4linux-ng` — Active Directory enumeration
+    - `evil-winrm` — WinRM remote shell
+    - `impacket` — SAM/SYSTEM dump & Pass-the-Hash
+
+</div>
+
+!!! tip "Topics Covered"
+    - Enumeración y reconocimiento con `nmap`
+    - Enumeración de entornos Active Directory
+    - Extracción de credenciales y credential spraying
+    - Escalamiento de privilegios con `SeBackupPrivilege`
+    - Técnica de Pass-the-Hash con `evil-winrm`
 
 ## Requisitos previos
 
@@ -360,3 +378,9 @@ La **flag** al finalizar la escalación de privilegios.
 **Finalización de la maquina Cicada por `KrozFu`**
 
 ![img](./img/cicada/img24.png)
+
+---
+
+!!! success "🚩 Flag Captured"
+    Acceso obtenido como `Administrator` mediante **Pass-the-Hash** con `evil-winrm`.  
+    Hash NTLM extraído con `impacket-secretsdump` aprovechando el privilegio `SeBackupPrivilege`.
