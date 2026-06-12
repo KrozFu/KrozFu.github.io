@@ -1,27 +1,29 @@
 site_name: KrozFu
+site_url: https://krozfu.github.io/
 
 nav:
   - Whoami: index.md
   - Projects:
-    - Configuración NAT y ataque con hping MikroTik: articles/nat-attack-hping.md
-    - Implementación WireGuard: articles/wireguard.md
-    - Implementación Servidores: articles/servidor-ubuntu.md
-    - Instalar Kali Linux VMware: articles/kali-linux.md
+      - Configuración NAT y ataque con hping MikroTik: articles/nat-attack-hping.md
+      - Implementación WireGuard: articles/wireguard.md
+      - Implementación Servidores: articles/servidor-ubuntu.md
+      - Instalar Kali Linux VMware: articles/kali-linux.md
+      - Instalación PyPhi: articles/install-pyphi.md
   - Writeups:
-    - HackTheBox:
-      - Machines:
-        - Blue: writeups/hackthebox/machines/blue.md
-        - Lame: writeups/hackthebox/machines/lame.md
-        - Cicada: writeups/hackthebox/machines/cicada.md
-      - Challenges:
-        - Pwn:
-          - R0bob1rd: writeups/hackthebox/challenges/pwn/r0bob1rd.md
-        - Coding:
-          - Primed-for-Action: writeups/hackthebox/challenges/coding/primed-for-action.md
-        - Hardware:
-          - The-Needle: writeups/hackthebox/challenges/hardware/the-needle.md
-    - TryHackMe:
-      - Pickle Rick: writeups/tryhackme/pickle-rick.md
+      - HackTheBox:
+          - Machines:
+              - Blue: writeups/hackthebox/machines/blue.md
+              - Lame: writeups/hackthebox/machines/lame.md
+              - Cicada: writeups/hackthebox/machines/cicada.md
+          - Challenges:
+              - Pwn:
+                  - R0bob1rd: writeups/hackthebox/challenges/pwn/r0bob1rd.md
+              - Coding:
+                  - Primed-for-Action: writeups/hackthebox/challenges/coding/primed-for-action.md
+              - Hardware:
+                  - The-Needle: writeups/hackthebox/challenges/hardware/the-needle.md
+      - TryHackMe:
+          - Pickle Rick: writeups/tryhackme/pickle-rick.md
 
 theme:
   name: material
@@ -39,18 +41,21 @@ theme:
     - content.code.copy
   language: en
   palette:
-    - scheme: default
-      toggle:
-        icon: material/toggle-switch-off-outline 
-        name: Switch to dark mode
-      primary: teal
-      accent: purple
-    - scheme: slate 
+    - scheme: slate
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode    
-      primary: teal
-      accent: lime
+        name: Switch to light mode
+      primary: black
+      accent: green
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: black
+      accent: teal
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - social
@@ -67,7 +72,7 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/krozfu
     - icon: fontawesome/brands/instagram
-      link: https://www.instagram.com/krozfu/
+      link: https://www.instagram.com/kr0zfu/
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -82,9 +87,10 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.mark
   - attr_list
+  - md_in_html
   - pymdownx.emoji:
-        emoji_index: !!python/name:material.extensions.emoji.twemoji
-        emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 copyright: |
-  &copy; 2025 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
+  &copy; 2026 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
