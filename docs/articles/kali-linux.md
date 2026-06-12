@@ -1,3 +1,25 @@
+<div class="grid cards" markdown>
+
+-   :material-information-outline: &nbsp; **Article Info**
+
+    ---
+
+    - 🌐 **Topic:** Kali Linux VM Setup
+    - 💻 **Platform:** VMware Workstation
+    - ⚡ **Level:** 🟢 Beginner
+
+-   :material-tools: &nbsp; **Tools & Technologies**
+
+    ---
+
+    - `VMware Workstation` — Virtualization platform
+    - `7-Zip` — Archive extraction
+    - `Kali Linux 2024.2` — Penetration testing OS
+
+</div>
+
+---
+
 # **COMO INSTALAR KALI LINUX EN ENTORNO VIRTUAL PARA HACKING**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/k6ykvhqvW54" frameborder="0" allowfullscreen></iframe>

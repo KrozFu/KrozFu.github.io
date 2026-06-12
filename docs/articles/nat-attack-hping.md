@@ -1,3 +1,27 @@
+<div class="grid cards" markdown>
+
+-   :material-information-outline: &nbsp; **Article Info**
+
+    ---
+
+    - 🌐 **Topic:** Network Security & Attack Simulation
+    - 💻 **Platform:** MikroTik RouterOS + GNS3
+    - ⚡ **Level:** 🟡 Intermediate
+
+-   :material-tools: &nbsp; **Tools & Technologies**
+
+    ---
+
+    - `GNS3` — Network simulation
+    - `WinBox` — MikroTik management
+    - `hping3` — Network attack simulation
+    - `Wireshark` — Traffic capture & analysis
+    - `arp-scan` — Network host discovery
+
+</div>
+
+---
+
 # **CONFIGURACIÓN NAT Y ATAQUE CON HPING MIKROTIK**
 
 ## Configuración de la topología de red
