@@ -1,3 +1,28 @@
+<div class="grid cards" markdown>
+
+-   :material-information-outline: &nbsp; **Article Info**
+
+    ---
+
+    - 🌐 **Topic:** Server Configuration & Services
+    - 💻 **OS:** Ubuntu Server 24.04 LTS
+    - ⚡ **Level:** 🟡 Intermediate
+
+-   :material-tools: &nbsp; **Tools & Technologies**
+
+    ---
+
+    - `VirtualBox` — Virtualization platform
+    - `OpenSSH` — Secure remote access
+    - `isc-dhcp-server` — DHCP service
+    - `vsftpd` — FTP server
+    - `BIND9` — DNS server
+    - `Apache2` — HTTP web server
+
+</div>
+
+---
+
 # **IMPLEMENTACIÓN Y CONFIGURACIÓN DE SERVICIOS SSH, DHCP, HTTP, DNS Y FTP EN UN SERVIDOR**
 
 En este laboratorio se implementara una red, donde esta conectado un computador con Windows 10 y un servidor Ubuntu server 22.04.4 LTS, y se implementara los servicios de SSH, DHCP, HTTP, DNS, FTP.

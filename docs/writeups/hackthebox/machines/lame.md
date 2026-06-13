@@ -1,22 +1,36 @@
-## Información maquina
+# 🖥️ Lame
 
-![img](./img/lame/Pasted%20image%2020240715155613.png)
+<div class="grid cards" markdown>
 
-| **Parámetros** | **Características**                              |
-| -------------- | ------------------------------------------------ |
-| OS             | Linux                                            |
-| Dificultad     | Easy                                             |
-| Creador        | ch4p                                             |
-| Link           | [Lame](https://www.hackthebox.com/machines/lame) |
+-   :material-information-outline: &nbsp; **Machine Info**
 
-## Skill
+    ---
 
-* Identificación de servicios vulnerables
-* Explotación de Samba
+    ![Lame](./img/lame/Pasted%20image%2020240715155613.png)
 
-## Introducción
+    - 💻 **OS:** Linux
+    - ⚡ **Difficulty:** 🟢 Easy
+    - 👤 **Creator:** ch4p
+    - 🔗 **Link:** [Lame](https://www.hackthebox.com/machines/lame)
 
-En esta maquina vamos a ver como se podría explotar para poder tener los privilegios de administrador del sistema, con lo que vamos a reconocer los diferentes puertos de la maquina y luego buscar alguna vulnerabilidad que nos pueda dar acceso a la maquina.
+-   :material-tools: &nbsp; **Tools Used**
+
+    ---
+
+    - `nmap` — Reconnaissance & port scanning
+    - `smbmap` / `smbclient` — SMB enumeration
+    - `searchsploit` — Vulnerability research (CVE-2007-2447)
+    - `netcat` — Reverse shell listener
+    - `tcpdump` — Traffic capture & analysis
+
+</div>
+
+!!! tip "Skills Practicados"
+    - Identificación de servicios vulnerables
+    - Explotación de Samba (CVE-2007-2447)
+
+!!! abstract "Introducción"
+    En esta máquina veremos cómo explotar el sistema para obtener privilegios de administrador. Se realizará reconocimiento de puertos y se buscará alguna vulnerabilidad en Samba que permita el acceso completo a la máquina.
 
 ## Requisitos previos
 
@@ -218,3 +232,9 @@ Y realizamos la búsqueda de las flag y se encuentra las diferentes direcciones 
 Se pudo observar que esta maquina logramos obtener privilegios de usuario root a traves de una vulnerabilidad de samba, que nos dejo ejecutar un comando de revershell para obtener este acceso y obtener el acceso completo a la maquina.
 
 ![img](./img/lame/Pasted%20image%2020240715173006.png)
+
+---
+
+!!! success "🚩 Flag Captured"
+    Shell obtenida como `root` a través de **CVE-2007-2447** (Samba 3.0.20).  
+    Acceso completo con privilegios root mediante una reverse shell en el puerto 443.

@@ -1,14 +1,27 @@
 # Primed for Action Challenge
 
-### Context
+<div class="grid cards" markdown>
 
-Intelligence units have intercepted a list of numbers. They seem to be used in a peculiar way: the adversary seems to be sending a list of numbers, most of which are garbage, but two of which are prime. These 2 prime numbers appear to form a key, which is obtained by multiplying the two. Your answer is the product of the two prime numbers. Find the key and help us solve the case.
+-   :material-information-outline: &nbsp; **Challenge Info**
+
+    ---
+
+    - 🏷️ **Category:** Coding
+    - ⚡ **Difficulty:** 🟢 Easy
+    - 💻 **Platform:** HackTheBox
+
+-   :material-tools: &nbsp; **Tools Required**
+
+    ---
+
+    - `python3` — Solution scripting
+
+</div>
+
+!!! abstract "Challenge Description"
+    Intelligence units have intercepted a list of numbers. They seem to be used in a peculiar way: the adversary seems to be sending a list of numbers, most of which are garbage, but two of which are prime. These 2 prime numbers appear to form a key, which is obtained by multiplying the two. Your answer is the product of the two prime numbers. Find the key and help us solve the case.
 
 ### Solution
-
-#### Requirements
-
-- python
 
 #### Step 1 - Analyze the code
 
@@ -63,9 +76,8 @@ In the end, the result of the multiplication that leads us to the challenge flag
 
 #### Step 3 - Flag
 
-```bash
-HTB{pr1m3_Pr0}
-```
+!!! success "🚩 Flag"
+    `HTB{pr1m3_Pr0}`
 
 #### Step 4 - Conclusion
 
