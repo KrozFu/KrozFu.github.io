@@ -1,20 +1,29 @@
----
-title: "Like a Glove"
-platform: "HackTheBox"
-category: "ai-ml"
-difficulty: "easy"
-date: "2026-07-04"
-flag: "htb{h4rm0n1ou5_hymn_0f_h1ghd1m3ns10n4l_subl1me_5ymph0ny_0f_num3r1cal_nuanc3_1n_tr3mend0u5_t4p3stry_0f_t3xtu4l_7r4n5f0rma7ion}"
----
+# Like a Glove Challenge
 
-# Like a Glove
+<div class="grid cards" markdown>
 
-## Summary
+- :material-information-outline: &nbsp; **Challenge Info**
 
-`chal.txt` contains 84 lines of the form `Like A is to B, C is to?` — analogies encoded
-as **word-vector arithmetic** over the `glove-twitter-25` embedding model. Solving each
-analogy as `D = B - A + C` (nearest neighbor by cosine similarity) and concatenating the
-84 answers, in order, reconstructs the flag character-by-character.
+    ---
+
+  - 🏷️ **Category:** AI/ML
+  - ⚡ **Difficulty:** 🟢 Easy
+  - 💻 **Platform:** HackTheBox
+
+- :material-tools: &nbsp; **Tools Required**
+
+    ---
+
+  - `python3` — Scripting the analogy solver
+  - `gensim` — Loading the `glove-twitter-25` word embeddings
+
+</div>
+
+!!! abstract "Challenge Description"
+    `chal.txt` contains 84 lines of the form `Like A is to B, C is to?` — analogies encoded
+    as **word-vector arithmetic** over the `glove-twitter-25` embedding model. Solving each
+    analogy as `D = B - A + C` (nearest neighbor by cosine similarity) and concatenating the
+    84 answers, in order, reconstructs the flag character-by-character.
 
 ## Solution
 

@@ -2,27 +2,27 @@
 
 <div class="grid cards" markdown>
 
--   :material-information-outline: &nbsp; **Machine Info**
+- :material-information-outline: &nbsp; **Machine Info**
 
     ---
 
     ![Cicada](./img/cicada.png)
 
-    - 💻 **OS:** Windows (Active Directory)
-    - ⚡ **Difficulty:** 🟢 Easy
-    - 👤 **Creator:** theblxckcicada
-    - 🔗 **Link:** [Cicada](https://www.hackthebox.com/machines/cicada)
+  - 💻 **OS:** Windows (Active Directory)
+  - ⚡ **Difficulty:** 🟢 Easy
+  - 👤 **Creator:** theblxckcicada
+  - 🔗 **Link:** [Cicada](https://www.hackthebox.com/machines/cicada)
 
--   :material-tools: &nbsp; **Tools Used**
+- :material-tools: &nbsp; **Tools Used**
 
     ---
 
-    - `nmap` — Reconnaissance & port scanning
-    - `crackmapexec` / `nxc` — SMB enumeration & credential spraying
-    - `smbclient` — SMB resource access
-    - `enum4linux-ng` — Active Directory enumeration
-    - `evil-winrm` — WinRM remote shell
-    - `impacket` — SAM/SYSTEM dump & Pass-the-Hash
+  - `nmap` — Reconnaissance & port scanning
+  - `crackmapexec` / `nxc` — SMB enumeration & credential spraying
+  - `smbclient` — SMB resource access
+  - `enum4linux-ng` — Active Directory enumeration
+  - `evil-winrm` — WinRM remote shell
+  - `impacket` — SAM/SYSTEM dump & Pass-the-Hash
 
 </div>
 

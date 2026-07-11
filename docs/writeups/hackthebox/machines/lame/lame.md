@@ -2,26 +2,26 @@
 
 <div class="grid cards" markdown>
 
--   :material-information-outline: &nbsp; **Machine Info**
+- :material-information-outline: &nbsp; **Machine Info**
 
     ---
 
     ![Lame](./img/Pasted%20image%2020240715155613.png)
 
-    - 💻 **OS:** Linux
-    - ⚡ **Difficulty:** 🟢 Easy
-    - 👤 **Creator:** ch4p
-    - 🔗 **Link:** [Lame](https://www.hackthebox.com/machines/lame)
+  - 💻 **OS:** Linux
+  - ⚡ **Difficulty:** 🟢 Easy
+  - 👤 **Creator:** ch4p
+  - 🔗 **Link:** [Lame](https://www.hackthebox.com/machines/lame)
 
--   :material-tools: &nbsp; **Tools Used**
+- :material-tools: &nbsp; **Tools Used**
 
     ---
 
-    - `nmap` — Reconnaissance & port scanning
-    - `smbmap` / `smbclient` — SMB enumeration
-    - `searchsploit` — Vulnerability research (CVE-2007-2447)
-    - `netcat` — Reverse shell listener
-    - `tcpdump` — Traffic capture & analysis
+  - `nmap` — Reconnaissance & port scanning
+  - `smbmap` / `smbclient` — SMB enumeration
+  - `searchsploit` — Vulnerability research (CVE-2007-2447)
+  - `netcat` — Reverse shell listener
+  - `tcpdump` — Traffic capture & analysis
 
 </div>
 
