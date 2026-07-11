@@ -1,0 +1,317 @@
+/* ================================================================
+   KrozFu — Hacker Theme
+   Estilo terminal / matriz verde sobre fondo negro
+   ================================================================ */
+
+/* ── ACCENT: sobreescribir verde de Material a verde neón ─────── */
+[data-md-color-accent="green"] {
+  --md-accent-fg-color: #00ff41;
+  --md-accent-fg-color--transparent: rgba(0, 255, 65, 0.12);
+}
+
+/* ── ESQUEMA OSCURO: fondo casi negro ────────────────────────── */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: hsl(0, 0%, 5%);
+  --md-default-bg-color--light: hsla(0, 0%, 7%, 0.54);
+  --md-default-bg-color--lighter: hsla(0, 0%, 7%, 0.26);
+  --md-default-bg-color--lightest: hsla(0, 0%, 7%, 0.07);
+  --md-code-bg-color: hsl(0, 0%, 7%);
+  --md-typeset-a-color: #00ff41;
+  --md-typeset-mark-color: rgba(0, 255, 65, 0.25);
+}
+
+/* ── HEADER (barra superior) ─────────────────────────────────── */
+.md-header {
+  background-color: #000000 !important;
+  box-shadow:
+    0 1px 0 rgba(0, 255, 65, 0.35),
+    0 4px 16px rgba(0, 0, 0, 0.9);
+}
+
+/* Nombre del sitio → tipografía monoespaciada y verde neón */
+.md-header__title .md-ellipsis {
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 2px;
+  color: #00ff41 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+}
+
+/* Botón menú y íconos del header */
+.md-header__button {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.md-header__button:hover {
+  color: #00ff41;
+}
+
+/* ── TABS DE NAVEGACIÓN ───────────────────────────────────────── */
+.md-tabs {
+  background-color: #050505 !important;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.18);
+}
+
+.md-tabs__link {
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.6px;
+  font-size: 0.72rem;
+  opacity: 0.65;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.md-tabs__link:is(:focus, :hover) {
+  color: #00ff41 !important;
+  opacity: 1;
+}
+
+.md-tabs__link--active {
+  color: #00ff41 !important;
+  opacity: 1;
+}
+
+.md-tabs__indicator {
+  background-color: #00ff41 !important;
+  box-shadow: 0 0 6px #00ff41;
+}
+
+/* ── LINKS ────────────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-typeset a {
+  color: #00ff41;
+  text-decoration: none;
+}
+
+[data-md-color-scheme="slate"] .md-typeset a:hover {
+  color: #66ff85;
+  text-decoration: underline;
+}
+
+/* ── CÓDIGO INLINE ────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-typeset code:not(.highlight code) {
+  color: #00ff41;
+  background-color: rgba(0, 255, 65, 0.08);
+  border: 1px solid rgba(0, 255, 65, 0.22);
+  border-radius: 3px;
+  padding: 0.05em 0.35em;
+}
+
+/* ── BLOQUES DE CÓDIGO ────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-typeset pre {
+  background-color: #050505;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .highlight {
+  background-color: #050505;
+  border-left: 3px solid #00ff41;
+  border-radius: 0 4px 4px 0;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .highlight code {
+  background-color: transparent;
+  color: #c8ffc8;
+}
+
+/* Número de líneas en código */
+[data-md-color-scheme="slate"] .md-typeset .highlight .linenos {
+  color: rgba(0, 255, 65, 0.35);
+  border-right: 1px solid rgba(0, 255, 65, 0.15);
+  padding-right: 0.8em;
+}
+
+/* ── NAVEGACIÓN LATERAL ───────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-nav__link--active,
+[data-md-color-scheme="slate"] .md-nav__link--active:hover {
+  color: #00ff41 !important;
+  font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link:is(:focus, :hover) {
+  color: #00ff41;
+}
+
+/* Flechas del acordeón de navegación */
+[data-md-color-scheme="slate"] .md-nav__icon {
+  color: rgba(0, 255, 65, 0.5);
+}
+
+/* ── TABLA DE CONTENIDOS (TOC) ────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active {
+  color: #00ff41 !important;
+  border-left: 2px solid #00ff41;
+  padding-left: 0.5em;
+}
+
+/* ── TABLAS ───────────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  border: 1px solid rgba(0, 255, 65, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: #0a0a0a;
+  color: #00ff41;
+  border-bottom: 2px solid rgba(0, 255, 65, 0.4);
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.5px;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+  border-bottom: 1px solid rgba(0, 255, 65, 0.07);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:hover {
+  background-color: rgba(0, 255, 65, 0.04);
+}
+
+/* ── GRID CARDS ───────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards> :is(ul, ol)>li {
+  background-color: #0a0a0a;
+  border: 1px solid rgba(0, 255, 65, 0.12);
+  border-radius: 6px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .grid.cards> :is(ul, ol)>li:hover {
+  border-color: rgba(0, 255, 65, 0.6);
+  box-shadow:
+    0 0 14px rgba(0, 255, 65, 0.12),
+    inset 0 0 14px rgba(0, 255, 65, 0.03);
+}
+
+/* HR dentro de cards */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards> :is(ul, ol)>li hr {
+  border-color: rgba(0, 255, 65, 0.2);
+}
+
+/* ── ADMONITIONS ──────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details) {
+  background-color: #090909;
+}
+
+/* Success: verde hacker */
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).success {
+  border-color: #00ff41;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .success> :is(.admonition-title, summary) {
+  background-color: rgba(0, 255, 65, 0.1);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .success> :is(.admonition-title, summary)::before {
+  background-color: #00ff41;
+}
+
+/* Tip: verde lima */
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).tip {
+  border-color: rgba(0, 200, 80, 0.7);
+}
+
+/* Abstract/Note */
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).abstract,
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).note {
+  border-color: rgba(0, 180, 200, 0.5);
+}
+
+/* ── BOTONES ──────────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-typeset .md-button {
+  color: #00ff41;
+  border-color: rgba(0, 255, 65, 0.6);
+  background-color: transparent;
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.8px;
+  transition: all 0.2s ease;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .md-button:hover {
+  background-color: #00ff41;
+  border-color: #00ff41;
+  color: #000000;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.45);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary {
+  background-color: #00ff41;
+  border-color: #00ff41;
+  color: #000000;
+  font-weight: 700;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary:hover {
+  background-color: transparent;
+  color: #00ff41;
+}
+
+/* ── SEARCH ───────────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-search__input {
+  background-color: rgba(0, 255, 65, 0.04);
+  border: 1px solid rgba(0, 255, 65, 0.15);
+  color: #c8ffc8;
+}
+
+[data-md-color-scheme="slate"] .md-search__input::placeholder {
+  color: rgba(0, 255, 65, 0.38);
+}
+
+[data-md-color-scheme="slate"] .md-search__input:focus {
+  border-color: rgba(0, 255, 65, 0.5);
+  box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.1);
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+.md-footer {
+  background-color: #000000 !important;
+}
+
+.md-footer-meta {
+  background-color: #000000 !important;
+  border-top: 1px solid rgba(0, 255, 65, 0.15);
+}
+
+[data-md-color-scheme="slate"] .md-footer__link {
+  color: rgba(0, 255, 65, 0.6);
+}
+
+[data-md-color-scheme="slate"] .md-footer__link:hover {
+  color: #00ff41;
+}
+
+/* ── SCROLLBAR (WebKit / Blink) ───────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070707;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 65, 0.35);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff41;
+}
+
+/* ── BADGES de shields.io (el fondo blanco no rompe nada) ─────── */
+[data-md-color-scheme="slate"] .md-typeset img[src*="shields.io"] {
+  filter: brightness(0.9);
+}
+
+/* ── MODO CLARO: header negro consistente ─────────────────────── */
+[data-md-color-scheme="default"] .md-header {
+  background-color: #000000 !important;
+}
+
+[data-md-color-scheme="default"] .md-tabs {
+  background-color: #111111 !important;
+  border-bottom: 1px solid rgba(0, 150, 136, 0.3);
+}
+
+[data-md-color-scheme="default"] .md-header__title .md-ellipsis {
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 2px;
+  color: #ffffff !important;
+}

