@@ -4,13 +4,16 @@ site_url: https://krozfu.github.io/
 nav:
   - Whoami: index.md
   - Projects:
+      - articles/index.md
       - Configuración NAT y ataque con hping MikroTik: articles/nat-hping/nat-attack-hping.md
       - Implementación WireGuard: articles/wireguard/wireguard.md
       - Implementación Servidores: articles/servidor/servidor-ubuntu.md
       - Instalar Kali Linux VMware: articles/kali-linux/kali-linux.md
       - Instalación PyPhi: articles/pyphi/install-pyphi.md
   - Writeups:
+      - writeups/index.md
       - HackTheBox:
+          - writeups/hackthebox/index.md
           - Machines:
               - Blue: writeups/hackthebox/machines/blue/blue.md
               - Lame: writeups/hackthebox/machines/lame/lame.md
@@ -27,6 +30,10 @@ nav:
                   - Like-a-Gloves: writeups/hackthebox/challenges/ia-ml/like-a-gloves.md
       - TryHackMe:
           - Pickle Rick: writeups/tryhackme/pickle-rick/pickle-rick.md
+      - Fluid Attacks CTF:
+          - writeups/ctf-fluidattacks/index.md
+          - "2026-2":
+              - writeups/ctf-fluidattacks/2026-2/index.md
 
 theme:
   name: material
@@ -34,9 +41,14 @@ theme:
   favicon: img/kzf-logo.png
   features:
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
     - navigation.top
+    - navigation.footer
+    - toc.follow
     - search.suggest
     - search.highlight
     - content.tabs.link
