@@ -15,6 +15,7 @@ nav:
               - Blue: writeups/hackthebox/machines/blue/blue.md
               - Lame: writeups/hackthebox/machines/lame/lame.md
               - Cicada: writeups/hackthebox/machines/cicada/cicada.md
+              - Makesense: writeups/hackthebox/machines/makesense/makesense.md
           - Challenges:
               - Pwn:
                   - R0bob1rd: writeups/hackthebox/challenges/pwn/r0bob1rd.md
