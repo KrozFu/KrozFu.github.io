@@ -71,7 +71,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Realizamos un reconocimiento por el puerto 80 que es de http, ya que le servicio de ssh necesitamos credenciales y no las tenemos para poder acceder a la maquina.
 Al ingresar al servicio de http de la maquina obtenemos una pantalla de de inicio de la serie de Rick and Morty.
 
-![img](./img/pickle-rick/img1.png)
+![img](./img/img1.png)
 
 Al realizar un `whatweb` sobre la pagina, miramos algunas herramientas que son utilizadas para el funcionamiento de la pagina.
 
@@ -87,7 +87,7 @@ http://10.10.110.194/ [200 OK] Apache[2.4.41], Bootstrap, Country[RESERVED][ZZ],
 
 Al realizar una inspección de código fuente de la pagina encontramos algo muy interesante que es un posible usuario, que lo podremos utilizar posteriormente en algunos análisis.
 
-![img](./img/pickle-rick/img2.png)
+![img](./img/img2.png)
 
 También exploramos algún reconocimiento de rutas con los cuales podremos encontrar mas información, sobre algunas rutas que pueden estar expuestas en dentro de la pagina web.
 
@@ -111,11 +111,11 @@ PORT   STATE SERVICE
 
 Al ingresar a la ruta de `robots.txt` encontramos lo siguiente, tiene una forma rara de escritura, pero es lo único que se encuentra en esta ruta, con lo cual es algo inusual, la vamos a guardar para ver si se la puede utilizar en pasos posteriores.
 
-![img](./img/pickle-rick/img3.png)
+![img](./img/img3.png)
 
 Al ingresar a la ruta de `/login.php`, encontramos un panel de ingreso de credenciales, lo cuales podemos intuir algunas cosas que veníamos encontrando en pasos anteriores, para ingresar a este panel de login, vamos a ingresar con el usuario encontrando y con la cadena de caracteres extraña como contraseña, para ver si tenemos éxito de ingreso.
 
-![img](./img/pickle-rick/img4.png)
+![img](./img/img4.png)
 
 Para probar la credenciales procedemos a ingresar y intentar obtener acceso con la información encontrada.
 
@@ -126,23 +126,23 @@ password:Wubbalubbadubdub
 
 Al ingresar esas credenciales, se logro ingresar a un panel de administración donde podemos administrar varias cosas, pero algo que llama mucho a atención es el primer panel, que dice `commands` donde posiblemente podemos ejecutar comando sobre algún servicio, como observamos anteriormente esta pagina web, esta corriendo sobre un servidor de Ubuntu, donde los posibles comandos a ejecutar pueden ser los de Linux.
 
-![img](./img/pickle-rick/img5.png)
+![img](./img/img5.png)
 
 Al ingresar un posible comando de Linux para reconocer el usuario que esta corriendo observamos que tiene el usuario `www-data`, que es un usuario común para los servicios de Apache, donde podemos intuir que este panel esta corriendo los mandos con este usuario sobre los directorios donde se encuentra alojada la pagina.
 
-![img](./img/pickle-rick/img6.png)
+![img](./img/img6.png)
 
 Probamos con otro comando de Linux para identificar si encontramos mas información y encontramos algo un archivo txt, que puede tener información de la maquina y de del reto que estamos investigando. 
 
-![img](./img/pickle-rick/img7.png)
+![img](./img/img7.png)
 
 Y miramos su contenido del archivo `txt` y encontramos que es el primer ingrediente, para ingresar al campo de la flag encontrada.
 
-![img](./img/pickle-rick/img8.png)
+![img](./img/img8.png)
 
 También podemos observar los privilegios que puede tener este usuario sobre el sistema, y se observa que tiene todos los privilegios para poder ejecutar comando como administrador, esto puede facilitar los accesos cuando logremos obtener control sobre la maquina.
 
-![img](./img/pickle-rick/img9.png)
+![img](./img/img9.png)
 
 Y se puede observar que tiene derecho a ejecutar todos lodos los comandos este usuario, con lo cual podemos darnos permisos para poder crear y ejecutar archivos para darnos acceso a la maquina.
 
@@ -150,20 +150,20 @@ Y se puede observar que tiene derecho a ejecutar todos lodos los comandos este u
 sudo chown www-data:www-data /var/www/html
 ```
 
-![img](./img/pickle-rick/img10.png)
+![img](./img/img10.png)
 
 Ya tenemos permisos para leer y ejecutar en esta maquina con este usuario `www-data`.
 
-![img](./img/pickle-rick/img11.png)
+![img](./img/img11.png)
 
 ## Explotación
 Una vez confirmada la posibilidad de ingresar comandos en el sistema, estamos en posición de explotar esta vulnerabilidad utilizando un exploit adecuado que nos permita obtener acceso remoto al sistema. Con los permisos obtenidos, subiremos un archivo malicioso diseñado para establecer una conexión de `reverse shell`, lo que nos permitirá conectarnos al sistema comprometido desde nuestro equipo atacante.
 
-![img](./img/pickle-rick/img12.png)
+![img](./img/img12.png)
 
 Luego de ejecutar el archivo maliciosa desde la maquina victima obtenemos acceso a la maquina desde la terminal del sistema.
 
-![img](./img/pickle-rick/img13.png)
+![img](./img/img13.png)
 
 Ingresado realizamos un tratamiento a la terminal y buscamos el segundo ingrediente en las carpetas que tenemos disponibilidad de acceso, el cual encontramos en el directorio de `/home/rick` y encontramos un archivo que tiene nuestro segundo ingrediente.
 
@@ -173,11 +173,11 @@ Ingresado realizamos un tratamiento a la terminal y buscamos el segundo ingredie
 
 Ingresamos como usuario `root`, ya que tenemos los privilegios de super usuario, y buscamos el tercer ingrediente como `root`.
 
-![img](./img/pickle-rick/img14.png)
+![img](./img/img14.png)
 
 Y lo encontramos en el directorio raíz `/root`.
 
-![img](./img/pickle-rick/img15.png)
+![img](./img/img15.png)
 
 ```bash
 3rd ingredients: fleeb juice
@@ -186,11 +186,11 @@ Y lo encontramos en el directorio raíz `/root`.
 ## Eliminación de evidencia
 Al finalizar el proceso, dentro de la maquina procedemos a borrar el exploit creado para poder eliminar rastros dentro de la maquina.
 
-![img](./img/pickle-rick/img16.png)
+![img](./img/img16.png)
 
 ## Finalización del reto
 
-![img](./img/pickle-rick/img17.png)
+![img](./img/img17.png)
 
 !!! success "🚩 Ingredients Found"
     - 🧪 **1st Ingredient:** `mr. meeseeks hair`

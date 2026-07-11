@@ -6,7 +6,7 @@
 
     ---
 
-    ![Lame](./img/lame/Pasted%20image%2020240715155613.png)
+    ![Lame](./img/Pasted%20image%2020240715155613.png)
 
     - 💻 **OS:** Linux
     - ⚡ **Difficulty:** 🟢 Easy
@@ -43,7 +43,7 @@ Vamos a crear unos directorios de trabajo, para poder manejar mucho mejor la inf
 
 Ya configurada las opciones realizamos un envío de una traza ICMP para comprobar la conectividad con la maquina, y con lo cual observamos que ya tenemos conectividad y que tiene un `ttl=63` que hace perteneciente a una maquina con sistema operativo Linux.
 
-![img](./img/lame/Pasted%20image%2020240715161017.png)
+![img](./img/Pasted%20image%2020240715161017.png)
 
 ## Reconocimiento
 
@@ -126,7 +126,7 @@ Host script results:
 
 Se puede observar que por el puerto 21, esta corriendo un servicio de `ftp` y que tiene acceso con el usuario `Anonymous` que es un usuario que no suele pedir credenciales de acceso, con lo cual podemos observar una primera instancia si se puede recolectar información a través de este puerto.
 
-![img](./img/lame/Pasted%20image%2020240715163110.png)
+![img](./img/Pasted%20image%2020240715163110.png)
 
 Se observa que por el puerto de ftp no tenemos ningún archivo que nos puede servir para poder encontrar algo de información, entonces procedemos a reconocer el siguiente puerto.
 
@@ -138,7 +138,7 @@ Procedemos a realizar una análisis por el puertos que esta corriendo samba que 
 smbmap -H $ip
 ```
 
-![img](./img/lame/Pasted%20image%2020240715164002.png)
+![img](./img/Pasted%20image%2020240715164002.png)
 
 Y observamos que el directorio `tmp` es accesible, y podemos leer y escribir dentro de este directorio, con lo que vamos a conectarnos a este recurso, ejecutamos el siguiente comando, y no colocamos ninguna credencial.
 
@@ -146,7 +146,7 @@ Y observamos que el directorio `tmp` es accesible, y podemos leer y escribir den
 smbclient //$ip/tmp
 ```
 
-![img](./img/lame/Pasted%20image%2020240715164222.png)
+![img](./img/Pasted%20image%2020240715164222.png)
 
 Se logran observar varios archivos, con los que podemos ir analizando cada unos para ver si encontramos algunas información que nos sea relevante para escalar privilegios, pero para este caso estos archivos no van hacer relevantes y vamos a proceder con otro paso que puede que nos ayude a escalar privilegios.
 
@@ -158,7 +158,7 @@ searchsploit samba 3.0.20
 
 Y logramos obtener algunas vulnerabilidades con esta versión de samba, y lo que se desea hacer con la maquina victima es tener acceso para poder ejecutar comando dentro de esta maquina utilizamos el script de `Command Execution`, vamos a analizar este script para poder ver como se lograría tener el acceso de privilegios.
 
-![img](./img/lame/Pasted%20image%2020240715164837.png)
+![img](./img/Pasted%20image%2020240715164837.png)
 
 Vamos a explorar que tiene este código y que nos puede servir de este script de ruby, ejecutando el siguiente comando.
 
@@ -168,7 +168,7 @@ searchsploit -x unix/remote/16320.rb
 
 Se observa que en esa linea de código ejecuta lo siguiente para poder tener acceso de super usuario en la maquina.
 
-![img](./img/lame/Pasted%20image%2020240715165401.png)
+![img](./img/Pasted%20image%2020240715165401.png)
 
 Vamos a probar esa vulnerabilidad para comprabar si funciona al realizar la conexion encontrada con **smbmap**.
 
@@ -190,7 +190,7 @@ sudo tcpdump -i tun0 icmp
 
 Y como se puede comprobar se tiene ejecución de código remoto a través de la maquina entonces procedemos a explotar esta vulnerabilidad.
 
-![img](./img/lame/Pasted%20image%2020240715170204.png)
+![img](./img/Pasted%20image%2020240715170204.png)
 
 Ahora ejecutamos el siguiente comando para poder tener un acceso remoto a la maquina a través de una `revershell`.
 
@@ -206,7 +206,7 @@ sudo nc -nlvp 443
 
 Y se puede observar que ya se tiene colectividad con usuario `root`, se logro tener conectiviad con una revershell.
 
-![img](./img/lame/Pasted%20image%2020240715171530.png)
+![img](./img/Pasted%20image%2020240715171530.png)
 
 Se realiza un tratamiento de tty para poder trabajar de una manera mas amigable y realizamos los siguientes comandos en el siguiente orden.
 
@@ -221,17 +221,17 @@ Se realiza un tratamiento de tty para poder trabajar de una manera mas amigable 
 
 Y se puede observar que ya es mas manejable la terminar para proceder a buscar las flags.
 
-![img](./img/lame/Pasted%20image%2020240715172531.png)
+![img](./img/Pasted%20image%2020240715172531.png)
 
 Y realizamos la búsqueda de las flag y se encuentra las diferentes direcciones donde podemos ir a buscarlas y terminal la maquina.
 
-![img](./img/lame/Pasted%20image%2020240715172731.png)
+![img](./img/Pasted%20image%2020240715172731.png)
 
 ## Finalizacion
 
 Se pudo observar que esta maquina logramos obtener privilegios de usuario root a traves de una vulnerabilidad de samba, que nos dejo ejecutar un comando de revershell para obtener este acceso y obtener el acceso completo a la maquina.
 
-![img](./img/lame/Pasted%20image%2020240715173006.png)
+![img](./img/Pasted%20image%2020240715173006.png)
 
 ---
 
