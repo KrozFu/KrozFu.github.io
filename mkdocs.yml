@@ -4,17 +4,21 @@ site_url: https://krozfu.github.io/
 nav:
   - Whoami: index.md
   - Projects:
-      - Configuración NAT y ataque con hping MikroTik: articles/nat-attack-hping.md
-      - Implementación WireGuard: articles/wireguard.md
-      - Implementación Servidores: articles/servidor-ubuntu.md
-      - Instalar Kali Linux VMware: articles/kali-linux.md
-      - Instalación PyPhi: articles/install-pyphi.md
+      - articles/index.md
+      - Configuración NAT y ataque con hping MikroTik: articles/nat-hping/nat-attack-hping.md
+      - Implementación WireGuard: articles/wireguard/wireguard.md
+      - Implementación Servidores: articles/servidor/servidor-ubuntu.md
+      - Instalar Kali Linux VMware: articles/kali-linux/kali-linux.md
+      - Instalación PyPhi: articles/pyphi/install-pyphi.md
   - Writeups:
+      - writeups/index.md
       - HackTheBox:
+          - writeups/hackthebox/index.md
           - Machines:
-              - Blue: writeups/hackthebox/machines/blue.md
-              - Lame: writeups/hackthebox/machines/lame.md
-              - Cicada: writeups/hackthebox/machines/cicada.md
+              - Blue: writeups/hackthebox/machines/blue/blue.md
+              - Lame: writeups/hackthebox/machines/lame/lame.md
+              - Cicada: writeups/hackthebox/machines/cicada/cicada.md
+              - Makesense: writeups/hackthebox/machines/makesense/makesense.md
           - Challenges:
               - Pwn:
                   - R0bob1rd: writeups/hackthebox/challenges/pwn/r0bob1rd.md
@@ -22,8 +26,22 @@ nav:
                   - Primed-for-Action: writeups/hackthebox/challenges/coding/primed-for-action.md
               - Hardware:
                   - The-Needle: writeups/hackthebox/challenges/hardware/the-needle.md
+              - IA/ML:
+                  - Like-a-Gloves: writeups/hackthebox/challenges/ia-ml/like-a-gloves.md
       - TryHackMe:
-          - Pickle Rick: writeups/tryhackme/pickle-rick.md
+          - Pickle Rick: writeups/tryhackme/pickle-rick/pickle-rick.md
+      - Fluid Attacks CTF:
+          - writeups/ctf-fluidattacks/index.md
+          - "2026-2":
+              - writeups/ctf-fluidattacks/2026-2/index.md
+              - API:
+                  - Coupon Collector: writeups/ctf-fluidattacks/2026-2/api/coupon-collector/coupon-collector.md
+                  - FlowForge (ni8mare-lite): writeups/ctf-fluidattacks/2026-2/api/ni8mare-lite/ni8mare-lite.md
+              - Crypto:
+                  - Crumble Cookie: writeups/ctf-fluidattacks/2026-2/crypto/crumble-cookie/crumble-cookie.md
+                  - Nonce Upon a Time: writeups/ctf-fluidattacks/2026-2/crypto/nonce-upon-a-time/nonce-upon-a-time.md
+              - Mobile:
+                  - Deadbolt: writeups/ctf-fluidattacks/2026-2/mobile/deadbolt/deadbolt.md
 
 theme:
   name: material
@@ -31,9 +49,14 @@ theme:
   favicon: img/kzf-logo.png
   features:
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
     - navigation.top
+    - navigation.footer
+    - toc.follow
     - search.suggest
     - search.highlight
     - content.tabs.link

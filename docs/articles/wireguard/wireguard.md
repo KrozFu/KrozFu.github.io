@@ -24,7 +24,7 @@
 
 En un servidor Ubuntu Server 22.04.4 LTS, se implementará una VPN utilizando Docker para establecer una conexión segura entre dos contenedores. Esta conexión se realizará mediante la tunelización de los contenedores a través del protocolo VPN WireGuard.
 
-![img](./img/wireguard/img_1.png)  
+![img](./img/img_1.png)  
 Versión del servidor de Ubuntu Server.
 
 !!! abstract "Requisitos previos"
@@ -43,7 +43,7 @@ Se creó una red para almacenar los dos contenedores de Docker y poder realizar 
 docker network create --driver bridge vpn-net
 ```
 
-![img](./img/wireguard/img_2.png)
+![img](./img/img_2.png)
 
 ## 2. Crear los contenedores
 
@@ -77,7 +77,7 @@ docker run -dit \
 ```
 
 Se puede observar los dos contenedores en ejecución.
-![img](./img/wireguard/img_3.png)
+![img](./img/img_3.png)
 
 ## 3. Configurar el servidor
 
@@ -94,8 +94,8 @@ Genera una clave pública y privada para el servidor:
 wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
 ```
 
-![img](./img/wireguard/img_4.png)
-![img](./img/wireguard/img_5.png)
+![img](./img/img_4.png)
+![img](./img/img_5.png)
 
 Configuramos ahora la interfaz de red wg0
 
@@ -126,7 +126,7 @@ Genera una clave pública y privada para el cliente:
 wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
 ```
 
-![img](./img/wireguard/img_6.png)
+![img](./img/img_6.png)
 
 Configuramos ahora la interfaz de red wg0
 
@@ -150,7 +150,7 @@ En el contenedor del servidor:
 wg-quick up wg0
 ```
 
-![img](./img/wireguard/img_7.png)
+![img](./img/img_7.png)
 
 En el contenedor del cliente:
 
@@ -158,15 +158,15 @@ En el contenedor del cliente:
 wg-quick up wg0
 ```
 
-![img](./img/wireguard/img_8.png)
+![img](./img/img_8.png)
 
 ## 6. Verificación de creación de la VPN
 
 Conexión de la VPN en servidor  
-![img](./img/wireguard/img_9.png)  
+![img](./img/img_9.png)  
 
 Conexión de la VPN en el cliente
-![img](./img/wireguard/img_10.png)  
+![img](./img/img_10.png)  
 
 ## 7. Verificar la conexión
 
@@ -176,7 +176,7 @@ Verificar envío de paquete ICMP desde el contenedor de servidor.
 ping 10.13.13.2
 ```
 
-![img](./img/wireguard/img_11.png)
+![img](./img/img_11.png)
 
 Verificar envió de paquete ICMP desde el contenedor de cliente.
 
@@ -184,7 +184,7 @@ Verificar envió de paquete ICMP desde el contenedor de cliente.
 ping 10.13.13.1
 ```
 
-![img](./img/wireguard/img_12.png)
+![img](./img/img_12.png)
 
 ## 8. Desactivar la VPN creada con Wireguard
 

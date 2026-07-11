@@ -38,7 +38,7 @@ Creamos **directorios** para poder almacenar los diferentes archivos de trabajo 
 
 Para ver a que tipo de maquina estamos explorando, realizamos una traza ICMP hacia la maquina y como se puede observar el TTL es de 127, que esta en el rango de una maquina Windows.
 
-![img](./img/blue/Pasted%20image%2020240526145148.png)
+![img](./img/Pasted%20image%2020240526145148.png)
 
 Realizamos el respectivo reconocimiento con `nmap`.
 
@@ -151,23 +151,23 @@ SMB         10.10.10.40     445    HARIS-PC         [*] Windows 7 Professional 7
 
 En este apartado vamos ayudarnos de la herramienta de `Metasploit`, para poder explotar esta maquina, realizamos la búsqueda de la vulnerabilidad en la base de datos de Metasploit.
 
-![img](./img/blue/Pasted%20image%2020240526151354.png)
+![img](./img/Pasted%20image%2020240526151354.png)
 
 Vamos a utilizar el `exploit 0`, y configuramos los parámetros necesarios para realizar el escalamiento.
 
-![img](./img/blue/Pasted%20image%2020240526151714.png)
+![img](./img/Pasted%20image%2020240526151714.png)
 
 Configuración de los parámetros, con ayuda de Metasploit se logra tener una conexión al servidor, y lograr tener el respectivo acceso al sistemas.
 
-![img](./img/blue/Pasted%20image%2020240526152443.png)
+![img](./img/Pasted%20image%2020240526152443.png)
 
 Luego de obtener acceso a la maquina por medio de Metasploit, se puede observar que tenemos acceso a la línea de comandos de Windows, con lo cual ahora podemos acceder a los diferentes directorios del sistema.
 
-![img](./img/blue/Pasted%20image%2020240526161044.png)
+![img](./img/Pasted%20image%2020240526161044.png)
 
 Navegamos  por los directorios del sistema, y logramos acceder como `Administrator` de Windows, obteniendo los máximos privilegios del sistema.
 
-![img](./img/blue/Pasted%20image%2020240526161242.png)
+![img](./img/Pasted%20image%2020240526161242.png)
 
 ## Explotación utilizando script de Python
 
@@ -175,7 +175,7 @@ Para explotar la vulnerabilidad `Eternalblue` en sistemas operativos Windows 7, 
 
 El exploit que nos ayudará a obtener acceso se llama `zzz_exploit.py`. Es importante tener en cuenta que la vulnerabilidad permite el acceso para un usuario anónimo.
 
-![img](./img/blue/Pasted%20image%2020240626114511.png)
+![img](./img/Pasted%20image%2020240626114511.png)
 
 Al comprobar las ejecución de comandos con python2 y tener instalados las diferentes herramientas, nos debe de arrojar las siguientes opciones, primer paso para la comprobación de funcionamiento del script se debe de ejecutar `checker.py`, el cual nos arroja si el funcionamiento que se  va a realizar es correcto o no.
 
@@ -192,15 +192,15 @@ from impacket.uuid import uuidtup_to_bin
 from impacket.dcerpc.v5.rpcrt import DCERPCException
 ```
 
-![img](./img/blue/Pasted%20image%2020240626123158.png)
+![img](./img/Pasted%20image%2020240626123158.png)
 
 Luego de configurar las dependencias debemos de hacer unos cambios al script `checker.py`, donde se deben de configurar algunas variables dentro del código, para hacer ejecutar adecuadamente el script.
 
-![img](./img/blue/Pasted%20image%2020240626123347.png)
+![img](./img/Pasted%20image%2020240626123347.png)
 
 Ahora se puede observar que el funcionamiento del script ya nos arroja cosas positivas con las cuales podemos seguir avanzando en el escalamiento de privilegios, se obtiene varios `OK`, que ya nos permiten seguir avanzando, tenemos un namepy `samr` que podemos utilizarlo.
 
-![img](./img/blue/Pasted%20image%2020240626124219.png)
+![img](./img/Pasted%20image%2020240626124219.png)
 
 Para poder correr ahora el Exploit `zzz_exploit.py` para obtener acceso a la maquina , debemos de realizar los siguientes cambios, y agregar el usuario `guest` en la variable `USERNAME`.
 
@@ -256,7 +256,7 @@ Preparamos los ambientes de trabajo para trabajar con netcat, del siguiente link
 
 Al descomprimir estos archivos en el directorio de trabajo obtenemos los siguientes resultados.
 
-![img](./img/blue/Pasted%20image%2020240626131739.png)
+![img](./img/Pasted%20image%2020240626131739.png)
 
 Pasar los archivos desde la maquina de trabajo a la maquina objetivo
 
@@ -278,7 +278,7 @@ python2 zzz_exploit.py 10.10.10.40 samr
 
 Finalmente se ha logrado obtener los privilegios de acceso dentro de la maquina Windows 7.
 
-![img](./img/blue/Pasted%20image%2020240626134517.png)
+![img](./img/Pasted%20image%2020240626134517.png)
 
 Al finalizar este proceso, se puede observar que esta vulnerabilidad de **EternalBlue**, nos permite tener acceso como usuario administrador `nt authority\system`, con lo cual podemos proceder a tener una escalabilidad tanto horizontal dentro del sistema, proponiendo tener persistencia dentro de la maquina.
 

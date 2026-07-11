@@ -113,7 +113,7 @@ pip install pyphi
 
 1. Finalización de instalación
 
-![install](./img/pyphi/img01.png)
+![install](./img/img01.png)
 
 1. Test de importación de la librería pyphi, para verificar la instalación se crea un archivo **main.py,** donde se importa la librería pyphi para verificar su instalación.
 
@@ -122,7 +122,7 @@ import os
 import pyphi
 ```
 
-![install](./img/pyphi/img02.png)
+![install](./img/img02.png)
 
 Como se puede observar la librería esta instalada correctamente y ya se puede trabajar con los documentos planteados para realizar las siguientes fases del proyecto de Análisis y diseño de algoritmos.
 

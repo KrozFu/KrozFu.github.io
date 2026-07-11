@@ -43,7 +43,7 @@ Para este laboratorio no es necesario tener un versión de Windows requerida, lo
 
 Para realizar este laboratorio se tendrá una red aislada para conectar los diferentes equipos, simulando una red de conexión entre los equipos, esto nos ayuda a tener un laboratorio mas controlado y lograr hacer lo que se propone en la siguiente grafica.
 
-![img](./img/servidor/img_1.png)
+![img](./img/img_1.png)
 
 ## Configuración de VirtualBox
 
@@ -51,27 +51,27 @@ Para realizar este laboratorio se tendrá una red aislada para conectar los dife
 
 Seguimos los siguientes pasos para crear la nueva red, elegimos `tools` y después en una `network manager` donde vamos a poder administrar las redes con virtual box.
 
-![img](./img/servidor/img_2.png)
+![img](./img/img_2.png)
 
 Y elegimos una red `Host-only Networks`.
 
-![img](./img/servidor/img_3.png)
+![img](./img/img_3.png)
 
 ### 2. Para crear una nueva red
 
 Para crear la nueva red, le damos en el botón `create` y aceptamos los permisos necesario para proceder a crear la red.
 
-![img](./img/servidor/img_4.png)
+![img](./img/img_4.png)
 
 ### 3. Configuración de dirección de red
 
 Procedemos a configurar la dirección de red que va a tener esta nueva red, en este caso no nos deja elegir una red, a partir de 1, con lo cual configuramos la dirección de red `10.10.10.1`.
 
-![img](./img/servidor/img_5.png)
+![img](./img/img_5.png)
 
 Y dejamos la configuración de DHCP que nos facilita VirtualBox como deshabilitada, ya que posteriormente la vamos a configurar con el servidor de Ubuntu.
 
-![img](./img/servidor/img_6.png)
+![img](./img/img_6.png)
 
 ## Configuración de dos interfaces de red para Ubuntu Server y Windows 10
 
@@ -80,13 +80,13 @@ Y dejamos la configuración de DHCP que nos facilita VirtualBox como deshabilita
 Vamos a configurar dos interfaces de res al servidor de Ubuntu server para mayor facilidad de trabajo, ya que va a tener una interfaz de red para conectarse a internet y otra para conectarse a la red interna creada.
 Vamos a ingresar a la parte de red de la maquina y configuramos dos adaptadores.
 
-![img](./img/servidor/img_7.png)
+![img](./img/img_7.png)
 
 Y debemos de configurar el **primer adaptador** como se muestra en la imagen, donde este tendrá acceso desde la maquina principal y con acceso a la red.
 
-![img](./img/servidor/img_8.png)
+![img](./img/img_8.png)
 
-![img](./img/servidor/img_9.png)
+![img](./img/img_9.png)
 
 ### Administración de Red Windows 10
 
@@ -94,7 +94,7 @@ Para configurar la red en Windows 10, solo debe habilitar una red, la cual será
 
 Y el cual esta conectado a la red interna que se configuro anteriormente.
 
-![img](./img/servidor/img_10.png)
+![img](./img/img_10.png)
 
 ## Conexión con MobaXterm a Servidor
 
@@ -110,7 +110,7 @@ main@main-server:~$ ip addres
 main@main-server:~$ ip a
 ```
 
-![img](./img/servidor/img_11.png)
+![img](./img/img_11.png)
 
 Observamos que sus interfaces de red configuradas anteriormente con el gestor de red de VirtualBox son la `enp0s3` y `enp0s8`, la cual la interfaz de red 2 y la IP `192.168.1.153`, nos ofrece la dirección de red para conexión remota con `ssh`. Este protocolo de conexión viene al momento de instalar Ubuntu Server, se se siguió los pasos respectivos previos, ya tienes `ssh` en el servidor, y si no lo tienes revisa el paso posterior donde se va a instalar SSH y debes primero realizar esa configuración de instalación, para realizar este paso.
 
@@ -118,15 +118,15 @@ Observamos que sus interfaces de red configuradas anteriormente con el gestor de
 
 Realizamos una nueva sesión de conexión.
 
-![img](./img/servidor/img_12.png)
+![img](./img/img_12.png)
 
 Y accedemos por medio de SSH y configuramos la IP y el nombre de usuario configurado anteriormente, para este caso mi dirección IP es `192.168.1.153` y mi usuario `main`.
 
-![img](./img/servidor/img_13.png)
+![img](./img/img_13.png)
 
 Una vez ingresado los parámetros te pedirá la contraseña y lograras acceder al servidor.
 
-![img](./img/servidor/img_14.png)
+![img](./img/img_14.png)
 
 Una vez ingresado ya puedes realizar las configuraciones mas fácilmente.
 
@@ -162,7 +162,7 @@ sudo netplan apply
 
 Y ya podemos observar que tenemos configurada la IP de esta nueva interfaz de red.
 
-![img](./img/servidor/img_15.png)
+![img](./img/img_15.png)
 
 ### 1. Configuración de SSH
 
@@ -173,7 +173,7 @@ Comprobamos si el servicio de SSH esta corriendo en el sistema, utilizando el si
 systemctl status ssh
 ```
 
-![img](./img/servidor/img_16.png)
+![img](./img/img_16.png)
 
 Se puede comprobar que el servicio esta corriendo y que esta activado, si no esta instalado debes de ejecutar el siguiente comando y comprobar su estado.
 
@@ -219,7 +219,7 @@ subnet 10.10.10.0 netmask 255.255.255.0 {
 
 Y se agrega la configuración al final del archivo.
 
-![img](./img/servidor/img_17.png)
+![img](./img/img_17.png)
 
 Y verificamos si la configuración esta correctamente configurada.
 
@@ -227,7 +227,7 @@ Y verificamos si la configuración esta correctamente configurada.
 sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf
 ```
 
-![img](./img/servidor/img_18.png)
+![img](./img/img_18.png)
 
 Procedemos a configurar  la interfaz de red del servidor DHCP.
 
@@ -237,13 +237,13 @@ sudo vim /etc/default/isc-dhcp-server
 
 Y se modifica la siguiente línea en el archivo dependiendo del nombre de la interfaz de red que tenga, para nuestro caso es la `enp0s3`, como se muestra a continuación.
 
-![img](./img/servidor/img_19.png)
+![img](./img/img_19.png)
 
 ```bash
 NTERFACESv4="enp0s8"
 ```
 
-![img](./img/servidor/img_20.png)
+![img](./img/img_20.png)
 
 Finalmente procedemos a reiniciar el servicio DHCP y revisamos el estados si está activo, ejecutamos las dos primeras líneas en la terminal por separado.
 
@@ -252,7 +252,7 @@ sudo systemctl restart isc-dhcp-server
 sudo systemctl status isc-dhcp-server
 ```
 
-![img](./img/servidor/img_21.png)
+![img](./img/img_21.png)
 
 #### Verificamos la IP en el sistema cliente de Windows 10
 
@@ -264,7 +264,7 @@ ipconfig
 
 Como se puede observar, en las configuraciones de red, ya el servidor DHCP, nos dio la IP `10.10.10.20` y con puerta de enlace `10.10.10.1`, las que fueron configuradas en el servidor de Ubuntu.
 
-![img](./img/servidor/img_22.png)
+![img](./img/img_22.png)
 
 ### 3. Configuración de FTP
 
@@ -286,7 +286,7 @@ La siguiente línea comentada debe descomentarse para activar el traspaso de arc
 write_enable=YES
 ```
 
-![img](./img/servidor/img_23.png)
+![img](./img/img_23.png)
 
 Procede a reiniciar el servicio de `ftp`, con la ejecución de la siguientes líneas por separado.
 
@@ -295,7 +295,7 @@ sudo service vsftpd restart
 sudo service vsftpd status
 ```
 
-![img](./img/servidor/img_24.png)
+![img](./img/img_24.png)
 
 #### Comprobar el servicio ftp desde windows
 
@@ -303,11 +303,11 @@ Para probar si el servicio de ftp esta corriendo perfectamente lo vamos a hacer 
 
 Configuramos los parámetros para realizar la conexión con la dirección IP del servidor y el usuario respectivo y la contraseña.
 
-![img](./img/servidor/img_25.png)
+![img](./img/img_25.png)
 
 Al finalizar ya tenemos la conexión respectiva, y podemos compartir archivos entre la maquina cliente y el servidor.
 
-![img](./img/servidor/img_26.png)
+![img](./img/img_26.png)
 
 ### 4. Configuración de DNS
 
@@ -323,7 +323,7 @@ Verificamos el estatus de `bind9` para ver si todo esta funcionando bien.
 sudo systemctl status bind9
 ```
 
-![img](./img/servidor/img_27.png)
+![img](./img/img_27.png)
 
 Permitir de forma sencilla en el Firewall local, el acceso al puerto y protocolo que utiliza Bind9
 
@@ -354,7 +354,7 @@ dnssec-validation no;
 
 El archivo debe de quedar con las siguientes configuraciones.
 
-![img](./img/servidor/img_28.png)
+![img](./img/img_28.png)
 
 Obligar el uso único de IPv4, modificando el siguiente archivo, y modificando la siguiente línea `OPTIONS="-u bind -4"`.
 
@@ -362,7 +362,7 @@ Obligar el uso único de IPv4, modificando el siguiente archivo, y modificando l
 sudo vim /etc/default/named
 ```
 
-![img](./img/servidor/img_29.png)
+![img](./img/img_29.png)
 
 Comprobar la configuración de Bind9 y reiniciar el servicio si todo está bien, luego lanzar status para ver si no hay errores.
 
@@ -372,7 +372,7 @@ sudo systemctl restart bind9
 sudo systemctl status bind9
 ```
 
-![img](./img/servidor/img_30.png)
+![img](./img/img_30.png)
 
 #### Agregamos las zonas
 
@@ -451,7 +451,7 @@ sudo named-checkzone networld.cu /etc/bind/zonas/db.networld.cu
 sudo named-checkzone db.10.10.10.in-addr.arpa /etc/bind/zonas/db.10.10.10
 ```
 
-![img](./img/servidor/img_31.png)
+![img](./img/img_31.png)
 
 Reiniciamos nuevamente
 
@@ -466,7 +466,7 @@ ping www.networld.cu
 ping ns1.networld.cu
 ```
 
-![img](./img/servidor/img_32.png)
+![img](./img/img_32.png)
 
 ### 5. Configuración de HTTP
 
@@ -496,8 +496,8 @@ Finalmente se comprueba si esta corriendo el servicio de apache.
 sudo systemctl status apache2
 ```
 
-![img](./img/servidor/img_33.png)
+![img](./img/img_33.png)
 
 Luego para probar el servicio de HTTP y de DNS entramos desde la maquina cliente y probamos la URL `www.networld.cu`.
 
-![img](./img/servidor/img_34.png)
+![img](./img/img_34.png)

@@ -2,27 +2,27 @@
 
 <div class="grid cards" markdown>
 
--   :material-information-outline: &nbsp; **Machine Info**
+- :material-information-outline: &nbsp; **Machine Info**
 
     ---
 
-    ![Cicada](./img/cicada/cicada.png)
+    ![Cicada](./img/cicada.png)
 
-    - 💻 **OS:** Windows (Active Directory)
-    - ⚡ **Difficulty:** 🟢 Easy
-    - 👤 **Creator:** theblxckcicada
-    - 🔗 **Link:** [Cicada](https://www.hackthebox.com/machines/cicada)
+  - 💻 **OS:** Windows (Active Directory)
+  - ⚡ **Difficulty:** 🟢 Easy
+  - 👤 **Creator:** theblxckcicada
+  - 🔗 **Link:** [Cicada](https://www.hackthebox.com/machines/cicada)
 
--   :material-tools: &nbsp; **Tools Used**
+- :material-tools: &nbsp; **Tools Used**
 
     ---
 
-    - `nmap` — Reconnaissance & port scanning
-    - `crackmapexec` / `nxc` — SMB enumeration & credential spraying
-    - `smbclient` — SMB resource access
-    - `enum4linux-ng` — Active Directory enumeration
-    - `evil-winrm` — WinRM remote shell
-    - `impacket` — SAM/SYSTEM dump & Pass-the-Hash
+  - `nmap` — Reconnaissance & port scanning
+  - `crackmapexec` / `nxc` — SMB enumeration & credential spraying
+  - `smbclient` — SMB resource access
+  - `enum4linux-ng` — Active Directory enumeration
+  - `evil-winrm` — WinRM remote shell
+  - `impacket` — SAM/SYSTEM dump & Pass-the-Hash
 
 </div>
 
@@ -43,7 +43,7 @@ export ip="10.10.11.35"
 
 Se realiza una prueba de conectividad lanzando una traza de ICMP al host, con lo que se comprueba que es una maquina Windows por el `TTL` que esta por el rango de 128.
 
-![img](./img/cicada/img1.png)
+![img](./img/img1.png)
 
 ## Reconocimiento
 
@@ -158,7 +158,7 @@ crackmapexec smb 10.10.11.35
 
 se encuentra el dominio que se había visto anteriormente en la exploración de los diferentes puestos que nos informaron que esta apuntando a un dominio de AD.
 
-![img](./img/cicada/img2.png)
+![img](./img/img2.png)
 
 Probar el siguiente comando, para listar los recursos compartidos en la red del lado del servidor, para poder observar si la maquina esta compartiendo recursos en la red.
 
@@ -173,7 +173,7 @@ crackmapexec smb 10.10.11.35 --shares -u '' -p ''
 crackmapexec smb 10.10.11.35 --shares -u 'guest' -p ''
 ```
 
-![img](./img/cicada/img3.png)
+![img](./img/img3.png)
 
 Seguimos enumerando algunos servicios con `smbclient` para el dominio de `cicada.htb`
 
@@ -183,7 +183,7 @@ smbclient -L //cicada.htb
 
 Al analizar con `smbclient`, encontramos dos directorios para analizar que se ven interesantes, los cuales son `DEV`, `HR`.
 
-![img](./img/cicada/img4.png)
+![img](./img/img4.png)
 
 Enumeramos los directorios de DEV y HR para mirar si encontramos algo interesante.
 
@@ -194,11 +194,11 @@ Enumeramos los directorios de DEV y HR para mirar si encontramos algo interesant
 
 Como se puede observar para DEV no tenemos permiso para ingresar, pero para HR, encontramos un archivo `Notice from HR.txt`
 
-![img](./img/cicada/img5.png)
+![img](./img/img5.png)
 
 Descargamos el archivo `Notice from HR.txt` y observamos su contenido.
 
-![img](./img/cicada/img6.png)
+![img](./img/img6.png)
 
 El contenido del archivo contiene la siguiente información:
 
@@ -237,7 +237,7 @@ crackmapexec smb cicada.htb -u "guest" -p '' --rid-brute
 
 Se encuentra varias información y varios posibles usuarios, se agregan a una lista de usuario para poder seguir analizando y poder tener acceso al sistema.
 
-![img](./img/cicada/img7.png)
+![img](./img/img7.png)
 
 Realizamos un filtro para obtener los usuarios que podemos utilizar en esta lista y luego realizar un ataque de fuerza bruta con estos usuarios, para mirar si se logra obtener acceso con alguno.
 
@@ -245,11 +245,11 @@ Realizamos un filtro para obtener los usuarios que podemos utilizar en esta list
 crackmapexec smb cicada.htb -u "guest" -p '' --rid-brute | grep "SidTypeUser"
 ```
 
-![img](./img/cicada/img8.png)
+![img](./img/img8.png)
 
 Se crea un listado de los posibles usuarios.
 
-![img](./img/cicada/img9.png)
+![img](./img/img9.png)
 
 Se procederá a realizar una enumeración con los usuarios identificados, con el objetivo de obtener información adicional o identificar un usuario válido para el sondeo, utilizando la credencial por defecto encontrada.
 
@@ -259,7 +259,7 @@ nxc smb cicada.htb -u users -p 'Cicada$M6Corpb*@Lp#nZp!8'
 
 Al realizar el escaneo encontramos que el único usuario que se logra tener un acceso por SMB es `michael.wrightson`
 
-![img](./img/cicada/img10.png)
+![img](./img/img10.png)
 
 Realizamos una enumeración con la herramienta `enum4linux-ng` para este equipo de Windows sobre el servicio de SMB,  y poder encontrar algo mas de información sobre el sistema.
 
@@ -269,7 +269,7 @@ enum4linux-ng -A -u 'Michael.wrightson' -p 'Cicada$M6Corpb*@Lp#nZp!8' 10.10.11.3
 
 Se encuentra un usuario  mas en esta enumeración, usuario `david.orelious` y su password `aRt$Lp#7t*VQ!3`, con el que procedemos a averiguar en algún servicio de SMB si podemos escalar mas privilegios.
 
-![img](./img/cicada/img11.png)
+![img](./img/img11.png)
 
 Con la herramienta de `smbclient` seguimos explorando si logramos acceder algún recurso compartido de DEV, que antes no logramos tener acceso.
 
@@ -279,11 +279,11 @@ smbclient //cicada.htb/DEV -U david.orelious%'aRt$Lp#7t*VQ!3'
 
 Se logra ingresar a los archivos compartidos para el usuario y se encuentra un archivo `Backup_script.ps1` que se procede a descargar a la maquina host y proceder a analizar que contiene.
 
-![img](./img/cicada/img12.png)
+![img](./img/img12.png)
 
 En este archivo se logra obtener otro usuario que contiene también una credencial.
 
-![img](./img/cicada/img13.png)
+![img](./img/img13.png)
 
 Ahora con esta nueva contraseña ingresada en nuestro diccionario de password, realizamos otra vez el comando `crackmapexec`.
 
@@ -293,7 +293,7 @@ crackmapexec smb cicada.htb -u users -p pass --continue-on-success
 
 Se puede observar que efectivamente este usuario y contraseña son validos para `smb`.
 
-![img](./img/cicada/img14.png)
+![img](./img/img14.png)
 
 Ahora vamos a probar otro protocolo para ver si tenemos algún acceso con estos usuario y contraseñas que se encontraron.
 
@@ -303,7 +303,7 @@ crackmapexec winrm cicada.htb -u users -p pass --continue-on-success
 
 Se logra observar que con el servicio de `winrm`, logramos tener un acceso al sistemas, con el usuario `emily.oscars` y password `Q!3@Lp#M6b*7t*Vt`
 
-![img](./img/cicada/img15.png)
+![img](./img/img15.png)
 
 Ahora nos conectamos al sistema para poder ingresar al sistema con la herramienta de `evil-winrm`
 
@@ -313,17 +313,17 @@ evil-winrm -i cicada.htb -u 'emily.oscars' -p 'Q!3@Lp#M6b*7t*Vt'
 
 Se ha logrado acceder a la maquina con el usuario de `emily.oscars`.
 
-![img](./img/cicada/img16.png)
+![img](./img/img16.png)
 
 Obtenemos la **flag** del usuario respectivo.
 
-![img](./img/cicada/img17.png)
+![img](./img/img17.png)
 
 Se lista los diferentes grupos y permisos que tiene el usuario sobre el sistemas, y los cuales nos van a servir para realizar la escalar privilegios.
 
-![img](./img/cicada/img18.png)
+![img](./img/img18.png)
 
-![img](./img/cicada/img19.png)
+![img](./img/img19.png)
 
 ## Escalamiento de privilegios
 
@@ -336,7 +336,7 @@ reg save hklm\system systemR
 
 Después de ejecutar estos los comandos me quedan dos archivos donde contengo la información del sistema.
 
-![img](./img/cicada/img20.png)
+![img](./img/img20.png)
 
 Ahora se procede a pasar los archivos generados a la maquina host para proceder a analizar la información de cada archivo.
 
@@ -359,7 +359,7 @@ impacket-secretsdump -sam samR -system systemR LOCAL
 
 Con esa información miramos que obtenemos los hash NTLM, pero lo interesante es que obtenemos el Hash NTLM del usuario `Administrator`.
 
-![img](./img/cicada/img21.png)
+![img](./img/img21.png)
 
 Ahora con el hash NTLM y utilizando `evil-winrm` con la parte del hash LM la usamos para conectarnos a la cuenta del usuario `Administrator`.
 
@@ -369,15 +369,15 @@ evil-winrm -i cicada.htb -u 'Administrator' -H '2b87e7c93a3e8a0ea4a581937016f341
 
 Se ha logrado acceder a la maquina con el usuario `Administrator`, obteniendo los altos privilegios sobre la maquina, utilizando la técnica de `pass-the-hash`.
 
-![img](./img/cicada/img22.png)
+![img](./img/img22.png)
 
 La **flag** al finalizar la escalación de privilegios.
 
-![img](./img/cicada/img23.png)
+![img](./img/img23.png)
 
 **Finalización de la maquina Cicada por `KrozFu`**
 
-![img](./img/cicada/img24.png)
+![img](./img/img24.png)
 
 ---
 
