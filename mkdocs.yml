@@ -34,6 +34,14 @@ nav:
           - writeups/ctf-fluidattacks/index.md
           - "2026-2":
               - writeups/ctf-fluidattacks/2026-2/index.md
+              - API:
+                  - Coupon Collector: writeups/ctf-fluidattacks/2026-2/api/coupon-collector/coupon-collector.md
+                  - FlowForge (ni8mare-lite): writeups/ctf-fluidattacks/2026-2/api/ni8mare-lite/ni8mare-lite.md
+              - Crypto:
+                  - Crumble Cookie: writeups/ctf-fluidattacks/2026-2/crypto/crumble-cookie/crumble-cookie.md
+                  - Nonce Upon a Time: writeups/ctf-fluidattacks/2026-2/crypto/nonce-upon-a-time/nonce-upon-a-time.md
+              - Mobile:
+                  - Deadbolt: writeups/ctf-fluidattacks/2026-2/mobile/deadbolt/deadbolt.md
 
 theme:
   name: material
