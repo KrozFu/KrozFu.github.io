@@ -22,6 +22,8 @@ nav:
                   - Primed-for-Action: writeups/hackthebox/challenges/coding/primed-for-action.md
               - Hardware:
                   - The-Needle: writeups/hackthebox/challenges/hardware/the-needle.md
+              - IA/ML:
+                  - Like-a-Gloves: writeups/hackthebox/challenges/ia-ml/like-a-gloves.md
       - TryHackMe:
           - Pickle Rick: writeups/tryhackme/pickle-rick/pickle-rick.md
 
