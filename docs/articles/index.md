@@ -1,4 +1,4 @@
-# 🛠️ Projects
+# :fontawesome-solid-screwdriver-wrench: Projects
 
 Tutoriales y proyectos de infraestructura, redes y ciberseguridad.
 
