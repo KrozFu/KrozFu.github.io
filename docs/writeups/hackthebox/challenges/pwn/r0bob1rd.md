@@ -7,7 +7,7 @@
     ---
 
     - :fontawesome-solid-tag: **Category:** Pwn
-    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-hard } Medium
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-medium } Medium
     - :fontawesome-solid-laptop-code: **Platform:** HackTheBox
 
 -   :material-tools: &nbsp; **Tools Required**

@@ -2,21 +2,21 @@
 
 <div class="grid cards" markdown>
 
-- :material-information-outline: &nbsp; **Challenge Info**
+-   :material-information-outline: &nbsp; **Challenge Info**
 
     ---
 
-  - :fontawesome-solid-tag: **Category:** API
-  - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
-  - :fontawesome-solid-crosshairs: **Target:** [chal.ctf.ae](https://2557f8acdd3cf1ab.chal.ctf.ae)
-  - :fontawesome-solid-flag: **Flag:** `flag{eb59b3f68e640ea5}`
+    - :fontawesome-solid-tag: **Category:** API
+    - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
+    - :fontawesome-solid-crosshairs: **Target:** [chal.ctf.ae](https://2557f8acdd3cf1ab.chal.ctf.ae)
+    - :fontawesome-solid-flag: **Flag:** `flag{eb59b3f68e640ea5}`
 
-- :material-tools: &nbsp; **Tools Required**
+-   :material-tools: &nbsp; **Tools Required**
 
     ---
 
-  - `curl` — Endpoint probing & path-traversal LFI
-  - `python3` (`PyJWT`, `requests`) — Secret recovery, admin JWT forgery & sandbox-escape exploit
+    - `curl` — Endpoint probing & path-traversal LFI
+    - `python3` (`PyJWT`, `requests`) — Secret recovery, admin JWT forgery & sandbox-escape exploit
 
 </div>
 

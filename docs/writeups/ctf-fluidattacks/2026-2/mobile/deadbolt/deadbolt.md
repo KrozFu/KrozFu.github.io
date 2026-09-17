@@ -2,22 +2,22 @@
 
 <div class="grid cards" markdown>
 
-- :material-information-outline: &nbsp; **Challenge Info**
+-   :material-information-outline: &nbsp; **Challenge Info**
 
     ---
 
-  - :fontawesome-solid-tag: **Category:** Mobile
-  - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
-  - :fontawesome-solid-crosshairs: **Target:** [chal.ctf.ae](https://a3b7c610a2ef0874.chal.ctf.ae/)
-  - :fontawesome-solid-flag: **Flag:** `flag{fe4a8cf9724233bb}`
+    - :fontawesome-solid-tag: **Category:** Mobile
+    - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
+    - :fontawesome-solid-crosshairs: **Target:** [chal.ctf.ae](https://a3b7c610a2ef0874.chal.ctf.ae/)
+    - :fontawesome-solid-flag: **Flag:** `flag{fe4a8cf9724233bb}`
 
-- :material-tools: &nbsp; **Tools Required**
+-   :material-tools: &nbsp; **Tools Required**
 
     ---
 
-  - APK decompiler — Recover `CryptoManager` KDF parameters from the Java sources
-  - `python3` (`hashlib.pbkdf2_hmac`, `cryptography`) — Re-derive the key & decrypt the vault backup
-  - `curl` — Submit the recovered admin password
+    - APK decompiler — Recover `CryptoManager` KDF parameters from the Java sources
+    - `python3` (`hashlib.pbkdf2_hmac`, `cryptography`) — Re-derive the key & decrypt the vault backup
+    - `curl` — Submit the recovered admin password
 
 </div>
 

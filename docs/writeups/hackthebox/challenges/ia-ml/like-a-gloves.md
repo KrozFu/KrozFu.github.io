@@ -2,20 +2,20 @@
 
 <div class="grid cards" markdown>
 
-- :material-information-outline: &nbsp; **Challenge Info**
+-   :material-information-outline: &nbsp; **Challenge Info**
 
     ---
 
-  - :fontawesome-solid-tag: **Category:** AI/ML
-  - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
-  - :fontawesome-solid-laptop-code: **Platform:** HackTheBox
+    - :fontawesome-solid-tag: **Category:** AI/ML
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+    - :fontawesome-solid-laptop-code: **Platform:** HackTheBox
 
-- :material-tools: &nbsp; **Tools Required**
+-   :material-tools: &nbsp; **Tools Required**
 
     ---
 
-  - `python3` — Scripting the analogy solver
-  - `gensim` — Loading the `glove-twitter-25` word embeddings
+    - `python3` — Scripting the analogy solver
+    - `gensim` — Loading the `glove-twitter-25` word embeddings
 
 </div>
 

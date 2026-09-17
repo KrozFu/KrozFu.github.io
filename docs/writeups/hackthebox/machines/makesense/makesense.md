@@ -2,23 +2,23 @@
 
 <div class="grid cards" markdown>
 
-- :material-information-outline: &nbsp; **Machine Info**
+-   :material-information-outline: &nbsp; **Machine Info**
 
     ---
 
-  - :fontawesome-solid-laptop-code: **OS:** Linux (WordPress 7.0 · Apache 2.4.58 · SQLite)
-  - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-medium } Medium
-  - :fontawesome-solid-crosshairs: **Target:** `makesense.htb` (10.129.28.208)
-  - :fontawesome-solid-link: **Link:** [Makesense](https://www.hackthebox.com/machines/makesense)
+    - :fontawesome-solid-laptop-code: **OS:** Linux (WordPress 7.0 · Apache 2.4.58 · SQLite)
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-medium } Medium
+    - :fontawesome-solid-crosshairs: **Target:** `makesense.htb` (10.129.28.208)
+    - :fontawesome-solid-link: **Link:** [Makesense](https://www.hackthebox.com/machines/makesense)
 
-- :material-tools: &nbsp; **Tools Used**
+-   :material-tools: &nbsp; **Tools Used**
 
     ---
 
-  - `nmap` — Reconnaissance & port scanning
-  - `curl` — HTTP requests & endpoint testing
-  - `python3` (`requests`, `pycryptodome`, `paramiko`, `Pillow`) — Payload forging, AES-GCM, SSH & OCR image rendering
-  - WordPress admin panel — Theme File Editor webshell
+    - `nmap` — Reconnaissance & port scanning
+    - `curl` — HTTP requests & endpoint testing
+    - `python3` (`requests`, `pycryptodome`, `paramiko`, `Pillow`) — Payload forging, AES-GCM, SSH & OCR image rendering
+    - WordPress admin panel — Theme File Editor webshell
 
 </div>
 
