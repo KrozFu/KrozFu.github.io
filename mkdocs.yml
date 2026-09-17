@@ -3,6 +3,8 @@ site_url: https://krozfu.github.io/
 
 nav:
   - Whoami: index.md
+  - Courses:
+      - Lenguajes de Programación: courses/programming-languages/session-01.md
   - Projects:
       - articles/index.md
       - Configuración NAT y ataque con hping MikroTik: articles/nat-hping/nat-attack-hping.md
