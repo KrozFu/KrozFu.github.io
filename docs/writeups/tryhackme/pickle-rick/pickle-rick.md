@@ -1,4 +1,4 @@
-# 🥒 Pickle Rick
+# :fontawesome-solid-desktop: Pickle Rick
 
 <div class="grid cards" markdown>
 
@@ -6,10 +6,10 @@
 
     ---
 
-    - 💻 **OS:** Linux
-    - ⚡ **Difficulty:** 🟢 Easy
-    - 👤 **Creator:** ar33zy
-    - 🔗 **Link:** [Pickle Rick](https://tryhackme.com/r/room/picklerick)
+    - :fontawesome-solid-laptop-code: **OS:** Linux
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+    - :fontawesome-solid-user: **Creator:** ar33zy
+    - :fontawesome-solid-link: **Link:** [Pickle Rick](https://tryhackme.com/r/room/picklerick)
 
 -   :material-tools: &nbsp; **Tools Used**
 
@@ -192,10 +192,10 @@ Al finalizar el proceso, dentro de la maquina procedemos a borrar el exploit cre
 
 ![img](./img/img17.png)
 
-!!! success "🚩 Ingredients Found"
-    - 🧪 **1st Ingredient:** `mr. meeseeks hair`
-    - 🧪 **2nd Ingredient:** `1 jerry tear`
-    - 🧪 **3rd Ingredient:** `fleeb juice`
+!!! success ":fontawesome-solid-flag: Ingredients Found"
+    - :fontawesome-solid-flask: **1st Ingredient:** `mr. meeseeks hair`
+    - :fontawesome-solid-flask: **2nd Ingredient:** `1 jerry tear`
+    - :fontawesome-solid-flask: **3rd Ingredient:** `fleeb juice`
 
 ## Reflexión
 1. Al finalizar este reto de CTF, aprendí a enumerar de manera mas eficientes los diferentes puertos utilizando la herramienta `nmap`, para poder comprobar los servicios que tenia abiertos esta maquina.

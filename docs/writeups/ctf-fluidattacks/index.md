@@ -1,10 +1,10 @@
-# 💧 Fluid Attacks CTF
+# :fontawesome-solid-droplet: Fluid Attacks CTF
 
 Retos resueltos de las distintas ediciones del CTF de Fluid Attacks.
 
 <div class="grid cards" markdown>
 
-- :material-calendar: &nbsp; **Edición 2026-2**
+-   :material-calendar: &nbsp; **Edición 2026-2**
 
     ---
 

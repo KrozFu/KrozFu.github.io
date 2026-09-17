@@ -4,9 +4,9 @@
 
     ---
 
-    - 🌐 **Topic:** Python Environment & Library Setup
-    - 💻 **OS:** Linux / WSL (Windows)
-    - ⚡ **Level:** 🟢 Beginner
+    - :fontawesome-solid-globe: **Topic:** Python Environment & Library Setup
+    - :fontawesome-solid-laptop-code: **OS:** Linux / WSL (Windows)
+    - :fontawesome-solid-bolt: **Level:** :fontawesome-solid-circle:{ .diff-easy } Beginner
 
 -   :material-tools: &nbsp; **Tools & Technologies**
 

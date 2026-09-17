@@ -4,9 +4,9 @@
 
     ---
 
-    - 🌐 **Topic:** Server Configuration & Services
-    - 💻 **OS:** Ubuntu Server 24.04 LTS
-    - ⚡ **Level:** 🟡 Intermediate
+    - :fontawesome-solid-globe: **Topic:** Server Configuration & Services
+    - :fontawesome-solid-laptop-code: **OS:** Ubuntu Server 24.04 LTS
+    - :fontawesome-solid-bolt: **Level:** :fontawesome-solid-circle:{ .diff-medium } Intermediate
 
 -   :material-tools: &nbsp; **Tools & Technologies**
 

@@ -1,24 +1,24 @@
-# 🖥️ Makesense
+# :fontawesome-solid-desktop: Makesense
 
 <div class="grid cards" markdown>
 
-- :material-information-outline: &nbsp; **Machine Info**
+-   :material-information-outline: &nbsp; **Machine Info**
 
     ---
 
-  - 💻 **OS:** Linux (WordPress 7.0 · Apache 2.4.58 · SQLite)
-  - ⚡ **Difficulty:** 🟡 Medium
-  - 🎯 **Target:** `makesense.htb` (10.129.28.208)
-  - 🔗 **Link:** [Makesense](https://www.hackthebox.com/machines/makesense)
+    - :fontawesome-solid-laptop-code: **OS:** Linux (WordPress 7.0 · Apache 2.4.58 · SQLite)
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-medium } Medium
+    - :fontawesome-solid-crosshairs: **Target:** `makesense.htb` (10.129.28.208)
+    - :fontawesome-solid-link: **Link:** [Makesense](https://www.hackthebox.com/machines/makesense)
 
-- :material-tools: &nbsp; **Tools Used**
+-   :material-tools: &nbsp; **Tools Used**
 
     ---
 
-  - `nmap` — Reconnaissance & port scanning
-  - `curl` — HTTP requests & endpoint testing
-  - `python3` (`requests`, `pycryptodome`, `paramiko`, `Pillow`) — Payload forging, AES-GCM, SSH & OCR image rendering
-  - WordPress admin panel — Theme File Editor webshell
+    - `nmap` — Reconnaissance & port scanning
+    - `curl` — HTTP requests & endpoint testing
+    - `python3` (`requests`, `pycryptodome`, `paramiko`, `Pillow`) — Payload forging, AES-GCM, SSH & OCR image rendering
+    - WordPress admin panel — Theme File Editor webshell
 
 </div>
 
@@ -388,8 +388,8 @@ interstitial worked around in Step 4).
 
 | Flag | Value | Status |
 |------|-------|--------|
-| **user** | `b0d9b988398ef8ab93131175d1086459` | ✅ |
-| **root** | `1ba34db31b170bb0a085d541b508a4c0` | ✅ |
+| **user** | `b0d9b988398ef8ab93131175d1086459` | :fontawesome-solid-circle-check:{ .diff-easy } |
+| **root** | `1ba34db31b170bb0a085d541b508a4c0` | :fontawesome-solid-circle-check:{ .diff-easy } |
 
 ---
 

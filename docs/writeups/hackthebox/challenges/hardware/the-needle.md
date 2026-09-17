@@ -6,9 +6,9 @@
 
     ---
 
-    - 🏷️ **Category:** Hardware
-    - ⚡ **Difficulty:** 🟢 Easy
-    - 💻 **Platform:** HackTheBox
+    - :fontawesome-solid-tag: **Category:** Hardware
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+    - :fontawesome-solid-laptop-code: **Platform:** HackTheBox
 
 -   :material-tools: &nbsp; **Tools Required**
 
@@ -138,7 +138,7 @@ ng-1591596-hwtheneedle-djvrn-6cfb57b64d-gljtm:~$
 
 #### Step 6 - Flag
 
-!!! success "🚩 Flag"
+!!! success ":fontawesome-solid-flag: Flag"
     `HTB{4_hug3_blund3r_d289a1_!!}`
 
 #### Step 5 - Conclusion

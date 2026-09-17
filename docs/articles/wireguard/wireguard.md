@@ -4,9 +4,9 @@
 
     ---
 
-    - 🌐 **Topic:** VPN Implementation with Docker
-    - 💻 **OS:** Ubuntu Server 22.04 LTS
-    - ⚡ **Level:** 🟢 Beginner
+    - :fontawesome-solid-globe: **Topic:** VPN Implementation with Docker
+    - :fontawesome-solid-laptop-code: **OS:** Ubuntu Server 22.04 LTS
+    - :fontawesome-solid-bolt: **Level:** :fontawesome-solid-circle:{ .diff-easy } Beginner
 
 -   :material-tools: &nbsp; **Tools & Technologies**
 

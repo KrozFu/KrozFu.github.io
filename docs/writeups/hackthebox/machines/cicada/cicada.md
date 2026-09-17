@@ -1,28 +1,28 @@
-# 🖥️ Cicada
+# :fontawesome-solid-desktop: Cicada
 
 <div class="grid cards" markdown>
 
-- :material-information-outline: &nbsp; **Machine Info**
+-   :material-information-outline: &nbsp; **Machine Info**
 
     ---
 
     ![Cicada](./img/cicada.png)
 
-  - 💻 **OS:** Windows (Active Directory)
-  - ⚡ **Difficulty:** 🟢 Easy
-  - 👤 **Creator:** theblxckcicada
-  - 🔗 **Link:** [Cicada](https://www.hackthebox.com/machines/cicada)
+    - :fontawesome-solid-laptop-code: **OS:** Windows (Active Directory)
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+    - :fontawesome-solid-user: **Creator:** theblxckcicada
+    - :fontawesome-solid-link: **Link:** [Cicada](https://www.hackthebox.com/machines/cicada)
 
-- :material-tools: &nbsp; **Tools Used**
+-   :material-tools: &nbsp; **Tools Used**
 
     ---
 
-  - `nmap` — Reconnaissance & port scanning
-  - `crackmapexec` / `nxc` — SMB enumeration & credential spraying
-  - `smbclient` — SMB resource access
-  - `enum4linux-ng` — Active Directory enumeration
-  - `evil-winrm` — WinRM remote shell
-  - `impacket` — SAM/SYSTEM dump & Pass-the-Hash
+    - `nmap` — Reconnaissance & port scanning
+    - `crackmapexec` / `nxc` — SMB enumeration & credential spraying
+    - `smbclient` — SMB resource access
+    - `enum4linux-ng` — Active Directory enumeration
+    - `evil-winrm` — WinRM remote shell
+    - `impacket` — SAM/SYSTEM dump & Pass-the-Hash
 
 </div>
 
@@ -381,6 +381,6 @@ La **flag** al finalizar la escalación de privilegios.
 
 ---
 
-!!! success "🚩 Flag Captured"
+!!! success ":fontawesome-solid-flag: Flag Captured"
     Acceso obtenido como `Administrator` mediante **Pass-the-Hash** con `evil-winrm`.  
     Hash NTLM extraído con `impacket-secretsdump` aprovechando el privilegio `SeBackupPrivilege`.

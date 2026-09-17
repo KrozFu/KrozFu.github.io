@@ -315,3 +315,22 @@
   letter-spacing: 2px;
   color: #ffffff !important;
 }
+
+/* ── DIFICULTAD: puntos de color semánticos ──────────────────── */
+/* Tonos neón para el esquema oscuro; versiones oscurecidas para el
+   claro, donde el neón sobre blanco queda por debajo de 1.5:1. */
+.diff-easy   { color: var(--kzf-diff-easy); }
+.diff-medium { color: var(--kzf-diff-medium); }
+.diff-hard   { color: var(--kzf-diff-hard); }
+
+[data-md-color-scheme="slate"] {
+  --kzf-diff-easy: #00ff41;
+  --kzf-diff-medium: #ffb300;
+  --kzf-diff-hard: #ff3b30;
+}
+
+[data-md-color-scheme="default"] {
+  --kzf-diff-easy: #00992b;
+  --kzf-diff-medium: #b45309;
+  --kzf-diff-hard: #d92020;
+}

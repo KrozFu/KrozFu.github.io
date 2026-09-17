@@ -1,10 +1,10 @@
-# 🚩 Writeups
+# :fontawesome-solid-flag: Writeups
 
 Colección de resoluciones de máquinas y retos de CTF, organizadas por plataforma.
 
 <div class="grid cards" markdown>
 
-- :material-cube-outline: &nbsp; **HackTheBox**
+-   :material-cube-outline: &nbsp; **HackTheBox**
 
     ---
 
@@ -12,7 +12,7 @@ Colección de resoluciones de máquinas y retos de CTF, organizadas por platafor
 
     [:octicons-arrow-right-24: Explorar HackTheBox](hackthebox/index.md)
 
-- :material-flag-checkered: &nbsp; **TryHackMe**
+-   :material-flag-checkered: &nbsp; **TryHackMe**
 
     ---
 
@@ -20,7 +20,7 @@ Colección de resoluciones de máquinas y retos de CTF, organizadas por platafor
 
     [:octicons-arrow-right-24: Pickle Rick](tryhackme/pickle-rick/pickle-rick.md)
 
-- :material-water: &nbsp; **Fluid Attacks CTF**
+-   :material-water: &nbsp; **Fluid Attacks CTF**
 
     ---
 

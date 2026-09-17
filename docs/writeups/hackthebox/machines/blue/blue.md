@@ -1,4 +1,4 @@
-# 🖥️ Blue
+# :fontawesome-solid-desktop: Blue
 
 <div class="grid cards" markdown>
 
@@ -6,10 +6,10 @@
 
     ---
 
-    - 💻 **OS:** Windows
-    - ⚡ **Difficulty:** 🟢 Easy
-    - 👤 **Creator:** ch4p
-    - 🔗 **Link:** [Blue](https://www.hackthebox.com/machines/blue)
+    - :fontawesome-solid-laptop-code: **OS:** Windows
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+    - :fontawesome-solid-user: **Creator:** ch4p
+    - :fontawesome-solid-link: **Link:** [Blue](https://www.hackthebox.com/machines/blue)
 
 -   :material-tools: &nbsp; **Tools Used**
 
@@ -284,6 +284,6 @@ Al finalizar este proceso, se puede observar que esta vulnerabilidad de **Eterna
 
 ---
 
-!!! success "🚩 Flag Captured"
+!!! success ":fontawesome-solid-flag: Flag Captured"
     Shell obtenida como `nt authority\system` mediante **EternalBlue (MS17-010)**.  
     Acceso completo con privilegios de SYSTEM en Windows 7 Professional.
