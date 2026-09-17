@@ -1,4 +1,4 @@
-# 🚩 Writeups
+# :fontawesome-solid-flag: Writeups
 
 Colección de resoluciones de máquinas y retos de CTF, organizadas por plataforma.
 
