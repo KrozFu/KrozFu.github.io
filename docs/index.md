@@ -31,25 +31,25 @@ My goal is to **educate, document real-world experiences, and contribute to the 
 
 <div class="grid cards" markdown>
 
-- :material-shield-lock:{ .lg .middle } &nbsp; **Cybersecurity & Pentesting**
+-   :material-shield-lock:{ .lg .middle } &nbsp; **Cybersecurity & Pentesting**
 
     ---
 
     Research, ethical hacking, vulnerability analysis, and CTF writeups on HackTheBox and TryHackMe.
 
-- :material-tools:{ .lg .middle } &nbsp; **Security Tools**
+-   :material-tools:{ .lg .middle } &nbsp; **Security Tools**
 
     ---
 
     Development of custom security tools like **VulnAnalyzer** to streamline vulnerability assessment workflows.
 
-- :material-server:{ .lg .middle } &nbsp; **Servers & Infrastructure**
+-   :material-server:{ .lg .middle } &nbsp; **Servers & Infrastructure**
 
     ---
 
     Linux server administration, networking configurations, VPN implementations, and cloud infrastructure.
 
-- :material-code-braces:{ .lg .middle } &nbsp; **Backend Development**
+-   :material-code-braces:{ .lg .middle } &nbsp; **Backend Development**
 
     ---
 
@@ -102,7 +102,7 @@ Founder of **SentrySec**, a cybersecurity community dedicated to:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-brands-youtube:{ .lg .middle } &nbsp; **YouTube**
+-   :fontawesome-brands-youtube:{ .lg .middle } &nbsp; **YouTube**
 
     ---
 
@@ -110,7 +110,7 @@ Founder of **SentrySec**, a cybersecurity community dedicated to:
 
     [:octicons-arrow-right-24: @krozfuhack](https://www.youtube.com/@krozfuhack)
 
-- :fontawesome-brands-twitch:{ .lg .middle } &nbsp; **Twitch**
+-   :fontawesome-brands-twitch:{ .lg .middle } &nbsp; **Twitch**
 
     ---
 
