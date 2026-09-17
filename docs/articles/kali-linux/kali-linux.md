@@ -4,9 +4,9 @@
 
     ---
 
-    - 🌐 **Topic:** Kali Linux VM Setup
-    - 💻 **Platform:** VMware Workstation
-    - ⚡ **Level:** 🟢 Beginner
+    - :fontawesome-solid-globe: **Topic:** Kali Linux VM Setup
+    - :fontawesome-solid-laptop-code: **Platform:** VMware Workstation
+    - :fontawesome-solid-bolt: **Level:** :fontawesome-solid-circle:{ .diff-easy } Beginner
 
 -   :material-tools: &nbsp; **Tools & Technologies**
 

@@ -4,9 +4,9 @@
 
     ---
 
-    - 🌐 **Topic:** Network Security & Attack Simulation
-    - 💻 **Platform:** MikroTik RouterOS + GNS3
-    - ⚡ **Level:** 🟡 Intermediate
+    - :fontawesome-solid-globe: **Topic:** Network Security & Attack Simulation
+    - :fontawesome-solid-laptop-code: **Platform:** MikroTik RouterOS + GNS3
+    - :fontawesome-solid-bolt: **Level:** :fontawesome-solid-circle:{ .diff-medium } Intermediate
 
 -   :material-tools: &nbsp; **Tools & Technologies**
 
