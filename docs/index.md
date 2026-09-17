@@ -5,9 +5,9 @@ hide:
 
 <div align="center" markdown>
 
-# 👨‍💻 KrozFu
+# KrozFu
 
-**Software Engineer · Cybersecurity Researcher · Content Creator**
+**Software Engineer · DevSecOps · Cybersecurity Researcher · Content Creator**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-carlos-charfuelan-caipe/)
 [![GitHub](https://img.shields.io/github/followers/krozfu?style=for-the-badge&logo=github)](https://github.com/KrozFu)
@@ -19,7 +19,7 @@ hide:
 
 ---
 
-## 🧑‍💻 Whoami
+## :fontawesome-solid-terminal: Whoami
 
 I'm **Juan Carlos Charfuelan**, a Software Engineer passionate about technology, with a strong focus on **cybersecurity, servers, and infrastructure**.
 
@@ -27,7 +27,7 @@ My goal is to **educate, document real-world experiences, and contribute to the 
 
 ---
 
-## 🚀 Areas of Focus
+## :fontawesome-solid-rocket: Areas of Focus
 
 <div class="grid cards" markdown>
 
@@ -59,7 +59,7 @@ My goal is to **educate, document real-world experiences, and contribute to the 
 
 ---
 
-## 🛡️ Cybersecurity Platforms
+## :fontawesome-solid-shield-halved: Cybersecurity Platforms
 
 <div align="center" markdown>
 
@@ -71,7 +71,7 @@ My goal is to **educate, document real-world experiences, and contribute to the 
 
 ---
 
-## 🌐 SentrySec Community
+## :fontawesome-solid-globe: SentrySec Community
 
 <div class="grid" markdown>
 
@@ -85,10 +85,10 @@ My goal is to **educate, document real-world experiences, and contribute to the 
 
 Founder of **SentrySec**, a cybersecurity community dedicated to:
 
-- 🤝 Collaborative learning and knowledge sharing
-- 🎯 Ethical hacking & pentesting techniques
-- 🔒 Secure development best practices
-- 🧠 Bridging the gap between beginners and professionals
+- :fontawesome-solid-handshake: Collaborative learning and knowledge sharing
+- :fontawesome-solid-crosshairs: Ethical hacking & pentesting techniques
+- :fontawesome-solid-lock: Secure development best practices
+- :fontawesome-solid-brain: Bridging the gap between beginners and professionals
 
 [:material-web: Visit SentrySec](https://sentrysecit.github.io/){ .md-button .md-button--primary }
 
@@ -98,7 +98,7 @@ Founder of **SentrySec**, a cybersecurity community dedicated to:
 
 ---
 
-## 📺 Content Creation
+## :fontawesome-solid-tv: Content Creation
 
 <div class="grid cards" markdown>
 
@@ -122,11 +122,11 @@ Founder of **SentrySec**, a cybersecurity community dedicated to:
 
 ---
 
-## 📊 GitHub Stats
+<!-- ## :fontawesome-solid-chart-line: GitHub Stats
 
 <p align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com?user=krozfu&theme=dracula&hide_border=true" alt="GitHub Streak Stats" />
-</p>
+</p> -->
 
 ---
 
