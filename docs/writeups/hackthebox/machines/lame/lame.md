@@ -1,4 +1,4 @@
-# 🖥️ Lame
+# :fontawesome-solid-desktop: Lame
 
 <div class="grid cards" markdown>
 
@@ -8,10 +8,10 @@
 
     ![Lame](./img/Pasted%20image%2020240715155613.png)
 
-  - 💻 **OS:** Linux
-  - ⚡ **Difficulty:** 🟢 Easy
-  - 👤 **Creator:** ch4p
-  - 🔗 **Link:** [Lame](https://www.hackthebox.com/machines/lame)
+  - :fontawesome-solid-laptop-code: **OS:** Linux
+  - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+  - :fontawesome-solid-user: **Creator:** ch4p
+  - :fontawesome-solid-link: **Link:** [Lame](https://www.hackthebox.com/machines/lame)
 
 - :material-tools: &nbsp; **Tools Used**
 
@@ -235,6 +235,6 @@ Se pudo observar que esta maquina logramos obtener privilegios de usuario root a
 
 ---
 
-!!! success "🚩 Flag Captured"
+!!! success ":fontawesome-solid-flag: Flag Captured"
     Shell obtenida como `root` a través de **CVE-2007-2447** (Samba 3.0.20).  
     Acceso completo con privilegios root mediante una reverse shell en el puerto 443.

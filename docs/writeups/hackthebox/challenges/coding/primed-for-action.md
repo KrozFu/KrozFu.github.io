@@ -6,9 +6,9 @@
 
     ---
 
-    - 🏷️ **Category:** Coding
-    - ⚡ **Difficulty:** 🟢 Easy
-    - 💻 **Platform:** HackTheBox
+    - :fontawesome-solid-tag: **Category:** Coding
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+    - :fontawesome-solid-laptop-code: **Platform:** HackTheBox
 
 -   :material-tools: &nbsp; **Tools Required**
 
@@ -76,7 +76,7 @@ In the end, the result of the multiplication that leads us to the challenge flag
 
 #### Step 3 - Flag
 
-!!! success "🚩 Flag"
+!!! success ":fontawesome-solid-flag: Flag"
     `HTB{pr1m3_Pr0}`
 
 #### Step 4 - Conclusion

@@ -6,9 +6,9 @@
 
     ---
 
-    - 🏷️ **Category:** Pwn
-    - ⚡ **Difficulty:** 🔴 Medium
-    - 💻 **Platform:** HackTheBox
+    - :fontawesome-solid-tag: **Category:** Pwn
+    - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-hard } Medium
+    - :fontawesome-solid-laptop-code: **Platform:** HackTheBox
 
 -   :material-tools: &nbsp; **Tools Required**
 
@@ -179,5 +179,5 @@ sh.interactive()
 
 #### Step 5 - Flag
 
-!!! success "🚩 Flag"
+!!! success ":fontawesome-solid-flag: Flag"
     `HTB{S0m3t1m3s_bl0w1ng_th3_pr0gr4m_1s_g00d}`

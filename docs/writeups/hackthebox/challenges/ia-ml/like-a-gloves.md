@@ -6,9 +6,9 @@
 
     ---
 
-  - 🏷️ **Category:** AI/ML
-  - ⚡ **Difficulty:** 🟢 Easy
-  - 💻 **Platform:** HackTheBox
+  - :fontawesome-solid-tag: **Category:** AI/ML
+  - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-easy } Easy
+  - :fontawesome-solid-laptop-code: **Platform:** HackTheBox
 
 - :material-tools: &nbsp; **Tools Required**
 
