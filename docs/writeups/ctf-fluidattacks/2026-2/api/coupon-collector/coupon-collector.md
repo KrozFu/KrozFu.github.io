@@ -6,11 +6,11 @@
 
     ---
 
-  - 🏷️ **Category:** API · Business Logic
-  - ⚡ **Difficulty:** 🟡 Easy/Medium
-  - 💻 **Platform:** Fluid Attacks CTF 2026-2
-  - 🎯 **Target:** [chal.ctf.ae](https://c38d56f0073a9aba.chal.ctf.ae/)
-  - 🚩 **Flag:** `flag{b4f0e056a0639f66}`
+  - :fontawesome-solid-tag: **Category:** API · Business Logic
+  - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-medium } Easy/Medium
+  - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
+  - :fontawesome-solid-crosshairs: **Target:** [chal.ctf.ae](https://c38d56f0073a9aba.chal.ctf.ae/)
+  - :fontawesome-solid-flag: **Flag:** `flag{b4f0e056a0639f66}`
 
 - :material-tools: &nbsp; **Tools Required**
 

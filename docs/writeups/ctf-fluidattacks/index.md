@@ -1,4 +1,4 @@
-# 💧 Fluid Attacks CTF
+# :fontawesome-solid-droplet: Fluid Attacks CTF
 
 Retos resueltos de las distintas ediciones del CTF de Fluid Attacks.
 

@@ -6,10 +6,10 @@
 
     ---
 
-  - 🏷️ **Category:** Crypto
-  - ⚡ **Difficulty:** 🟡 Medium
-  - 💻 **Platform:** Fluid Attacks CTF 2026-2
-  - 🚩 **Flag:** Pending (instance down before capture)
+  - :fontawesome-solid-tag: **Category:** Crypto
+  - :fontawesome-solid-bolt: **Difficulty:** :fontawesome-solid-circle:{ .diff-medium } Medium
+  - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
+  - :fontawesome-solid-flag: **Flag:** Pending (instance down before capture)
 
 - :material-tools: &nbsp; **Tools Required**
 

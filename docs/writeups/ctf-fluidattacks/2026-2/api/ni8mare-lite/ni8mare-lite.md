@@ -6,10 +6,10 @@
 
     ---
 
-  - 🏷️ **Category:** API
-  - 💻 **Platform:** Fluid Attacks CTF 2026-2
-  - 🎯 **Target:** [chal.ctf.ae](https://2557f8acdd3cf1ab.chal.ctf.ae)
-  - 🚩 **Flag:** `flag{eb59b3f68e640ea5}`
+  - :fontawesome-solid-tag: **Category:** API
+  - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
+  - :fontawesome-solid-crosshairs: **Target:** [chal.ctf.ae](https://2557f8acdd3cf1ab.chal.ctf.ae)
+  - :fontawesome-solid-flag: **Flag:** `flag{eb59b3f68e640ea5}`
 
 - :material-tools: &nbsp; **Tools Required**
 

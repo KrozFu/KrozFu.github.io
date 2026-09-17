@@ -6,10 +6,10 @@
 
     ---
 
-  - 🏷️ **Category:** Crypto
-  - 💻 **Platform:** Fluid Attacks CTF 2026-2
-  - 🎯 **Target:** [chal.ctf.ae](https://8caecc81907bc1d4.chal.ctf.ae/)
-  - 🚩 **Flag:** `flag{4eb972f5cda22208}`
+  - :fontawesome-solid-tag: **Category:** Crypto
+  - :fontawesome-solid-laptop-code: **Platform:** Fluid Attacks CTF 2026-2
+  - :fontawesome-solid-crosshairs: **Target:** [chal.ctf.ae](https://8caecc81907bc1d4.chal.ctf.ae/)
+  - :fontawesome-solid-flag: **Flag:** `flag{4eb972f5cda22208}`
 
 - :material-tools: &nbsp; **Tools Required**
 
