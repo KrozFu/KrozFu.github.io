@@ -12,6 +12,8 @@ nav:
       - Implementación Servidores: articles/servidor/servidor-ubuntu.md
       - Instalar Kali Linux VMware: articles/kali-linux/kali-linux.md
       - Instalación PyPhi: articles/pyphi/install-pyphi.md
+      - AI:
+          - Harness de agentes de código: articles/ai/harness/harness-agent.md
   - Writeups:
       - writeups/index.md
       - HackTheBox:
@@ -109,7 +111,11 @@ markdown_extensions:
       generic: true
   - footnotes
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.mark
   - attr_list
   - md_in_html
