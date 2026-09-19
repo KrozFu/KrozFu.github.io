@@ -19,4 +19,10 @@ Tutoriales y proyectos de infraestructura, redes y ciberseguridad.
     - [Instalar Kali Linux en VMware](kali-linux/kali-linux.md)
     - [Instalación de PyPhi](pyphi/install-pyphi.md)
 
+-   :material-robot-outline: &nbsp; **Inteligencia Artificial**
+
+    ---
+
+    - [Harness de agentes de código: qué son y cómo instalarlos](ai/harness/harness-agent.md)
+
 </div>
