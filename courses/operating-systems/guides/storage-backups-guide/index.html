@@ -1,0 +1,3588 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://krozfu.github.io/courses/operating-systems/guides/storage-backups-guide/">
+      
+      
+        <link rel="prev" href="../../session-02/">
+      
+      
+        <link rel="next" href="../../../../articles/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../img/kzf-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>Almacenamiento y respaldos - KrozFu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Almacenamiento y respaldos - KrozFu" />
+<meta property="og:image" content="https://krozfu.github.io/assets/images/social/courses/operating-systems/guides/storage-backups-guide.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://krozfu.github.io/courses/operating-systems/guides/storage-backups-guide/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Almacenamiento y respaldos - KrozFu" />
+<meta property="twitter:image" content="https://krozfu.github.io/assets/images/social/courses/operating-systems/guides/storage-backups-guide.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-de-implementacion-almacenamiento-y-respaldos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KrozFu" class="md-header__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KrozFu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Almacenamiento y respaldos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Whoami
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../programming-languages/session-01/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Courses
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../articles/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../writeups/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Writeups
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KrozFu" class="md-nav__button md-logo" aria-label="KrozFu" data-md-component="logo">
+      
+  <img src="../../../../img/kzf-logo.png" alt="logo">
+
+    </a>
+    KrozFu
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Whoami
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Courses
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Courses
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lenguajes de Programación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lenguajes de Programación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-languages/session-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 01
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-languages/session-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 02
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistemas Operativos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistemas Operativos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 01
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 02
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guías
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guías
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento y respaldos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento y respaldos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-ya-lo-tiene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. ¿Ya lo tiene?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. ¿Ya lo tiene?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-agregar-dos-discos-a-la-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Agregar dos discos a la VM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-volumen-de-datos-con-lvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El volumen de datos con LVM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-montarlo-con-opciones-restrictivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Montarlo con opciones restrictivas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Montarlo con opciones restrictivas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agregar-el-segundo-disco-y-extender-en-caliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregar el segundo disco y extender en caliente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-script-de-respaldo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. El script de respaldo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. El script de respaldo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-que-las-instantaneas-comparten-los-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprobar que las instantáneas comparten los archivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-programarlo-con-un-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Programarlo con un timer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-restaurar-un-archivo-borrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Restaurar un archivo borrado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Restaurar un archivo borrado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuando-ultimo-ya-no-tiene-el-archivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando ultimo ya no tiene el archivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-si-el-respaldo-falla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Si el respaldo falla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-al-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Al repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-antes-de-la-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Antes de la entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../articles/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/nat-hping/nat-attack-hping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración NAT y ataque con hping MikroTik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/wireguard/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación WireGuard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/servidor/servidor-ubuntu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Servidores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/kali-linux/kali-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalar Kali Linux VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/pyphi/install-pyphi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación PyPhi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../articles/ai/harness/harness-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness de agentes de código
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../writeups/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writeups
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writeups
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../writeups/hackthebox/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HackTheBox
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HackTheBox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machines
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machines
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/machines/blue/blue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/machines/lame/lame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lame
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/machines/cicada/cicada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/machines/makesense/makesense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Makesense
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Challenges
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Challenges
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3_1" id="__nav_4_2_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pwn
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pwn
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/challenges/pwn/r0bob1rd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R0bob1rd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3_2" id="__nav_4_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Coding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/challenges/coding/primed-for-action/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primed-for-Action
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3_3" id="__nav_4_2_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/challenges/hardware/the-needle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The-Needle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3_4" id="__nav_4_2_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IA/ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IA/ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/hackthebox/challenges/ia-ml/like-a-gloves/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Like-a-Gloves
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHackMe
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    TryHackMe
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/tryhackme/pickle-rick/pickle-rick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pickle Rick
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../writeups/ctf-fluidattacks/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fluid Attacks CTF
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fluid Attacks CTF
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../writeups/ctf-fluidattacks/2026-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-2
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4_2" id="__nav_4_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2026-2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_2_2" id="__nav_4_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/ctf-fluidattacks/2026-2/api/coupon-collector/coupon-collector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coupon Collector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/ctf-fluidattacks/2026-2/api/ni8mare-lite/ni8mare-lite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlowForge (ni8mare-lite)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_2_3" id="__nav_4_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crypto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/ctf-fluidattacks/2026-2/crypto/crumble-cookie/crumble-cookie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crumble Cookie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/ctf-fluidattacks/2026-2/crypto/nonce-upon-a-time/nonce-upon-a-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nonce Upon a Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_2_4" id="__nav_4_4_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mobile
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../writeups/ctf-fluidattacks/2026-2/mobile/deadbolt/deadbolt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deadbolt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-ya-lo-tiene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. ¿Ya lo tiene?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. ¿Ya lo tiene?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-agregar-dos-discos-a-la-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Agregar dos discos a la VM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-volumen-de-datos-con-lvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El volumen de datos con LVM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-montarlo-con-opciones-restrictivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Montarlo con opciones restrictivas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Montarlo con opciones restrictivas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agregar-el-segundo-disco-y-extender-en-caliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregar el segundo disco y extender en caliente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-script-de-respaldo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. El script de respaldo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. El script de respaldo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-que-las-instantaneas-comparten-los-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprobar que las instantáneas comparten los archivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-programarlo-con-un-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Programarlo con un timer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-restaurar-un-archivo-borrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Restaurar un archivo borrado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Restaurar un archivo borrado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuando-ultimo-ya-no-tiene-el-archivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando ultimo ya no tiene el archivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-si-el-respaldo-falla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Si el respaldo falla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-al-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Al repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-antes-de-la-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Antes de la entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guia-de-implementacion-almacenamiento-y-respaldos">Guía de implementación · Almacenamiento y respaldos</h1>
+<p>Esta guía deja listo en su servidor el criterio <strong>Almacenamiento y respaldos</strong> del proyecto final: un volumen LVM para los respaldos con opciones de montaje restrictivas, un respaldo automático con instantáneas y una restauración probada. Al final, todo queda en su repositorio para que otra persona pueda reconstruirlo.</p>
+<div class="admonition info">
+<p class="admonition-title">Entorno: VirtualBox</p>
+<p>Esta guía está hecha para implementarse en una VM de <strong>Ubuntu Server 24.04 sobre VirtualBox</strong>, la misma de la <a href="../../session-01/">Sesión 01</a> a la que se entra con <code>ssh srv</code> <em>(reenvío de puertos 2222 → 22)</em>. Los pasos para agregar discos, los nombres de los discos (<code>sdb</code>, <code>sdc</code>) y el uso de instantáneas asumen VirtualBox con controlador <strong>SATA</strong> y discos <strong>VDI</strong>. Si usa otro hipervisor (VMware, KVM, Hyper-V), el procedimiento para agregar los discos y tomar instantáneas cambia, y los discos pueden aparecer con otro nombre (por ejemplo <code>vdb</code> o <code>nvme0n2</code>).</p>
+</div>
+<hr />
+<h2 id="0-ya-lo-tiene">0. ¿Ya lo tiene?</h2>
+<p>Si ya armó el volumen y el respaldo, compruébelo antes de repetir nada:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lsblk<span class="w"> </span>-o<span class="w"> </span>NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>vgs<span class="w"> </span>datos
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>findmnt<span class="w"> </span>-no<span class="w"> </span>SOURCE,OPTIONS<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>respaldo.timer
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>ls<span class="w"> </span>-l<span class="w"> </span>/srv/respaldos
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Si ve esto</th>
+<th>Haga esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datos</code> con <code>VFree</code> mayor que 0, <code>/srv/respaldos</code> con <code>nodev,nosuid,noexec</code>, el timer <code>enabled</code> y carpetas con fecha</td>
+<td>Vaya directo a la sección 6 <em>(restaurar)</em> y luego a la 8 <em>(repositorio)</em></td>
+</tr>
+<tr>
+<td><code>Volume group "datos" not found</code></td>
+<td>Empiece en la sección 1</td>
+</tr>
+<tr>
+<td><code>datos</code> existe pero <code>/srv/respaldos</code> no está montado</td>
+<td>Revise la sección 3 <em>(fstab)</em></td>
+</tr>
+<tr>
+<td>El volumen está bien, pero no hay timer o no hay carpetas con fecha</td>
+<td>Empiece en la sección 4</td>
+</tr>
+<tr>
+<td><code>VFree</code> en <code>0</code></td>
+<td>Vea <em>Si se quedó sin espacio libre</em> al final de la sección 3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="requisitos">Requisitos</h3>
+<p>El respaldo copia <code>/srv/proyecto</code> y <code>/srv/estado</code>, así que su servidor ya debe tenerlos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/srv/proyecto
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/srv/proyecto/codigo
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>estado
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>setfacl<span class="w"> </span>rsync
+</code></pre></div>
+<ul>
+<li><strong>Resultado esperado:</strong> <code>codigo</code> con <code>drwxrws---+</code> <em>(el <code>+</code> indica que tiene ACL)</em>, <code>app.py</code> dentro, <code>estado</code> en <code>active</code>, y las rutas de <code>setfacl</code> y <code>rsync</code>.</li>
+<li>Si falta <code>setfacl</code>: <code>sudo apt install -y acl</code>. Si falta <code>rsync</code>: <code>sudo apt install -y rsync</code>.</li>
+<li>Si falta <code>/srv/proyecto</code> o el servicio <code>estado</code>, constrúyalos primero: son criterios del proyecto y el respaldo los necesita.</li>
+</ul>
+<hr />
+<h2 id="1-agregar-dos-discos-a-la-vm">1. Agregar dos discos a la VM</h2>
+<ol>
+<li>Apague la VM: <code>sudo systemctl poweroff</code>.</li>
+<li><strong>Tome una instantánea</strong> en VirtualBox <em>(Máquina → Tomar instantánea, con el nombre <code>antes-almacenamiento</code>)</em>. Si algo sale mal, vuelve a este punto.</li>
+<li>En <strong>Configuración → Almacenamiento</strong>, seleccione el controlador <strong>SATA</strong> y use el botón <strong>Agregar disco duro → Crear</strong>: tipo <strong>VDI</strong>, <strong>reservado dinámicamente</strong>, <strong>5 GB</strong>. Selecciónelo para conectarlo.</li>
+<li>Repita el paso 3 para un segundo disco de 5 GB.</li>
+<li>Encienda la VM y entre con <code>ssh srv</code>.</li>
+</ol>
+<p>Necesita unos 10 GB libres en su equipo. Como los discos son dinámicos, empiezan casi vacíos y crecen con el uso.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lsblk<span class="w"> </span>-o<span class="w"> </span>NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>NAME                       SIZE TYPE FSTYPE      MOUNTPOINTS
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sda                         50G disk
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>├─sda1                       1M part
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>├─sda2                       2G part ext4        /boot
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>└─sda3                      48G part LVM2_member
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  └─ubuntu--vg-ubuntu--lv   24G lvm  ext4        /
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>sdb                          5G disk
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>sdc                          5G disk
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>sr0                       1024M rom
+</code></pre></div>
+<ul>
+<li><code>sdb</code> y <code>sdc</code> son los discos nuevos: <strong>5G, sin particiones, sin <code>FSTYPE</code> y sin punto de montaje</strong>. Los tamaños de <code>sda</code> cambian de una VM a otra.</li>
+<li><strong>Antes de seguir, confirme cuáles son sus discos nuevos.</strong> Si en su VM tienen otro nombre, use ese nombre en todos los comandos. Particionar el disco equivocado borra el sistema.</li>
+<li>Los <code>loop</code> que aparecen en <code>lsblk</code> son de los snaps; ignórelos.</li>
+</ul>
+<hr />
+<h2 id="2-el-volumen-de-datos-con-lvm">2. El volumen de datos con LVM</h2>
+<p>LVM pone una capa entre los discos y los sistemas de archivos. Con ella se puede <strong>agrandar un volumen y agregar discos sin desmontar nada</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a> discos                   /dev/sdb1          /dev/sdc
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>                             │                   │
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a> volúmenes físicos (PV)   pvcreate          pvcreate
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>                             └───────┬───────────┘
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> grupo de volúmenes (VG)           datos                vgcreate / vgextend
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                             ┌───────┴───────┐
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a> volúmenes lógicos (LV)  respaldos        (libre)       lvcreate / lvextend
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                             │
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a> sistema de archivos      ext4 en /srv/respaldos        mkfs / mount
+</code></pre></div>
+<p>Primero, una partición GPT en <code>sdb</code> marcada para LVM, y el volumen encima:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>parted<span class="w"> </span>/dev/sdb<span class="w"> </span>--script<span class="w"> </span>mklabel<span class="w"> </span>gpt<span class="w"> </span>mkpart<span class="w"> </span>datos<span class="w"> </span>1MiB<span class="w"> </span><span class="m">100</span>%<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>lvm<span class="w"> </span>on
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>lsblk<span class="w"> </span>/dev/sdb
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>pvcreate<span class="w"> </span>/dev/sdb1
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sudo<span class="w"> </span>vgcreate<span class="w"> </span>datos<span class="w"> </span>/dev/sdb1
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>sudo<span class="w"> </span>lvcreate<span class="w"> </span>-L<span class="w"> </span>2G<span class="w"> </span>-n<span class="w"> </span>respaldos<span class="w"> </span>datos
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>-L<span class="w"> </span>respaldos<span class="w"> </span>/dev/datos/respaldos
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>sudo<span class="w"> </span>lvs<span class="w"> </span>datos
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sdb      8:16   0   5G  0 disk
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>└─sdb1   8:17   0   5G  0 part
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  Physical volume "/dev/sdb1" successfully created.
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  Volume group "datos" successfully created
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  Logical volume "respaldos" created.
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>…
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>Writing superblocks and filesystem accounting information: done
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>  LV        VG    Attr       LSize
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>  respaldos datos -wi-a----- 2.00g
+</code></pre></div>
+<ul>
+<li><code>1MiB</code> como inicio deja la partición alineada con los bloques del disco.</li>
+<li><code>set 1 lvm on</code> marca la partición como <code>Linux LVM</code>. Se ve con <code>sudo fdisk -l /dev/sdb</code>.</li>
+</ul>
+<hr />
+<h2 id="3-montarlo-con-opciones-restrictivas">3. Montarlo con opciones restrictivas</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"UUID=</span><span class="k">$(</span>sudo<span class="w"> </span>blkid<span class="w"> </span>-s<span class="w"> </span>UUID<span class="w"> </span>-o<span class="w"> </span>value<span class="w"> </span>/dev/datos/respaldos<span class="k">)</span><span class="s2"> /srv/respaldos ext4 defaults,nodev,nosuid,noexec 0 2"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/fstab
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo<span class="w"> </span>findmnt<span class="w"> </span>--verify
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-a<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>mount-ok
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>findmnt<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>df<span class="w"> </span>-h<span class="w"> </span>/srv/respaldos
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>UUID=d92c66d3-… /srv/respaldos ext4 defaults,nodev,nosuid,noexec 0 2
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>…
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>mount-ok
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>TARGET         SOURCE                      FSTYPE OPTIONS
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>/srv/respaldos /dev/mapper/datos-respaldos ext4   rw,nosuid,nodev,noexec,relatime
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>Filesystem                   Size  Used Avail Use% Mounted on
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>/dev/mapper/datos-respaldos  2.0G  536K  1.8G   1% /srv/respaldos
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Qué impide en el volumen de respaldos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nodev</code></td>
+<td>Que un archivo de dispositivo copiado ahí dé acceso a un disco</td>
+</tr>
+<tr>
+<td><code>nosuid</code></td>
+<td>Que un binario con el bit SUID se ejecute con los privilegios de su dueño</td>
+</tr>
+<tr>
+<td><code>noexec</code></td>
+<td>Ejecutar cualquier programa guardado ahí</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Se monta por <strong>UUID</strong> y no por <code>/dev/sdb1</code>: si cambia el orden de los discos, el UUID sigue siendo el mismo.</li>
+<li><code>findmnt --verify</code> revisa todo <code>/etc/fstab</code> y termina con un resumen. Lo que importa es que no haya errores <em>(<code>Success, no errors…</code> o <code>0 errors</code>)</em>: una advertencia sobre otra línea <em>(por ejemplo, la del swap)</em> no es de este paso.</li>
+<li><strong><code>sudo findmnt --verify</code> y <code>mount -a</code> van antes de cualquier reinicio.</strong> Una línea mal escrita en <code>/etc/fstab</code> puede dejar la VM en modo de emergencia al arrancar. Si alguno da error, corrija la línea con <code>sudo nano /etc/fstab</code>.</li>
+<li><code>tee -a</code> <strong>agrega</strong> la línea al final. Si corrió el comando dos veces, borre la línea repetida.</li>
+</ul>
+<p><em>Pruebe que <code>noexec</code> actúa:</em></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/usr/bin/true<span class="w"> </span>/srv/respaldos/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>/srv/respaldos/true<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"rc=</span><span class="nv">$?</span><span class="s2">"</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/srv/respaldos/true
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>bash: /srv/respaldos/true: Permission denied
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>rc=126
+</code></pre></div>
+<ul>
+<li><code>126</code> significa que el archivo se encontró pero no se puede ejecutar.</li>
+</ul>
+<h3 id="agregar-el-segundo-disco-y-extender-en-caliente">Agregar el segundo disco y extender en caliente</h3>
+<p>Con el volumen ya montado, el segundo disco entero se suma al grupo, y el volumen crece <strong>sin desmontar</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>pvcreate<span class="w"> </span>/dev/sdc
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>vgextend<span class="w"> </span>datos<span class="w"> </span>/dev/sdc
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>sudo<span class="w"> </span>vgs<span class="w"> </span>datos
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>df<span class="w"> </span>-h<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-L<span class="w"> </span>+1G<span class="w"> </span>datos/respaldos
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>df<span class="w"> </span>-h<span class="w"> </span>/srv/respaldos
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  Physical volume "/dev/sdc" successfully created.
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  Volume group "datos" successfully extended
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  VG    #PV #LV #SN Attr   VSize VFree
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  datos   2   1   0 wz--n- 9.99g 7.99g
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>/dev/mapper/datos-respaldos  2.0G  536K  1.8G   1% /srv/respaldos
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  Size of logical volume datos/respaldos changed from 2.00 GiB (512 extents) to 3.00 GiB (768 extents).
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>Filesystem at /dev/datos/respaldos is mounted on /srv/respaldos; on-line resizing required
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>…
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>  Logical volume datos/respaldos successfully resized.
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>/dev/mapper/datos-respaldos  2.9G  536K  2.8G   1% /srv/respaldos
+</code></pre></div>
+<ul>
+<li>Aquí el disco <code>sdc</code> se usó <strong>entero</strong>, sin partición. LVM acepta las dos formas.</li>
+<li><code>-r</code> agranda también el sistema de archivos. Sin <code>-r</code>, el volumen crece pero <code>df</code> sigue mostrando el tamaño viejo.</li>
+<li><code>on-line resizing required</code>: ext4 se agranda <strong>montado</strong>, sin detener nada.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Deje espacio libre en <code>datos</code></p>
+<p>Use <code>-L +1G</code>, <strong>no</strong> <code>-l +100%FREE</code>. El criterio pide <code>VFree</code> mayor que 0, y en la sustentación le pueden pedir que extienda el volumen en vivo. Sin espacio libre, no podría hacerlo.</p>
+</div>
+<p><strong>Si se quedó sin espacio libre:</strong> ext4 no se puede achicar montado. Vuelva a la instantánea <code>antes-almacenamiento</code>, o agregue un tercer disco a la VM y súmelo con <code>sudo pvcreate /dev/sdd</code> y <code>sudo vgextend datos /dev/sdd</code>.</p>
+<hr />
+<h2 id="4-el-script-de-respaldo">4. El script de respaldo</h2>
+<p><code>/usr/local/sbin/respaldo.sh</code> copia <code>/srv/proyecto</code> y <code>/srv/estado</code> a una carpeta con la fecha y la hora, y conserva las siete más recientes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="ch">#!/usr/bin/env bash</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># respaldo.sh — instantáneas por fecha de /srv/proyecto y /srv/estado</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nv">DESTINO</span><span class="o">=</span>/srv/respaldos
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nv">FECHA</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%Y-%m-%d_%H%M%S<span class="k">)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="nv">ULTIMO</span><span class="o">=</span><span class="s2">"</span><span class="nv">$DESTINO</span><span class="s2">/ultimo"</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="nv">CONSERVAR</span><span class="o">=</span><span class="m">7</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nv">opciones</span><span class="o">=(</span>-aAX<span class="w"> </span>--delete<span class="o">)</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$ULTIMO</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span><span class="nv">opciones</span><span class="o">+=(</span>--link-dest<span class="o">=</span><span class="s2">"</span><span class="nv">$ULTIMO</span><span class="s2">"</span><span class="o">)</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="k">fi</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$DESTINO</span><span class="s2">/</span><span class="nv">$FECHA</span><span class="s2">"</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>rsync<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">opciones</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>/srv/proyecto<span class="w"> </span>/srv/estado<span class="w"> </span><span class="s2">"</span><span class="nv">$DESTINO</span><span class="s2">/</span><span class="nv">$FECHA</span><span class="s2">/"</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>ln<span class="w"> </span>-sfn<span class="w"> </span><span class="s2">"</span><span class="nv">$FECHA</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ULTIMO</span><span class="s2">"</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>find<span class="w"> </span><span class="s2">"</span><span class="nv">$DESTINO</span><span class="s2">"</span><span class="w"> </span>-mindepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span><span class="s1">'20*'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span>-<span class="s2">"</span><span class="nv">$CONSERVAR</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-r<span class="w"> </span>rm<span class="w"> </span>-rf
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Respaldo </span><span class="nv">$FECHA</span><span class="s2"> listo"</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-aAX</code></td>
+<td>Conserva dueño, grupo, permisos y fechas <em>(<code>-a</code>)</em>, ACL <em>(<code>-A</code>)</em> y atributos extendidos <em>(<code>-X</code>)</em></td>
+</tr>
+<tr>
+<td><code>--delete</code></td>
+<td>La instantánea refleja el estado actual: lo que se borró del original no aparece en la copia nueva</td>
+</tr>
+<tr>
+<td><code>--link-dest</code></td>
+<td>Lo que no cambió desde la instantánea anterior se crea como <strong>enlace duro</strong> al mismo archivo: no ocupa espacio otra vez</td>
+</tr>
+<tr>
+<td><code>ultimo</code></td>
+<td>Enlace simbólico a la instantánea más reciente</td>
+</tr>
+<tr>
+<td><code>find … head -n -7</code></td>
+<td>Borra las instantáneas más viejas y deja siete</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/usr/local/sbin/respaldo.sh<span class="w">        </span><span class="c1"># pegar el script</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/usr/local/sbin/respaldo.sh
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>/usr/local/sbin/respaldo.sh
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>sleep<span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>sudo<span class="w"> </span>/usr/local/sbin/respaldo.sh
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>ls<span class="w"> </span>-l<span class="w"> </span>/srv/respaldos
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Respaldo 2026-11-23_182049 listo
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Respaldo 2026-11-23_182050 listo
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>drwxr-xr-x 4 root root  4096 Nov 23 18:20 2026-11-23_182049
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>drwxr-xr-x 4 root root  4096 Nov 23 18:20 2026-11-23_182050
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>drwx------ 2 root root 16384 Nov 23 18:20 lost+found
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>lrwxrwxrwx 1 root root    17 Nov 23 18:20 ultimo -&gt; 2026-11-23_182050
+</code></pre></div>
+<ul>
+<li>El script vive en <code>/usr/local/sbin</code> y no en <code>/srv/respaldos</code>, porque ese volumen es <code>noexec</code>: ahí no se podría ejecutar.</li>
+<li><code>lost+found</code> lo crea <code>mkfs.ext4</code>. Es donde <code>fsck</code> deja lo que recupera.</li>
+</ul>
+<h3 id="comprobar-que-las-instantaneas-comparten-los-archivos">Comprobar que las instantáneas comparten los archivos</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'ls -i /srv/respaldos/20*/proyecto/codigo/app.py'</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>/srv/respaldos/20*
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>21 /srv/respaldos/2026-11-23_182049/proyecto/codigo/app.py
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>21 /srv/respaldos/2026-11-23_182050/proyecto/codigo/app.py
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>52K     /srv/respaldos/2026-11-23_182049
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>36K     /srv/respaldos/2026-11-23_182050
+</code></pre></div>
+<ul>
+<li><strong>El mismo número de inodo</strong> en las dos instantáneas: es un solo archivo con dos nombres <em>(un enlace duro)</em>. La segunda instantánea no lo copió otra vez.</li>
+<li>Con archivos tan pequeños, <code>du</code> casi no muestra diferencia, porque lo que más ocupa son las carpetas, y esas sí se crean de nuevo. <strong>La prueba es el inodo, no el tamaño.</strong> Para verlo en <code>du</code>, cree antes un archivo grande, por ejemplo <code>sudo -u ana dd if=/dev/urandom of=/srv/proyecto/codigo/datos.bin bs=1M count=20</code>. La instantánea siguiente sube unos 20M, la otra se queda en decenas de K. Después borre el archivo.</li>
+<li>El <code>sh -c</code> hace que el <code>*</code> lo expanda root. Su usuario no puede entrar a <code>codigo/</code>, y su shell no encontraría los archivos.</li>
+</ul>
+<hr />
+<h2 id="5-programarlo-con-un-timer">5. Programarlo con un timer</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/respaldo.service<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="s">[Unit]</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="s">Description=Respaldo de /srv/proyecto y /srv/estado</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="s">RequiresMountsFor=/srv/respaldos</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="s">[Service]</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="s">Type=oneshot</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="s">ExecStart=/usr/local/sbin/respaldo.sh</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="s">EOF</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/respaldo.timer<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="s">[Unit]</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="s">Description=Respaldo diario</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="s">[Timer]</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="s">OnCalendar=*-*-* 02:00:00</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="s">Persistent=true</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="s">[Install]</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="s">WantedBy=timers.target</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="s">EOF</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>respaldo.timer
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>systemctl<span class="w"> </span>list-timers<span class="w"> </span>respaldo.timer<span class="w"> </span>--no-pager
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>respaldo.service
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>respaldo.service<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>--no-pager
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Created symlink '/etc/systemd/system/timers.target.wants/respaldo.timer' → '/etc/systemd/system/respaldo.timer'.
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>NEXT                        LEFT LAST PASSED UNIT           ACTIVATES
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Tue 2026-11-24 02:00:00 UTC   7h -         - respaldo.timer respaldo.service
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>… Starting respaldo.service - Respaldo de /srv/proyecto y /srv/estado...
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>… respaldo.sh[5205]: Respaldo 2026-11-23_182051 listo
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>… respaldo.service: Deactivated successfully.
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>… Finished respaldo.service - Respaldo de /srv/proyecto y /srv/estado.
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Línea</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RequiresMountsFor=/srv/respaldos</code></td>
+<td>Si el volumen no está montado, el respaldo no corre, y así no llena la raíz por error</td>
+</tr>
+<tr>
+<td><code>Type=oneshot</code></td>
+<td>El servicio corre, termina y no queda vigilado</td>
+</tr>
+<tr>
+<td><code>OnCalendar=*-*-* 02:00:00</code></td>
+<td>Todos los días a las 02:00</td>
+</tr>
+<tr>
+<td><code>Persistent=true</code></td>
+<td>Si la VM estaba apagada a las 02:00, el respaldo corre apenas arranque</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Mire la zona horaria</strong> en la línea <code>NEXT</code>. Si dice <code>UTC</code>, las 02:00 son las 21:00 del día anterior en Colombia. Para usar la hora local: <code>sudo timedatectl set-timezone America/Bogota</code>.</li>
+<li><code>systemd-analyze calendar '*-*-* 02:00:00'</code> muestra cuándo será la próxima ejecución.</li>
+<li><strong>Encienda la VM varios días antes de la entrega.</strong> Así acumula instantáneas de días distintos, y la sección 6 tiene más de una de dónde elegir.</li>
+</ul>
+<hr />
+<h2 id="6-restaurar-un-archivo-borrado">6. Restaurar un archivo borrado</h2>
+<p>Es el paso 3 de la demostración. Practíquelo hasta poder hacerlo sin mirar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo<span class="w"> </span>getfacl<span class="w"> </span>/srv/proyecto/codigo/app.py<span class="w"> </span>&gt;<span class="w"> </span>antes.txt
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/srv/proyecto/codigo/app.py
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>sudo<span class="w"> </span>ls<span class="w"> </span>/srv/proyecto/codigo
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>sudo<span class="w"> </span>rsync<span class="w"> </span>-aAX<span class="w"> </span>/srv/respaldos/ultimo/proyecto/codigo/app.py<span class="w"> </span>/srv/proyecto/codigo/
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>sudo<span class="w"> </span>cat<span class="w"> </span>/srv/proyecto/codigo/app.py
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>sudo<span class="w"> </span>getfacl<span class="w"> </span>/srv/proyecto/codigo/app.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>diff<span class="w"> </span>antes.txt<span class="w"> </span>-<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"permisos idénticos"</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>getfacl: Removing leading '/' from absolute path names
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>print(1)
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>getfacl: Removing leading '/' from absolute path names
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>permisos idénticos
+</code></pre></div>
+<ul>
+<li>El <code>ls</code> de la carpeta vacía no imprime nada: el archivo ya no está.</li>
+<li>El aviso <code>Removing leading '/'</code> de <code>getfacl</code> <strong>no es un error</strong>. Sale por la salida de errores y no entra en <code>antes.txt</code>.</li>
+<li><code>permisos idénticos</code> quiere decir que volvieron el dueño, el grupo y la ACL. Restaurar no es solo recuperar el contenido. Sin <code>-A</code>, el archivo volvería sin su ACL y el equipo perdería el acceso.</li>
+<li>Use <code>rsync -aAX</code> y no <code>cp</code>: un <code>cp</code> simple deja el archivo a nombre de root y sin ACL.</li>
+</ul>
+<h3 id="cuando-ultimo-ya-no-tiene-el-archivo">Cuando <code>ultimo</code> ya no tiene el archivo</h3>
+<p><code>ultimo</code> apunta a la instantánea <strong>más reciente</strong>. Si el archivo se borró <strong>antes</strong> de ese respaldo, por <code>--delete</code> la copia nueva tampoco lo tiene, y hay que sacarlo de una instantánea anterior. Practíquelo con un archivo de prueba:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>ana<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo "versión 1" &gt; /srv/proyecto/codigo/prueba.txt'</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>respaldo.service
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/srv/proyecto/codigo/prueba.txt
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>sleep<span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>respaldo.service
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>sudo<span class="w"> </span>ls<span class="w"> </span>/srv/respaldos/ultimo/proyecto/codigo
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'ls -l /srv/respaldos/20*/proyecto/codigo/prueba.txt 2&gt;/dev/null'</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>app.py
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>-rw-rw----+ 1 ana desarrollo 11 Nov 23 18:25 /srv/respaldos/2026-11-23_182530/proyecto/codigo/prueba.txt
+</code></pre></div>
+<ul>
+<li><code>ultimo</code> ya no tiene <code>prueba.txt</code>. La única instantánea que lo tiene es la anterior.</li>
+<li>Restaure desde esa instantánea, con su nombre real:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo<span class="w"> </span>rsync<span class="w"> </span>-aAX<span class="w"> </span>/srv/respaldos/2026-11-23_182530/proyecto/codigo/prueba.txt<span class="w"> </span>/srv/proyecto/codigo/
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/srv/proyecto/codigo/prueba.txt
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/srv/proyecto/codigo/prueba.txt
+</code></pre></div>
+<ul>
+<li>Si <code>ana</code> no existe en su servidor, use cualquier usuario del grupo dueño de <code>codigo</code>.</li>
+<li>La fecha de cada carpeta dice <strong>cuándo</strong> se tomó. Antes de restaurar, compare esas fechas con la hora en que se perdió el archivo.</li>
+</ul>
+<hr />
+<h2 id="7-si-el-respaldo-falla">7. Si el respaldo falla</h2>
+<p>Un respaldo que falla en silencio es peor que no tener respaldo. Dónde mirar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>systemctl<span class="w"> </span>--failed
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>systemctl<span class="w"> </span>status<span class="w"> </span>respaldo.service<span class="w"> </span>--no-pager
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>respaldo.service<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span><span class="w"> </span>--no-pager
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>findmnt<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>df<span class="w"> </span>-h<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>sudo<span class="w"> </span>du<span class="w"> </span>-xh<span class="w"> </span>--max-depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>/srv/respaldos<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa probable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dependency failed</code> o el servicio no arranca</td>
+<td><code>/srv/respaldos</code> no está montado <em>(<code>RequiresMountsFor=</code>)</em>: revise <code>findmnt</code> y <code>/etc/fstab</code></td>
+</tr>
+<tr>
+<td>El respaldo «funciona» pero <code>df -h /</code> crece</td>
+<td>Falta la línea de <code>/etc/fstab</code>: sin ella no hay unidad de montaje que exigir, y el respaldo escribe en la carpeta <code>/srv/respaldos</code> de la raíz</td>
+</tr>
+<tr>
+<td><code>Permission denied</code> al ejecutar el script</td>
+<td>Falta el permiso de ejecución: <code>sudo chmod 750 /usr/local/sbin/respaldo.sh</code></td>
+</tr>
+<tr>
+<td><code>rsync error: … (code 23)</code></td>
+<td>No existe alguna de las carpetas de origen</td>
+</tr>
+<tr>
+<td><code>No space left on device</code> o <code>rsync error: error in file IO (code 11)</code></td>
+<td>El volumen está lleno: busque con <code>du</code> <strong>qué</strong> lo llenó antes de decidir</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Arregle la causa y vuelva a correrlo con <code>sudo systemctl start respaldo.service</code>. Luego confirme que quedó una instantánea nueva con <code>ls -l /srv/respaldos</code>.</li>
+<li><strong>Que el volumen esté lleno no se arregla con extenderlo</strong> si lo que lo llenó no es del respaldo. Primero encuentre qué lo llenó y por qué.</li>
+</ul>
+<hr />
+<h2 id="8-al-repositorio">8. Al repositorio</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>so-&lt;apellido&gt;/
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>├── config/
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>│   ├── fstab-respaldos.txt
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>│   ├── respaldo.service
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>│   └── respaldo.timer
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>└── scripts/
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>    ├── almacenamiento.sh
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>    └── respaldo.sh
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>grep<span class="w"> </span>/srv/respaldos<span class="w"> </span>/etc/fstab<span class="w"> </span>&gt;<span class="w"> </span>config/fstab-respaldos.txt<span class="w">   </span><span class="c1"># en la VM; luego cópielo al repositorio</span>
+</code></pre></div>
+<ul>
+<li><code>config/</code>: las copias de la línea de <code>fstab</code> y de las dos unidades.</li>
+<li><code>scripts/respaldo.sh</code>: el script de la sección 4.</li>
+<li><code>scripts/almacenamiento.sh</code>: el volumen en <strong>una VM nueva</strong>, en una sola corrida. Recibe los dos discos y no toca un disco que ya tenga particiones o datos:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="ch">#!/usr/bin/env bash</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="c1"># almacenamiento.sh — volumen de datos para los respaldos, en una VM nueva</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="c1"># Uso: sudo ./almacenamiento.sh /dev/sdb /dev/sdc</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="nv">D1</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="p">:?Falta el primer disco, por ejemplo /dev/sdb</span><span class="si">}</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="nv">D2</span><span class="o">=</span><span class="si">${</span><span class="nv">2</span><span class="p">:?Falta el segundo disco, por ejemplo /dev/sdc</span><span class="si">}</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="nv">$D1</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$D2</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-b<span class="w"> </span><span class="nv">$d</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2"> no es un disco"</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>lsblk<span class="w"> </span>-n<span class="w"> </span>-o<span class="w"> </span>NAME<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>-n<span class="w"> </span><span class="k">$(</span>lsblk<span class="w"> </span>-n<span class="w"> </span>-o<span class="w"> </span>FSTYPE<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">'[:space:]'</span><span class="k">)</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2"> ya tiene particiones o datos: no se toca"</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a><span class="k">done</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>parted<span class="w"> </span><span class="s2">"</span><span class="nv">$D1</span><span class="s2">"</span><span class="w"> </span>--script<span class="w"> </span>mklabel<span class="w"> </span>gpt<span class="w"> </span>mkpart<span class="w"> </span>datos<span class="w"> </span>1MiB<span class="w"> </span><span class="m">100</span>%<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>lvm<span class="w"> </span>on
+<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a>udevadm<span class="w"> </span>settle
+<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a><span class="nv">P1</span><span class="o">=</span><span class="k">$(</span>lsblk<span class="w"> </span>-n<span class="w"> </span>-o<span class="w"> </span>PATH<span class="w"> </span><span class="s2">"</span><span class="nv">$D1</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span>2p<span class="k">)</span>
+<a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>
+<a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a>pvcreate<span class="w"> </span><span class="s2">"</span><span class="nv">$P1</span><span class="s2">"</span>
+<a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a>pvcreate<span class="w"> </span><span class="s2">"</span><span class="nv">$D2</span><span class="s2">"</span>
+<a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a>vgcreate<span class="w"> </span>datos<span class="w"> </span><span class="s2">"</span><span class="nv">$P1</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$D2</span><span class="s2">"</span>
+<a id="__codelineno-28-25" name="__codelineno-28-25" href="#__codelineno-28-25"></a>lvcreate<span class="w"> </span>-L<span class="w"> </span>3G<span class="w"> </span>-n<span class="w"> </span>respaldos<span class="w"> </span>datos
+<a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a>mkfs.ext4<span class="w"> </span>-L<span class="w"> </span>respaldos<span class="w"> </span>/dev/datos/respaldos
+<a id="__codelineno-28-27" name="__codelineno-28-27" href="#__codelineno-28-27"></a>
+<a id="__codelineno-28-28" name="__codelineno-28-28" href="#__codelineno-28-28"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-28-29" name="__codelineno-28-29" href="#__codelineno-28-29"></a><span class="nv">UUID</span><span class="o">=</span><span class="k">$(</span>blkid<span class="w"> </span>-s<span class="w"> </span>UUID<span class="w"> </span>-o<span class="w"> </span>value<span class="w"> </span>/dev/datos/respaldos<span class="k">)</span>
+<a id="__codelineno-28-30" name="__codelineno-28-30" href="#__codelineno-28-30"></a><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"</span><span class="nv">$UUID</span><span class="s2">"</span><span class="w"> </span>/etc/fstab<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-28-31" name="__codelineno-28-31" href="#__codelineno-28-31"></a><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"UUID=</span><span class="nv">$UUID</span><span class="s2"> /srv/respaldos ext4 defaults,nodev,nosuid,noexec 0 2"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/fstab
+<a id="__codelineno-28-32" name="__codelineno-28-32" href="#__codelineno-28-32"></a><span class="k">fi</span>
+<a id="__codelineno-28-33" name="__codelineno-28-33" href="#__codelineno-28-33"></a>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-28-34" name="__codelineno-28-34" href="#__codelineno-28-34"></a>mount<span class="w"> </span>-a
+<a id="__codelineno-28-35" name="__codelineno-28-35" href="#__codelineno-28-35"></a>findmnt<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-28-36" name="__codelineno-28-36" href="#__codelineno-28-36"></a>vgs<span class="w"> </span>datos
+</code></pre></div>
+<ul>
+<li><strong>No lo corra en su VM actual</strong>: ahí el volumen ya existe, y el script se detiene con <code>ya tiene particiones o datos</code>. Es la receta para reconstruir el servidor.</li>
+<li>Crea el volumen directamente con 3G y deja libre el resto de <code>datos</code>: el mismo resultado de las secciones 2 y 3.</li>
+</ul>
+<p>En el <code>README.md</code>, el paso <em>Discos, LVM, fstab, respaldo.sh, respaldo.service y respaldo.timer</em> de <em>Reconstruir desde cero</em> puede quedar así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">5.</span> Almacenamiento y respaldos
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">   </span><span class="k">-</span><span class="w"> </span>Agregar a la VM dos discos VDI de 5 GB (apagada).
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">   </span><span class="k">-</span><span class="w"> </span><span class="sb">`sudo ./scripts/almacenamiento.sh /dev/sdb /dev/sdc`</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">   </span><span class="k">-</span><span class="w"> </span>Copiar <span class="sb">`scripts/respaldo.sh`</span> a <span class="sb">`/usr/local/sbin/`</span> con permisos 750.
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">   </span><span class="k">-</span><span class="w"> </span>Copiar <span class="sb">`config/respaldo.service`</span> y <span class="sb">`config/respaldo.timer`</span> a <span class="sb">`/etc/systemd/system/`</span>,
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>     y luego <span class="sb">`sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable --now respaldo.timer`</span>.
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">   </span><span class="k">-</span><span class="w"> </span>Restaurar un archivo: <span class="sb">`sudo rsync -aAX /srv/respaldos/&lt;instantánea&gt;/proyecto/&lt;ruta&gt; /srv/proyecto/&lt;ruta&gt;`</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>git<span class="w"> </span>add<span class="w"> </span>config<span class="w"> </span>scripts<span class="w"> </span>README.md
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat: volumen de respaldos con LVM, respaldo diario y restauración"</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>git<span class="w"> </span>push
+</code></pre></div>
+<hr />
+<h2 id="9-antes-de-la-entrega">9. Antes de la entrega</h2>
+<p>Reinicie la VM y compruebe que todo vuelve solo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
+</code></pre></div>
+<p>Al entrar de nuevo con <code>ssh srv</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sudo<span class="w"> </span>lvs<span class="w"> </span>datos
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>sudo<span class="w"> </span>vgs<span class="w"> </span>datos
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>findmnt<span class="w"> </span>-no<span class="w"> </span>OPTIONS<span class="w"> </span>/srv/respaldos
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>systemctl<span class="w"> </span>list-timers<span class="w"> </span>respaldo.timer<span class="w"> </span>--no-pager
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>estado
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>ls<span class="w"> </span>-l<span class="w"> </span>/srv/respaldos
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../session-02/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Sesión 02">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Sesión 02
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../../articles/" class="md-footer__link md-footer__link--next" aria-label="Next: Projects">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Projects
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 <a href="https://github.com/krozfu"  target="_blank" rel="noopener">KrozFu</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/juan-carlos-charfuelan-caipe" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/krozfu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@krozfuhack" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/krozfu" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/kr0zfu/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
