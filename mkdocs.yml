@@ -10,6 +10,8 @@ nav:
       - Sistemas Operativos:
           - Sesión 01: courses/operating-systems/session-01.md
           - Sesión 02: courses/operating-systems/session-02.md
+          - Guías:
+              - Almacenamiento y respaldos: courses/operating-systems/guides/storage-backups-guide.md
   - Projects:
       - articles/index.md
       - Configuración NAT y ataque con hping MikroTik: articles/nat-hping/nat-attack-hping.md
